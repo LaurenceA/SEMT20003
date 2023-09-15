@@ -14,6 +14,7 @@ All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days
 * PyTorch is currently the leading AI library, both for academic research, and industry.
 * PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
 * As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
+* You're going to need PyTorch for the group project.
 
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
