@@ -24,4 +24,4 @@ Course materials for each week will be posted here on Monday.  Course materials 
 * The exam will focus on the _concepts_ rather than specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  I will give more guidance once the practice exam is available.
 
 ## Group coursework:
-There will be a group coursework in TB2.  Details are again not yet nailed down, and I will announce as soon as information is available.
+There will be a group coursework in TB2, which will run roughly for the first half of the teaching block.  Details are again not yet nailed down, and I will announce as soon as information is available.
