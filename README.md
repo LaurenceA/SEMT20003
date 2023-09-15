@@ -12,7 +12,8 @@ Course materials will be posted here on Monday.  Course materials each week will
 * There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.
 * These iPython notebooks _occasionally_ have exercises.
 * The concepts in the iPython notebooks are examinable.
-
+* There will be videos of me going through the material in the pdf notes.  Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.
+ 
 ## Feedback: 
 * The main route for feedback is the labs/problem classes on Fridays 11-1 in MVB 1.11.  *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, any question sheets and past exams, not just iPython notebooks!!!!*
 
@@ -20,15 +21,7 @@ Course materials will be posted here on Monday.  Course materials each week will
 * Christmas exam format is not yet nailed down.  I will announce as soon as details are available.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
 * I will post a practice exam once details are available.
-* The exam will focus on the _concepts_ rather than specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.
-
-## Labs:
-* The labs are starting on September 29th, so there will be no lab on 26th Jan.
-* The labs come with exercises as Python notebook.  A new set of exercises will be released every _two_ weeks.  (So there will be a new notebook on 2nd Feb and Feb 16th but _not_ 9th Feb).
-* Material in the labs may appear in the exam.
-* *The labs are the primary route for feedback on all aspects of the course, including lectures, any question sheets and exams, not just the labs!!!!*
-* The lab exercises will be released in the /labs/ folder.
-* Lab 4 (just released) is the last lab.
+* The exam will focus on the _concepts_ rather than specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  I will give more guidance once the practice exam is available.
 
 ## Group coursework:
 There will be a group coursework in TB2.  Details are again not yet nailed down, and I will announce as soon as information is available.
