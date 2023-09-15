@@ -26,7 +26,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
 ## Exam (50% of total mark):
 * These exams are in Christmas, and examine the taught material from TB1.
 * I don't yet have confirmation on the exam format, but it will be 2 hours long.
-* The exam is mainly based on theory/maths.  But material in the iPython notebooks will be examinable.  But the exam will be paper-based, so you won't actually need to do any coding.  For instance, you might have to spot a bug in a piece of code given by the question.  Or I might give some PyTorch code, and you might have to work out the shape of a tensor in that code.
+* The exam is mainly based on theory/maths.  But material in the iPython notebooks will be examinable.  But the exam will be paper-based, so you won't actually need to do any coding.  For instance, the question might give a piece of code, and you have to work out the shape of a tensor in that code.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
 * I will post a practice exam once details are available.
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  Exactly what I mean by that will be more obvious once the practice exam is available.
