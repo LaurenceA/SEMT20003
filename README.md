@@ -19,6 +19,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
 
 ## Exam (50% of total mark):
 * Christmas exam format is not yet nailed down.  I will announce as soon as details are available.
+* The material in the iPython notebooks will be examinable.  But the exam will be paper-based, so you won't actually need to do any coding.  For instance, you might have to spot a bug in a piece of code given by the question.  Or I might give some PyTorch code, and you might have to work out the shape of a tensor in that code.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
 * I will post a practice exam once details are available.
 * The exam will focus on the _concepts_ rather than specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  I will give more guidance once the practice exam is available.
