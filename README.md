@@ -5,7 +5,7 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 - [Laurence Aitchison](http://www.gatsby.ucl.ac.uk/~laurence/) [laurence.aitchison@bristol.ac.uk] (unit director)
 
 ## Course Materials:
-* Course materials will be posted here on Monday.  Course materials each week will include some combination of:
+Course materials will be posted here on Monday.  Course materials each week will include some combination of:
 * There is _always_ extensive pdf notes.
 * The pdf notes will _usually, but not always_ include questions.
 * All questions will have worked answers.
