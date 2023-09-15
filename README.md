@@ -8,7 +8,6 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 * This course runs across TB1 + TB2.
 * TB1: all the teaching happens in TB1.
 * TB2: there is a group project in the first half of TB2.
-* Don't be surprised if the course ends up taking more time in TB1!
 
 ## Why PyTorch
 All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
