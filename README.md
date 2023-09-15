@@ -1,4 +1,4 @@
-# EMAT31530_2023: Introduction to AI
+# EMAT31530: Introduction to AI
 The course will introduce AI, with a focus on neural networks in PyTorch.
 
 ## Staff
