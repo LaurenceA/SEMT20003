@@ -20,7 +20,9 @@ Course materials for each week will be posted here on Monday.  Course materials 
 * There will be videos of me going through the material in the pdf notes.  Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.
  
 ## Feedback: 
-* The main route for feedback is the labs/problem classes on Fridays 11-1 in MVB 1.11.  *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework!!!!*
+* TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
+  - *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework!!!!*
+  - There is no extra content for these classes.  You're expected to bring questions from the material from that week, and ask the TAs.  The TAs will be wandering around the room.
 
 ## Why PyTorch
 All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
