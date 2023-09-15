@@ -10,9 +10,15 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 * TB2: there is a group project in the first half of TB2.
 * Don't be surprised if the course ends up taking more time in TB1!
 
+## Why PyTorch
+All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
+* PyTorch is currently the leading AI library, both for academic research, and industry.
+* PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
+* As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
+
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
-* There is _always_ extensive pdf notes.
+* There are pdf notes for every week of taught material.
 * The pdf notes will _usually, but not always_ include questions.
 * All questions will have worked answers.
 * There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.
