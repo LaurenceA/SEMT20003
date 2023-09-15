@@ -15,7 +15,7 @@ Course materials will be posted here on Monday.  Course materials each week will
 * There will be videos of me going through the material in the pdf notes.  Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.
  
 ## Feedback: 
-* The main route for feedback is the labs/problem classes on Fridays 11-1 in MVB 1.11.  *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, any question sheets and past exams, not just iPython notebooks!!!!*
+* The main route for feedback is the labs/problem classes on Fridays 11-1 in MVB 1.11.  *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, and past exams!!!!*
 
 ## Exam
 * Christmas exam format is not yet nailed down.  I will announce as soon as details are available.
