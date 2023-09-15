@@ -9,13 +9,6 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 * TB1: all the teaching happens in TB1.
 * TB2: there is a group project in the first half of TB2.
 
-## Why PyTorch
-All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
-* PyTorch is currently the leading AI library, both for academic research, and industry.
-* PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
-* As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
-* You're going to need PyTorch for the group project.
-
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * There are pdf notes for every week of taught material.
@@ -28,6 +21,13 @@ Course materials for each week will be posted here on Monday.  Course materials 
  
 ## Feedback: 
 * The main route for feedback is the labs/problem classes on Fridays 11-1 in MVB 1.11.  *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework!!!!*
+
+## Why PyTorch
+All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
+* PyTorch is currently the leading AI library, both for academic research, and industry.
+* PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
+* As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
+* You're going to need PyTorch for the group project.
 
 ## Exam (50% of total mark):
 * These exams are in Christmas, and examine the taught material from TB1.
