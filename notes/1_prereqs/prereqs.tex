@@ -31,7 +31,7 @@
 
 \maketitle
 
-Here, I'm going to introduce all the mathematical preliminaries and notation that I'm going to use, with a view to their later use in AI.  This was originally designed for CS students, rather than the more Math-y cohort in the course. So you've probably seen the early stuff, but not necessarily the later stuff.  The emphasis might be quite different from stuff you've seen before (as I'm developing stuff necessary for AI).  Everything here is examinable, so please do at least skim through.  And in any case, you really have a go at the should do the exercises (especially the last ones): they're great preparation for later lectures.
+Here, I'm going to introduce all the mathematical preliminaries and notation that I'm going to use, with a view to their later use in AI.  There's a broad mix of cohorts on this course, so it is worth going through this stuff explicitly: while you've probably seen the early stuff, you probably haven't seen the later stuff.  Additionally, I'm going to introduce conventions that I'll use later, and I'll likely take a different perspective, specifically with a view to AI, from the one you've seen previously.  So please do skim through.  And in any case, you really have a go at the should do the exercises (especially the last one): they're great preparation for later lectures.
 
 \section{Calculus}
 
@@ -480,7 +480,7 @@ The exact form for the summation is usually written a bit differently, omitting 
 A vector inner product is the same as the matrix-matrix product, but we take $\M=1$ and $\P=1$, so the output is scalar.
 For a vector inner product, the first argument needs to be a row-vector, and the second argument needs to be a column-vector,
 \begin{align}
-  \underbrace{v}_{1 \times 1} &= \underbrace{\r}_{1 \times \N} \underbrace{\c}_{\N \times 1}\\
+  \underbrace{v}_{1 \times 1} &= \underbrace{\r}_{1 \times \N} \underbrace{\c}_{\N \times 1}
 \end{align}
 where remember $\r$ is a row-vector,  $\c$ is a column-vector, and $v$ is a scalar (or a $1\times 1$ matrix).
 We write the summation for omitting $\i$ and $\k$,
@@ -581,34 +581,34 @@ Its a bit like the indices of an identity matrix (except that we never write $I_
 \subsection{The Kronecker delta often appears when we're taking gradients of vectors}
 Consider a vector,
 \begin{align}
-  \a^T = \begin{pmatrix}
-    a_1 & a_2 & a_3
+  \r = \begin{pmatrix}
+    r_1 & r_2 & r_3
   \end{pmatrix}
 \end{align}
-One thing we might want to do (usually as part of a larger calculation) is compute the gradient of $\a$ wrt one of the components, $a_1$,
+One thing we might want to do (usually as part of a larger calculation) is to compute the gradient of $\r$ wrt one of the components, $r_1$,
 \begin{align}
-  \dt[\a^T]{a_2} &= \begin{pmatrix}
-    \dt[a_1]{a_2} & \dt[a_2]{a_2} & \dt[a_3]{a_2}
+  \dt[\r]{r_2} &= \begin{pmatrix}
+    \dt[r_1]{r_2} & \dt[r_2]{r_2} & \dt[r_3]{r_2}
   \end{pmatrix}\\
-  \intertext{The gradient is zero when the variables don't match, as e.g. changing $a_2$ doesn't cause $a_1$ to change at all,}
-  \dt[\a^T]{a_2} &= \begin{pmatrix}
+  \intertext{Assuming there are no dependencies between the elements of $\r$, the gradient is zero when the variables don't match, (i.e.\ changing $r_2$ doesn't cause $r_1$ to change),}
+  \dt[\r]{r_2} &= \begin{pmatrix}
     0 & 1 & 0
   \end{pmatrix}
 \end{align}
 Now, we can do the same thing a bit more abstractly,
 \begin{align}
-  \a^T &= \begin{pmatrix}
-    a_1 & a_2 & \hdots & a_N
+  \r &= \begin{pmatrix}
+    r_1 & r_2 & \hdots & r_N
   \end{pmatrix}\\
-  \dt[\a^T]{a_j} &= \begin{pmatrix}
-    \dt[a_1]{a_j} & \dt[a_2]{a_j} & \hdots & \dt[a_N]{a_j}
+  \dt[\r]{r_j} &= \begin{pmatrix}
+    \dt[r_1]{r_j} & \dt[r_2]{r_j} & \hdots & \dt[r_N]{r_j}
   \end{pmatrix}\\
   \intertext{To represent that these gradients are $1$ only when the top index matches the bottom index, we use the Kronecker delta,}
-  \dt[\a^T]{a_j} &= \begin{pmatrix}
+  \dt[\r]{r_j} &= \begin{pmatrix}
     \delta_{1j} & \delta_{2j} & \hdots & \delta_{Nj}
   \end{pmatrix}\\
   \intertext{And if we select out the $i$th element of the vector,}
-  \dt[a_i]{a_j} &= \delta_{ij}.
+  \dt[r_i]{r_j} &= \delta_{ij}.
 \end{align}
 
 \subsection{The Kronecker delta picks out an element of a sum}
