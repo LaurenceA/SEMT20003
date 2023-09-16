@@ -10,3 +10,6 @@ Notebooks:
 * [6.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing)
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
+
+Prereqs:
+* [Notes video 1](https://uob.sharepoint.com/:v:/t/grp-LA/EcJ4IReynmZPpNCG2_kUMnIBguvkENLttVZaime8khzJKg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=qidmLN)
