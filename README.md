@@ -9,6 +9,9 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 * TB1: all the teaching happens in TB1.
 * TB2: there is a group project in the first half of TB2.
 
+## Prerequisites
+EMAT20011, EMAT10006 (or equivalent units, i.e good knowledge and experience with Python and basic statistics)
+
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * There are pdf notes for every week of taught material.
