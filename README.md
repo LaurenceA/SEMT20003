@@ -30,8 +30,12 @@ Course materials for each week will be posted here on Monday.  Course materials 
 ## Why PyTorch
 All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days, you _need_ to know PyTorch if you're doing AI:
 * PyTorch is currently the leading AI library, both for academic research, and industry.
+* Fantastic docs + tutorials + libraries than any other library
+* Pythonic and hackable: you can look at + modify the source for just about anything
 * PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
 * As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
+* 
+Other points:
 * You're going to need PyTorch for the group project.
 * You won't need to install PyTorch.  All the iPython notebooks in the taught material are presented using [Google Colab](https://colab.research.google.com).  And you can do your group project there too!
 
