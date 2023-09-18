@@ -12,6 +12,10 @@ The course will introduce AI, with a focus on neural networks in PyTorch.
 ## Prerequisites
 EMAT20011, EMAT10006 (or equivalent units, i.e good knowledge and experience with Python and basic statistics)
 
+## Course Structure
+
+The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  Then, you can ask questions through the 2-hour weekly TA-led problem classes, and the 1-hour weekly lecturer-led QA session (see Feedback below).
+
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * There are pdf notes for every week of taught material.
