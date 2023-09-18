@@ -21,10 +21,11 @@ Course materials for each week will be posted here on Monday.  Course materials 
 * There are pdf notes for every week of taught material.
 * The pdf notes will _usually, but not always_ include questions.
 * All questions will have worked answers.
-* There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.
+* There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.  _It is critical for your understanding that you play around with the material in the notebooks.  Open up your own Colab notebook and enter the commands yourself; play with the commands; try things that are a little bit different!
 * These iPython notebooks _occasionally_ have exercises.
 * The concepts in the iPython notebooks are examinable.
-* There will be videos of me going through the material in the pdf notes.  Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.
+* There will be videos of me going through the material in the pdf notes.
+* Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.  If you are going to look at the videos, then open up your own Colab notebook alongside and follow along.  Try the things that I'm doing.  Try something a bit different!  (Feel free to pause the video to do this!).
  
 ## Feedback: 
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
