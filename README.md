@@ -26,6 +26,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
 * The concepts in the iPython notebooks are examinable.
 * There will be videos of me going through the material in the pdf notes.
 * Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.  If you are going to look at the videos, then open up your own Colab notebook alongside and follow along.  Try the things that I'm doing.  Try something a bit different!  (Feel free to pause the video to do this!).
+* The videos are not intended to add anything to the underlying material.  The exam is based on the notes/notebooks, _not_ the videos.  So if you're happy with the material in the notes/notebooks, you do not necessarily need to go through all the videos.
  
 ## Feedback: 
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
