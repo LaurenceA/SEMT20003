@@ -43,7 +43,7 @@ All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days
 * Pythonic and hackable: you can look at + modify the source for just about anything
 * PyTorch is great for learning AI, because it exposes alot of the underlying concepts, and doesn't hide them under abstractions.
 * As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
-* 
+
 Other points:
 * You're going to need PyTorch for the group project.
 * You won't need to install PyTorch.  All the iPython notebooks in the taught material are presented using [Google Colab](https://colab.research.google.com).  And you can do your group project there too!
