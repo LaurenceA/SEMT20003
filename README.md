@@ -60,6 +60,12 @@ Other points:
 ## Group coursework (50% of total mark):
 There will be a group coursework in TB2, which will run roughly for the first half of the teaching block.  Details are again not yet nailed down, and I will announce as soon as information is available.
 
+## Downloading the notes
+
+To download the notes, use the download button highlighted with the red circle:
+
+![button to download the notes](screenshot.png)
+
 ## Weekly material
 
 #### Week 1
