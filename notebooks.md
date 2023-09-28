@@ -11,3 +11,10 @@ Notebooks:
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
 
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [notes](notes/2_regression/regression.pdf) | [notes video 1 ()]() |
+| | [notes video 2 ()]() |
+| | [notes video 3 ()]() |
+| | [notes video 4 ()]() |
+| [Notebook 2: Linear Regression](https://colab.research.google.com/drive/1wrgZfRJaWC-Hh_zgrDd-ubgdIAq0Qd_q?usp=sharing) | N/A |
