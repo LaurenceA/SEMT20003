@@ -9,7 +9,7 @@ args = parser.parse_args()
 
 xs = np.linspace(-1, 1, 100)
 fig, axs = plt.subplots(figsize=(1.7,1.7), sharey=True)
-axs.plot(xs, xs**2)
+axs.plot(xs, 0.3 + (xs-0.2)**2)
 axs.set_xlabel('$w_1$')
 axs.set_ylabel('$\mathcal{L}(w_1)$')
 

@@ -64,15 +64,15 @@ And it turns out that this curve-fitting is the starting point for AI.
 \section{Quantifying good and bad predictions using distances/losses}
 
 To get a mathematical procedure for fitting good predictions, we need to know what makes a good prediction and what makes a bad prediction.
-Intuitively, a good prediction lies close to the true value, and a bad prediction lies far from the true value.
+Intuitively, a good prediction is close to the $y_i$'s in the data, and a bad prediction is far from the $y_i$'s in the data.
 \begin{center}
   \includegraphics{good_bad.pdf}
 \end{center}
-But to choose better predictors, we need to formally nail down this notion of distance.
-Fundamentally, there are a huge number of sensible things we could choose, corresponding to different mathematical formalisations of ``distance''.
+But to choose better predictors, we need to formally nail down this notion of distance between the prediction and the data.
+Specifically, the goal is to measure the distance between the prediction, $\yh(x_i)$, and the data, $y_i$.
+There are a huge number of sensible things we could choose, corresponding to different mathematical formalisations of ``distance''.
 Any given notion of distance will give rise to a ``loss'', $\L$. 
-The goal is to find a function $\yh(x_i)$ which is ``close'' to the true values, $y_i$, and thus has a small loss.
-Generally speaking, the loss is a sum of the distance for each datapoint, because we want the prediction for every datapoint to be close to the true value.
+Generally speaking, the loss is a sum of distances for each datapoint, because we want the prediction for every datapoint to be close to the data.
 Perhaps the most obvious is to use the sum of distances between $y_i$ and $\yh_i$,
 \begin{align}
   \L &= \sum_i \abs{\yh(x_i) - y_i},
@@ -99,7 +99,7 @@ But that doesn't scale:
   \item Where are these possible prediction-functions going to come from?
   \item What if we have \textit{loads} of possible prediction-functions?
 \end{itemize}
-To solve these problems, we're going to write our family of possible prediction functions using parameters (NNs will turn out to be the same idea, but where we have $10^3$ to $10^{12}$ parameters).
+To solve these problems, we're going to write our family of possible prediction functions using parameters (NNs will turn out to be the same idea, but where we have \textit{loads} more parameters: usually somewhere between a thousand and a trillion).
 For instance we could consider three predictors: the constant predictor, the ``slope'' predictor, and the straight-line predictor,
 \begin{align}
   \yh_\text{const}(x_i) &= w_1 & 
@@ -116,7 +116,6 @@ That means we can't try all possible values of $w_1$ and $w_2$.
 What can we do instead?
 It turns out we can find the lowest-loss function analytically, using calculus.
 Remember that the minimum of a function is often where the function has slope $0$.
-For instance, for the constant predictor we might have,
 \begin{center}
   \includegraphics{x2.pdf}
 \end{center}
@@ -146,7 +145,7 @@ We start by differentating the loss,
 \begin{align}
   \label{eq:const:grad_0}
   \dd[\L_\text{const}(w_1)]{w_1} &= \dd{w_1} \sqb{\sum_{i=1}^N \b{y_i - w_1}^2}.\\
-  \intertext{Swap the gradient and the sum,}
+  \intertext{(Note I'm playing fast-and-loose with $d$ and $\partial$.  This is done all the time by deep learners, so it is important to be able to work with it.  I'm going to be more careful when we come to talking about backprop in general, where this distinction matters a bit more).  Swap the gradient and the sum,}
   \dd[\L_\text{const}(w_1)]{w_1}  &= \sum_{i=1}^N \dd{w_1} \b{y_i - w_1}^2. %\b{y_i^2  - 2 w_1 y_i + w_1^2}\\
   \intertext{Now, we take $u_i=y_i - w_1$,}
   \dd[\L_\text{const}(w_1)]{w_1} &= \sum_{i=1}^N \dd[u_i^2]{w_1}
@@ -155,7 +154,7 @@ We start by differentating the loss,
   \intertext{The individual derivatives are,}
   \dd[u_i^2]{u_i} &= 2u_i\\
   \dd[u_i]{w_1} &= \dd{w_1} \sqb{y_i - w_1} = -1
-  \intertext{(note that the data, $y_i$ are fixed and independent of $w_1$, so $\dd[y_i]{w_1}=0$. Thus,}
+  \intertext{(note that the data, $y_i$ are fixed and independent of $w_1$, so $\dd[y_i]{w_1}=0$). Thus,}
   \dd[\L_\text{const}(w_1)]{w_1} &= 2 \sum_{i=1}^N (w_1 - y_i).
   \intertext{Now, we solve for the value of $w_1$ at which the gradient is zero,}
   0 &= \dd[\L_\text{const}(w_1)]{w_1} = 2 \sum_{i=1}^N (w_1 - y_i).
@@ -290,8 +289,9 @@ To do that, we need to find the place where the derivative wrt $w_2$ is zero.
   \intertext{Now rearrange (add $\sum_{i=1}^N y_i x_i$ to both sides, and divide by $\sum_{i=1}^N x_i^2$,)}
   w_2 &= \frac{\sum_{i=1}^N y_i x_i}{\sum_{i=1}^N x_i^2}.
 \end{align}
-Does this make sense?  Yes! Remember that $w_2$ is the slope.  The slope is bigger if for positive $x_i$, we have big positive $y_i$, and for negative $x_i$ we have big negative $y_i$.
-Indeed, the numerator in the final fraction is big in that case too!
+Does this make sense?  Yes! Remember that $w_2$ is the slope.  
+The slope is bigger if for positive $x_i$, we have big positive $y_i$, and for negative $x_i$ we have big negative $y_i$.
+And the numerator in this expression is big in exactly the same situation.
 
 \subsection{Straight line fitting}
 \label{sec:straight_line}
@@ -407,11 +407,15 @@ and make a prediction for a single datapoint,
 \end{align}
 Note that this expression wouldn't work if $\x_i$ and $\w$ were both column vectors; it only works because $\x_i$ is a row-vector, and $\w$ is a column-vector.
 
+The loss function is, as usual,
+\begin{align}
+  \mathcal{L}(\w) &= \sum_i \b{\yh(\x_i) - y_i}^2.
+\end{align}
 The optimal weights are,
 \begin{align}
   \label{eq:wo}
   \wo &= \b{\X^T \X}^{-1} \X^T \y\\
-  \intertext{Lets look a bit closer at the sizes,}
+  \intertext{I could give the derivation for this.  But its quite tedious, and isn't really super-relevant for later work in neural nets (as neural nets don't have analytic solutions like this).  Instead, I just want to make sure we think carefully about this expression and how the vectors/matrices in it work.  Specifically, lets look a bit closer at the sizes,}
   \underbrace{\wo}_{D \times 1} &= \big( \underbrace{\X^T}_{D\times N} \underbrace{\X}_{N \times D}\big)^{-1} \underbrace{\X^T}_{D \times N} \underbrace{\y}_{N \times 1}\\
   \intertext{Or, if we look at $\b{\X^T \X}^{-1}$ and $\X^T \y$ separately,}
   \underbrace{\wo}_{D \times 1} &= \underbrace{\b{\X^T \X}^{-1}}_{D \times D} \underbrace{\X^T \y}_{D \times 1}.
@@ -509,18 +513,18 @@ Remember that in linear regression, we are fitting a straight line of the form,
   \label{eq:grad:straight}
   \yh(x_i) = w_1 + w_2 x_i
 \end{align}
-with an intercept, $w_1$ and slope, $w_2$ parameter?
+with an intercept, $w_1$ and slope, $w_2$ parameter.
 Conceptually, it is the same idea we've seen previously: the loss is a function of $w_1$ and $w_2$,
 \begin{align}
-  \L(w_1, w_2) &= \sum_i \b{\yh(x_i) - y_i}^2 =  \sum_i \b{w_1 + w_2 x_i - y_i}^2
+  \L(w_1, w_2) &= \sum_i \b{\yh(x_i) - y_i}^2
 \end{align} 
 Now, we differentiate the loss wrt $w_1$,
 \begin{align}
-  \dd{w_1}\L(w_1, w_2) &= \sum_i \b{\yh(\x_i) - y_i}^2 =\sum_i \dd{w_1}\b{w_1 + w_2 x_i - y_i}^2.\\
-  \intertext{Now we use the chain rule, with $u_i=\yh(x_i) - y_i =w_1 + w_2 x_i - y_i$.  With this choice of $u_i$,}
+  \dd{w_1}\L(w_1, w_2) &= \sum_i \b{\yh(\x_i) - y_i}^2.
+  \intertext{Now we use the chain rule, with $u_i=\yh(x_i) - y_i =w_1 + w_2 x_i - y_i$ (the final equality comes from substituting Eq.~\ref{eq:grad:straight}).  With this choice of $u_i$,}
   \L(\w) &= \sum_i u_i^2.
   \intertext{So,}
-  \dd{w_1}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{w_2} = \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_1}\\
+  \dd{w_1}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{w_1} = \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_1}\\
   \intertext{The individual derivatives are,}
   \dd[u_i^2]{u} &= 2u_i = 2\b{\yh(x_i) - y_i}\\
   \dd[u_i]{w_1} &= \dd{w_1}\b{w_1 + w_2 x_i - y_i} = 1
@@ -547,7 +551,7 @@ We use the same choice of $u_i$, so we can start at,
 \end{align}
 To interpret these updates, consider a setting where again, the data, $y_i$, is bigger than our prediction, $\yh(x_i)$.
 If $x_i$ is positive, then we can reduce the error by \textit{increasing} $w_2$ (as that will increase the size of $w_2 x_i$ in the predcition Eq.~\ref{eq:grad:straight}); and that's exactly what these updates do.
-In contrast, if $x_i$ is negative, then we can reduce the error by \textit{decreasing} $w_2$ (i.e.\ if $w_2$ is already negative, we make it even more negative).  For instance, consider a setting where $w_2$ is currently negative; $x_i$ is also negative, so $w_2 x_i$ is positive, and we can increase $w_2 x_i$ by making $w_2$ even more negative. That's exactly what these updates do.
+In contrast, if $x_i$ is negative, then we can reduce the error by \textit{decreasing} $w_2$, as that will make $w_2 x_i$ more positive.
 
 \section{Gradient descent for multivariate linear regression}
 Critically, gradient descent is much easier to generalise to more complex cases than analytic solutions, like those in the previous part.
@@ -609,7 +613,9 @@ These updates again make sense.  If $X_{i\nu}$ is positive, and the error, $y_i 
 
 
 \section{Exercises}
-The following three questions are based on this dataset,
+All these exercises are designed to be possible by hand (with a calculator).  We'd advise doing them that way, as that's how the exam will be set!
+
+The following three exercises are based on this dataset.
 
 \begin{center}
 \begin{tabular}{c c}
