@@ -13,8 +13,8 @@ Notebooks:
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/2_regression/regression.pdf) | [notes video 1 ()]() |
-| | [notes video 2 ()]() |
-| | [notes video 3 ()]() |
-| | [notes video 4 ()]() |
+| [notes](notes/2_regression/regression.pdf) | [notes video 1 (24:57)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ER4Iry8y6ndItNCFzORtK6YBOzMyo96zjKgcPogap8L0uA) |
+| | [notes video 2 (13:30)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaVCMXsQp_lHjfygzWUdCREBOzaCsmyDvj4z17sasdK85g) |
+| | [notes video 3 (23:43)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZbSaoApXjVOvEKCf1f-A7kBOHhWlk-Bs4o4KP_9RonDxw) |
+| | [notes video 4 (27:27)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ee3CZ5XfG_NPsh_fCN4U-P0Bnfg0RPd63sa-N5tfzYSQsg) |
 | [Notebook 2: Linear Regression](https://colab.research.google.com/drive/1wrgZfRJaWC-Hh_zgrDd-ubgdIAq0Qd_q?usp=sharing) | N/A |
