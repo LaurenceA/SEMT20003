@@ -146,7 +146,7 @@ Note that we again use an \textit{average}, rather than a sum, as it makes the c
 \end{align}
 Using PyTorch to differentiate the minibatch loss gives 
 \begin{align}
-  \dLmb{\w} &= \mbavg \dLi{\w} = \mbavg \g_i = \gmb,
+  \dLmb{\w} &= \dt{\w} \b{\mbavg \L_i} = \mbavg \dLi{\w} = \mbavg \g_i = \gmb,
 \end{align}
 which gives the required averaged gradients.
 
@@ -159,9 +159,11 @@ The ``stochastic'' in SGD refers to the stochasticity induced by randomness in t
 
 This additional stochasticity raises a question: does SGD actually work?
 Specifically, does it converge to the minimum of the loss?
-In general, it won't converge (but it will typically bounce around a reasonable solution).
-It turns out we can prove convergence in once setting: when the learning rate, $\eta$, goes to zero.
-Specifically, we're can show that if you reduce the learning rate $\eta$, and at the same time, consider an increasing number number of iterations, $T(\eta) = 1/\eta$, then you expect the SGD updates to move the parameters to the same place, but the variance decreasing variance, as we in-effect end up averaging over more samples of the minibatch noise.
+Indeed, if you use a fixed learning rate, it will get close to the optimum, but won't actually exactly converge to exactly the optimum. 
+Instead, it bounce around the optimum forever due to the ``noisy'' minibatched gradient estimates.
+
+However, it turns out we can prove convergence in once setting: when the learning rate, $\eta$, goes to zero.
+Specifically, we can show that if you reduce the learning rate $\eta$, and at the same time, consider an increasing number number of iterations, $T(\eta) = 1/\eta$, then you expect the SGD updates to move the parameters to the same place, but the variance decreasing variance, as we in-effect end up averaging over more samples of the minibatch noise.
 
 To define the notion of the ``right expectation'', we need to go back to the original full batch setting.
 Specifically, we're going to write the full batch loss again as an average,

@@ -446,7 +446,7 @@ However, it turns out that we can adapt the previous formula (for multivaraible 
 The basic idea is to form multiple inputs for multivariable linear regression by applying a bunch of different functions (here, $f_1(\cdot)$, $f_2(\cdot)$ and $f_3(\cdot)$), to the actual input, $x_i$,
 \begin{align}
   \label{eq:feat_vec}
-  \x^T(x) &= \begin{pmatrix} f_1(x) & f_2(x) & f_3(x) \end{pmatrix}
+  \x(x) &= \begin{pmatrix} f_1(x) & f_2(x) & f_3(x) \end{pmatrix}
 \end{align}
 So the big matrix $\X$ becomes,
 \begin{align}
@@ -558,7 +558,7 @@ Critically, gradient descent is much easier to generalise to more complex cases 
 As such, we can now derive the updates for multivariate linear regression (note that while there was an analytic solution in this case, we didn't derive it because its painful and not particularly instructive).
 From last time, the prediction in multivariate linear regression was a weighted sum of features,
 \begin{align}
-  \yh(\x_i) = \x_i^T \w = \sum_\lambda X_{i\lambda} w_\lambda
+  \yh(\x_i) = \x_i \w = \sum_\lambda X_{i\lambda} w_\lambda
 \end{align}
 We use the usual squared-error loss,
 \begin{align}
