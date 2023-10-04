@@ -19,6 +19,7 @@ The course is taught in a "flipped classroom model".  So there are no in-person 
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * There are pdf notes for every week of taught material.
+* The notes are often long-ish, but that's only because I'm trying to be _thorough_ (e.g. I'm trying to include all the steps in derivations).  So the notes shouldn't in general be very dense.
 * The pdf notes will _usually, but not always_ include questions.
 * All questions will have worked answers.
 * There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.  _It is critical for your understanding that you play around with the material in the notebooks.  Open up your own Colab notebook and enter the commands yourself; play with the commands; try things that are a little bit different!
