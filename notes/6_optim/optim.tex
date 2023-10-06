@@ -39,9 +39,11 @@
 \newcommand{\gsmb}{g_\text{mb}}
 \newcommand{\gsd}{\g_\text{sd}}
 \newcommand{\vh}{\hat{v}}
+\newcommand{\mh}{\hat{m}}
 \newcommand{\gh}{\mathbf{\hat{g}}}
 \newcommand{\gb}{\mathbf{\ab{g}}}
 \newcommand{\gssqb}{\ab{g^2}}
+\newcommand{\gsb}{\ab{g}}
 \newcommand{\bv}{\mathbf{b}}
 \newcommand{\ov}{\mathbf{o}}
 \renewcommand{\a}{\mathbf{a}}
@@ -134,6 +136,7 @@ where $\Li$ is the loss for an individual datapoint.
 We can use the individual datapoint gradient to write down the minibatched gradient. 
 The minibatched gradient is just the gradient, averaged over datapoints in the minibatch,
 \begin{align}
+  \label{eq:gmb}
   \gmb &= \mbavg \g_i =  \mbavg \dLi{\w}.
 \end{align}
 Here, $\mbsize$ is the minibatch size, and ``$\iinmb$'' gives the set of indicies of datapoints in the current minibatch.
@@ -183,20 +186,21 @@ Critically, this random variable has the right expectation,
 \begin{align}
   \E{\gsd} &= \fbavg \g_i = \gfb.
 \end{align}
-And as the minibatched gradient is just a bunch of independent realisations of $\gsd$, 
+And as the minibatched gradient is just the average of a bunch of independent realisations of $\gsd$ (Eq.~\ref{eq:gmb}),
 \begin{align}
-  \E{\gmb} &= \gfb.
+  \E{\gmb} &= \gfb,
 \end{align}
-i.e.\ it also has the right expectation.
+it also has the right expectation.
 
 Thus, we interpreted the single-datapoint, $\gsd$, or minibatched, $\gmb$, gradients as random variables, and proved that they have the right expectation, $\gfb$.
-In language from statistics, we could consider $\gsd$ and $\gmb$ as estimators of $\gfb$, and because the expectation is right, we say these estimators are ``unbiased''.
-It turns out that having unbiased gradient estimates provably works: as the learning rate goes to zero, the noise in each minibatch estimate ``averages out'', and the method converges.
-Specifically, as we reduce the learning rate, $\eta$, we consider an increasing number of timesteps,
+In language from statistics, we could consider $\gsd$ and $\gmb$ as estimators of $\gfb$, and because the expectation of $\gsd$ and $\gmb$ equals the desired value, $\gfb$, we say these estimators are ``unbiased''.
+It turns out that having unbiased gradient estimates provably works: as the learning rate goes to zero, the noise in each minibatch estimate ``averages out''.
+To prove this kind of convergence, we consider reducing the learning rate $\eta$, and at the same time, increasing number of timesteps,
 \begin{align}
   \label{eq:T(eta)}  
   T(\eta) = \tfrac{1}{\eta}.
 \end{align}
+Note that we make sure to choose values of $\eta$ that give integer numbers of steps $T(\eta)$.
 The overall change in the parameter, $w$ is,
 \begin{align}
   \Delta w &= \eta \sum_{t=1}^{T(\eta)} \gsmbt.
@@ -206,7 +210,7 @@ Writing $\eta = 1/T(\eta)$,
   \Delta w &= \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \gsmbt
 \end{align}
 Thus, $\Delta w$ is just the average of $T(\eta)$ independent realisations of the minibatched gradient, $\gsmbt$.
-The expected change in weights is thus,
+Assuming that we consider a small number of iterations, such that the expected gradient doesn't change much across the small part of the trajectory considered (i.e.\ $\E{\gsmbt} = \gsfb$, where $\gsfb$ doesn't change over timesteps), the expected change in weights becomes,
 \begin{align}
   \E{\Delta w} &= \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \E{\gsmbt} = \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \gsfb = \gsfb,
 \end{align}
@@ -236,7 +240,6 @@ Thus, as $\eta \rightarrow 0$, the variance in the change in weights $\Var{\Delt
 %  = \eta^2 \tfrac{1}{\eta} \Var{\gsmb(t)}
 %  = \eta \Var{\gsmb(t)}.
 %\end{align}
-Hence, as $\eta \rightarrow 0$, the variance in the parameters also converges to zero, $\Var{\Delta w} \rightarrow 0$.
 
 Theory is great, but deep learning is a practical subject, so there's a few points of ``wisdom'' and/or common practice. Specifically:
 \begin{itemize}
@@ -254,16 +257,17 @@ Specifically:
   \item If all the gradients are large, then we'd like to use small learning rates to avoid instability.
 \end{itemize}
 The problem is in practice, gradients in some directions are large, and gradients in some directions are small.
-In practice, that means you need to use a small learning rate (to avoid instabilities along directions with large gradients).
-But that inevitably means you converge slowly in directions with small gradients.
-Momentum is one way to mitigate these issues, as it allows you to push up the learning rate a bit, allowing faster convergence in the small-gradient directions, while avoiding instabilities in the large-gradient directions.
+That sets up a conflict: for directions with a large gradient, you'd like to use a small learning rate (to avoid instabilities along directions with large gradients).
+But for for directions with a small gradient, you'd like to use a large learning rate (to converge reasonably quickly).
+Momentum is one way to mitigate these issues, as it stabilises learning with large-ish learning rates along high gradient directions.
+That allows you to push up the learning rate a bit, allowing faster convergence in the small-gradient directions, before you hit instabilities in the large-gradient directions.
 Specifically, the instabilities often look like the diagram below,
 \begin{center}
   \includegraphics[width=\textwidth]{momentum.pdf}
 \end{center}
-If the learning rate is too large, SGD can jump over the optimum in that direction (in this case, we're looking at the large vertical jumps for SGD depicted in the blue line).
-That's okay if you end up closer to the middle than you started (i.e.\ left plot below with $\eta=0.1$), in which case the gradient next time is smaller, and you will gradually converge on the right answer.
-But if you end up further from the middle than you started (i.e.\ middle and left plots below), then you'll blow up.
+If the learning rate is large, SGD can oscillate, as at each step, it jumpts over the ``horizontal'' in these diagrams.
+That's okay if the oscillations decay (i.e.\ left plot below with $\eta=0.1$), in which case you will still converge.
+But as the learning rate increases, the oscillations grow, and the learning process diverges (middle and right plots).
 Momentum (orange line) allows you to increase learning rates a bit while avoiding this instability.
 
 How does momentum work?
@@ -274,7 +278,8 @@ The objective, $\L(\w)$ describes the height of the landscape at any location, $
 \begin{align}
   \F(\w) &= - \lrtrad \gfb.
 \end{align}
-Taking $m=1$, the equations of motion are,
+(Note that I'm using two slightly different notions of gradient, $\lrtrad$, the ``traditional'' gradient used in standard formulations of SGD with momentum that you'll find on the internet, and $\lravg$: a slightly different notion of momentum that I think makes the effect of momentum far clearer).
+Taking the mass to be $1$ for simplicity, the equations of motion are,
 \begin{subequations}
 \begin{align}
   \dt[\mom]{t} &= - (1-\mu) \mom + \F(\w) = - (1-\mu) \mom - \lrtrad \gfb\\
@@ -313,73 +318,90 @@ These other learning rules use an exponential moving average gradient,
   \gb_{t+1} &= \beta_1 \gb_{t} + (1-\beta_1) \gmbt
 \end{align}
 This looks alot the ``velocity'' updates in Eq.~\eqref{eq:sgdm:trad:mom}, in that they both have an exponentially decay, with an additive term that depends on the minibatch gradient (the exponential decay is for $\mom$ in Eq.~\eqref{eq:sgdm:trad:mom} and for $\gb$ in Eq.~\eqref{eq:gb}).
-However, the exponential moving average is much easier to interpret, as it is estimates the full batch gradient.
-Specifically, if we are in a region where the underlying gradient doesn't change much,
-\begin{align}
-  \E{\gb_{t}} &= \gfb
-\end{align}
-(see exercises for details).
+However, this form is much easier to interpret, as it is an exponential moving average of minibatch gradients that just estimates the full batch gradient (see exercises for details).
+That's why we denote this quantity $\gmbt$ (angle brackets are often used to denote some type of average).
+%Specifically, if we are in a region where the underlying gradient doesn't change much,
+%\begin{align}
+%  \E{\gb_{t}} &= \gfb
+%\end{align}
 Now, we can write an alternative set of momentum updates,
 \begin{subequations}
 \begin{align}
   \label{eq:sgdm:avg:g}
   \gb_{t+1} &= \beta_1 \gb_t + (1-\beta_1) \gmbt\\
   \label{eq:sgdm:avg:w}
-  \w_{t+1} &= \w_{t} - \lrtrad \gb_{t+1}
+  \w_{t+1} &= \w_{t} - \lravg \gb_{t+1}
 \end{align}
 \end{subequations}
-This is alot more similar to traditional SGD, in that the parameter updates are again just a learning rate times an estimate of the graident.
+This is alot more similar to traditional SGD, in that the parameter updates are again just a learning rate times an estimate of the gradient.
 In SGD, we just use a single minibatched gradient estimate, while here, we use an exponential-moving-average over previous minibatch gradient estimates.
 This averaging allows us to reduce alternating gradients (as in the original diagram), and stabilise learning at larger learning rates.
 
 This raises a question: how does this ``average'' parameterisation relate to the ``traditional'' parameterisation?
-It turns out that the ``velocity'' in the traditional formulation is just proportional to the exponential moving average gradient,
+Our goal is to find relationships between the so-called ``hyperparameters'' in the traditional formulation (i.e.\ $\mu$ and $\lrtrad$) and the hyperparameters in the alternative formulation (i.e.\ $\beta_1$ and $\lravg$) that give exactly the same parameter updates at all timesteps.
+Specifically, we need the parameter update from the traditional formulation (Eq.~\ref{eq:sgdm:trad:w}) equal to the update from the alternative formulation (Eq.~\ref{eq:sgdm:avg:w}) at timestep $t$ and $t+1$,
 \begin{align}
-  \mom_t &= - \frac{\lrtrad}{1-\mu} \gb_t.
+  \label{eq:prop:t}
+  \mom_{t} &= - \lravg \gb_{t} \\
+  \label{eq:prop:t+1}
+  \mom_{t+1} &= - \lravg \gb_{t+1}.
 \end{align}
-To prove this assertion, we can substitute this into the traditional momentum updates (Eq.~\ref{eq:sgdm:trad:mom}),
+This indicates that we need the momentum in the traditional formulation to be directly proportional to the average gradient.
+To achieve that, lets substitute the updates for $\mom_{t+1}$ (Eq.~\ref{eq:sgdm:trad:mom}) and for $\gb_{t+1}$ (Eq.~\ref{eq:sgdm:avg:g}) into Eq.~\eqref{eq:prop:t+1},
 \begin{align}
-  \mom_{t+1} &= \mu \mom_t - \lrtrad \gmbt\\
-  - \frac{\lrtrad}{1-\mu} \gb_{t+1} &= - \frac{\lrtrad}{1-\mu} \mu \gb_t - \lrtrad \gmbt
-  \intertext{And dividing everything by $-\tfrac{\lrtrad}{1-\mu}$,}
-  \gb_{t+1} &= \mu \gb_t + (1-\mu) \gmbt.
+  \nonumber
+  \mu \mom_t - \lrtrad \gmbt &= - \lravg \b{\beta_1 \gb_t + (1-\beta_1) \gmbt} \\
+  &= - \lravg \beta_1 \gb_t - \lravg (1-\beta_1) \gmbt.
 \end{align}
-This is exactly the exponential moving average gradient in Eq.~\eqref{eq:sgdm:avg:g}, with $\beta_1 = \mu$.
-
-Additionally, we can relate the learning rates in the two formulations.
-Specifically, the traditional parameter updates (Eq.~\ref{eq:sgdm:trad:w}) are,
+Now, lets substitute the value of $\mom_t$ in terms of the average gradient (Eq.~\ref{eq:prop:t}),
 \begin{align}
-  \w_{t+1} &= \w_{t} + \mom_{t+1} = \w_t - \frac{\lrtrad}{1-\mu} \gb_{t+1}.
+  - \mu \lravg \gb_{t} - \lrtrad \gmbt &= - \lravg \beta_1 \gb_t - \lravg (1-\beta_1) \gmbt.
 \end{align}
-This is equivalent to the average parameter updates (Eq.~\ref{eq:sgdm:avg:w}), if we set
+Now, the minibatch gradient, $\gmbt$ is a random variable that could (in principle) be anything, and is not e.g.\ deterministically tied to $\gb_t$.
+Thus, we're going to consider the equality of the terms proportional to the minibatch gradient, and the terms proportional to $\gb_t$ separately.
+For the terms proportional to $\gb_t$ to be equal, we need,
 \begin{align}
-  \lravg = \frac{\lrtrad}{1-\mu}.
+  - \mu \lravg \gb_{t} &= - \lravg \beta_1 \gb_t.
 \end{align}
-That means if we increase momentum (typically we use $\mu=0.9$) while keeping the traditional momentum, $\lrtrad$, the same, then we are in effect increasing the learning rate, $\lravg$.
+Thus,
+\begin{align}
+  \mu &= \beta_1.
+\end{align}
+And for the terms proportional to $\gmbt$ to be equal,
+\begin{align}
+  - \lrtrad \gmbt &= - \lravg (1-\beta_1) \gmbt.
+\end{align}
+Thus,
+\begin{align}
+  \lrtrad &= \lravg (1-\beta_1) & 
+  \lravg &= \tfrac{1}{1 -\beta_1} \lrtrad.
+\end{align}
+That means if we increase momentum (typically we use $\mu=\beta_1=0.9$) while keeping the traditional momentum, $\lrtrad$, the same, then we are in effect increasing the learning rate, $\lravg$.
 
 \section{RMSProp}
 
 If you remember, the original problem we were solving with momentum was that there are big gradients in some directions, and small gradients in other directions.
 You ideally want a big learning rate in directions with a small gradient, to converge quickly.
 At the same time, you want a small learning rate in directions with a big gradient, to avoid instability.
-RMSProp gives you just that!
-Specifically, RMSProp updates for a single parameter, $w$, are,
+Momentum mitigated the problem, by stabilising along high-gradient directions.
+But it is also possible to just directly reduce the gradients in the high-gradient directions.
+And that's just what RMSProp gives you!
+Specifically, RMSProp computes an exponential moving average of the squared gradient, $\gsmbt^2$ then uses the root-mean-square-average gradient to normalize (or adapt) the learning rate,
 \begin{align}
-  \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) g_t^2\\
-  \vh_{t+1} &= \frac{\gsmbt^2}{1-(\beta_2)^t}\\
-  w_{t+1} &= w_t + \eta \frac{\gsmbt}{\sqrt{\vh_{t+1}} + \epsilon}
+  \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
+  %\vh_{t+1} &= \frac{\gsmbt^2}{1-(\beta_2)^t}\\
+  \label{eq:rmsprop:w}
+  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
 \end{align}
-where $g_t$ is the minibatch gradient at iteration $t$.
-You can understand this as being like SGD, but where 
+Note that $\epsilon$ is a small positive constant (usually set to $10^{-8}$) which ensures that we never divide-by-zero.
 
-so $\gssqb_{t+1}$ is an exponential moving average of the squared gradients, $g^2$.
-Now, the update to the weights is always about $\eta$.
-If we assume that we're in a small region, where the gradient is always the same, $g_t = \gsfb$, then, $\gssqb_{t+1} = \gsfb^2$, so the weight update is,
+To understand how RMS prop functions, we assume that we're in a small region, where the gradient is always the same, $\gsmbt = \gsfb$, and if we're in this region for long enough, $\gssqb_{t+1} = \gsfb^2$. 
+Now, the weight update is,
 \begin{align}
   w_{t+1} &= w_t + \eta \frac{\gsfb}{\sqrt{\gsfb^2} + \epsilon} 
   \intertext{And $\sqrt{\gsfb^2} = \abs{\gsfb}$,}
   w_{t+1} &= w_t + \eta \frac{\gsfb}{\abs{\gsfb} + \epsilon}
-  \intertext{For very small $\epsilon$,}
+  \intertext{Setting $\epsilon = 0$ for simplicity,}
   w_{t+1} &= w_t + \eta \; \text{sign}(\gsfb) \\
   \text{sign}(x) &= \begin{cases}
      1 &\text{if } 0 < x\\
@@ -391,65 +413,175 @@ So the magnitude of the updates is always around $\eta$, no matter how big the g
 
 \section{Adam}
 
-Adam is just RMSProp + Momentum.
+In practice, RMSProp is rarely, if ever used.
+Instead, Adam is perhaps the most common optimizer in deep learning.
+Critically, Adam is just RMSProp + Momentum + Bias correction.
+Note that the name ``Adam'' breaks down as ``Ada-m'', with the ``Ada'' for ``adaptive'' learning rates, and the ``m'' for momentum.
+To combine RMSProp with momentum, we just replace the gradient, $\gsmbt$, in Eq.~\eqref{eq:rmsprop:w} with the exponential moving average gradient, 
+\begin{align}
+  \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
+  \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
+  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
+\end{align}
+However, there's another problem with these updates. 
+Specifically, $\gssqb_{t+1}$ is too small for about the first $1000$ timesteps.
+In particular, we typically use a long timescale for the exponential moving average for $\gssqb_{t+1}$: the default is $\beta_2 = 0.999$, which implies a timescale of about $1000$ timesteps.
+Moreover, in the absence of any better information, we initialize $\gssqb_0 = 0$.
+Combining all this, we have $1-\beta_2 = \tfrac{1}{1000}$, so
+\begin{align}
+  \gssqb_1 &= \tfrac{1}{1000} g_{\text{mb}; t=1}^2,
+\end{align}
+thus the first estimate of $\gssqb$ is about 1000 times too small.
+To fix this issue, the full Adam updates do bias correction:
+\begin{align}
+  \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
+  \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
+  \mh_{t+1} &= \frac{\gssqb_{t+1}}{1-(\beta_1)^t}\\
+  \vh_{t+1} &= \frac{\gsb_{t+1}}{1-(\beta_2)^t}\\
+  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\vh_{t+1}} + \epsilon}\mh_{t+1}.
+\end{align}
+To understand what bias correction is doing, see Exercises.
 
 
-\section{Appendix [Non examinable]}
+\section{Exercises}
 
-\subsection{Exponential moving averages}
-The exponential moving average gradient estimator was,
-\begin{align}
-  \gb_{t+1} &= \beta_1 \gb_t + (1-\beta_1) \g_t
-\end{align}
-But in what sense is this an ``exponential moving average''?
+\begin{exercise}
+  Consider an exponential moving average of random variables $X_{t+1}$,
+  \begin{align}
+    \label{eq:ex:abX}
+    \ab{X}_{t+1} &= \beta \ab{X}_{t} + (1- \beta) X_{t+1}
+  \end{align}
+  where we initialize at,
+  \begin{align}
+    \ab{X}_{0} &= 0
+  \end{align}
+  and the means of all the $X_{t+1}$'s are $\mu$,
+  \begin{align}
+    \label{eq:ex:EX}
+    \E{X_{t+1}} &= \mu.
+  \end{align}
+  Part 1: What is $\E{\ab{X}_{t+1}}$ after an arbitrary number of timesteps?  
 
-We know,
+  Part 2: Can I multiply by a time-dependent constant, $c_{t+1}$ to form a ``debiased'' estimate,
+  \begin{align}
+    d_{t+1} &= c_{t+1} \ab{X}_{t+1} 
+  \end{align}
+  such that
+  \begin{align}
+    \E{d_{t+1}} &= \mu.
+  \end{align}
+\end{exercise}
+
+\begin{answer}
+Part 1: We begin by taking the expectation of the update (Eq.~\ref{eq:ex:abX})
 \begin{align}
-  \gb_{t} &= \beta_1 \gb_{t-1} + (1-\beta_1) \g_{t-1}\\
-  \gb_{t-1} &= \beta_1 \gb_{t-2} + (1-\beta_1) \g_{t-2}\\
-  \gb_{t-2} &= \beta_1 \gb_{t-3} + (1-\beta_1) \g_{t-3}
+  \E{\ab{X}_{t+1}} &= \beta \E{\ab{X}_{t}} + (1- \beta) \E{X_{t+1}}.\\
+  \intertext{Substituting Eq.~\eqref{eq:ex:EX},}
+  \E{\ab{X}_{t+1}} &= \beta \E{\ab{X}_{t}} + (1- \beta) \mu.\\
+  \intertext{To make the notation slightly ``lighter'', use $a_t = \E{\ab{X}_{t}}$,}
+  a_{t+1} &= \beta a_t + (1- \beta) \mu.\\
+  \intertext{We also have,}
+  a_{t} &= \beta a_{t-1} + (1- \beta) \mu.\\
+  a_{t-1} &= \beta a_{t-2} + (1- \beta) \mu.\\
+  \intertext{Substituting $a_t$ into $a_{t+1}$,}
+  a_{t+1} &= \beta (\beta a_{t-1} + (1- \beta) \mu) + (1- \beta) \mu.\\
+  a_{t+1} &= \beta^2 a_{t-1} + (1- \beta) (1 + \beta) \mu
+  \intertext{Substituting $a_{t-1}$,}
+  a_{t+1} &= \beta^2 (\beta a_{t-2} + (1- \beta) \mu)+ (1- \beta) \mu (1 + \beta)\\
+  a_{t+1} &= \beta^3 a_{t-2} + (1- \beta) \mu (1 + \beta + \beta^2).
+  \intertext{Repeating until we get to $a_0$,}
+  a_{t+1} &= \beta^3 a_0 + (1- \beta) \mu \sum_{\tau=0}^{t}\beta^\tau.
+  \intertext{As we initialize at $a_0=0$,}
+  a_{t+1} &= (1- \beta) \mu \sum_{\tau=0}^{t}\beta^\tau.
+  \intertext{Now, the $\sum_{\tau=0}^{t}\beta^\tau$ term is a geometric series.  You can look geometric series up.  Or we can find the value ourselves.  There's a ``trick'' to the proof for a geometric series, which is to consider,}
+  (1-\beta) \sum_{\tau=0}^{t}\beta^\tau &= \sum_{\tau=0}^{t}\beta^\tau - \beta \sum_{\tau=0}^{t}\beta^\tau 
+  \intertext{Now we can absorb the $\beta$ into the sum,}
+  (1-\beta) \sum_{\tau=0}^{t}\beta^\tau &= \sum_{\tau=0}^{t}\beta^\tau - \sum_{\tau=1}^{t+1}\beta^\tau\\
+  \intertext{Now, notice that almost all the terms cancel, except those for $\tau=0$ and $\tau=T+1$,}
+  (1-\beta) \sum_{\tau=0}^{t}\beta^\tau &= 1 - \beta^{t+1}.
+  \intertext{Thus,}
+  \sum_{\tau=0}^{t}\beta^\tau &= \frac{1 - \beta^{t+1}}{1-\beta}.
+  \intertext{Substituting this back into our form for $a_{t+1}$ gives,}
+  \label{eq:ans:a}
+  a_{t+1} &= (1-\beta^{t+1}) \mu 
 \end{align}
-Now, substituting $\gb_t$ into $\gb_{t+1}$,
+Of course, assuming that $0<\beta<1$, then as $t+1$ goes to infinity, we have,
 \begin{align}
-  \gb_{t+1} &= \beta_1 (\beta_1 \gb_{t-1} + (1-\beta_1) \g_{t-1}) + (1-\beta_1) \g_t\\
-  \gb_{t+1} &= \beta_1^2 \gb_{t-1} + (1-\beta_1) (\g_t + \beta_1 \g_{t-1}).
+  \lim_{t \rightarrow \infty} \beta^{t+1} &= 0
+  \lim_{t \rightarrow \infty} a_{t+1} &= \mu
 \end{align}
-Now, substituting $\gb_{t-1}$ into this expression,
+The problem is what happens for smaller numbers of timesteps.
+
+Part 2: Therefore, we can choose,
 \begin{align}
-  \gb_{t+1} &= \beta_1^2 (\beta_1 \gb_{t-2} + (1-\beta_1) \g_{t-2}) + (1-\beta_1) (\g_t + \beta_1 \g_{t-1})\\
-  \gb_{t+1} &= \beta_1^3 \gb_{t-2} + (1-\beta_1) (\g_t + \beta_1 \g_{t-1} + \beta^2 \g_{t-2}).
+  \label{eq:ans:c}
+  c_{t+1} &= \frac{1}{1-\beta^{t+1}}
+  \intertext{Now, the expectation of our debiased estimator, $d_{t+1}$ becomes,}
+  \E{d_{t+1}} &= c_{t+1} \E{\ab{X}_{t+1}}
+  \intertext{Substituting $a_{t+1} = \E{\ab{X}_{t+1}}$}
+  \E{d_{t+1}} &= c_{t+1} a_{t+1}
+  \intertext{Substituting for $c_{t+1}$ from Eq.~\eqref{eq:ans:c} and $a_{t+1}$ from Eq.~\eqref{eq:ans:a},}
+  \E{d_{t+1}} &= \frac{1}{1-\beta^{t+1}} (1-\beta^{t+1}) \mu = \mu.
 \end{align}
-If we continued doing this, we'd get,
-\begin{align}
-  \gb_{t+1} &= \beta_1^{t+1} \gb_{1} + (1-\beta_1) \sum_{\tau=0}^{t-1}\beta_1^{\tau} \g_{t-\tau}
-\end{align}
-Additionally, we assume that we initialize $\gb_1 = \0$,
-\begin{align}
-  \gb_{t+1} &= (1-\beta_1) \sum_{\tau=0}^{t-1}\beta_1^{\tau} \g_{t-\tau}
-\end{align}
-This can be interpreted as a weighted average, 
-\begin{align}
-  \gb_{t+1} &= \sum_{\tau=0}^{t-1}w_\tau \g_{t-\tau}
-\end{align}
-with weights,
-\begin{align}
-  w_{\tau} &= (1-\beta_1) \beta_1^{\tau}
-\end{align}
-For this to be an exponential moving average, we need the sum of the weights to be $1$.
-\begin{align}
-  \sum_{\tau=0}^{t-1} w_{\tau} &= (1-\beta_1) \underbrace{\sum_{\tau=0}^{t-1} \beta_1^{\tau}}_{\mathclap{\text{geometric series}}}
-\end{align}
-For geometric series, we know,
-\begin{align}
-  \sum_{k=0}^{n-1} r^k &= \frac{1-r^n}{1-r}
-\end{align}
-(for $0 \leq r < 1$).
-Therefore,
-\begin{align}
-  \sum_{\tau=0}^{t-1} w_{\tau} &= (1-\beta_1) \frac{1-\beta_1^t}{1-\beta_1} = 1-\beta_1^t
-\end{align}
-As $0 \leq \beta_1 < 1$, it will quickly approach $0$ as $t$ gets large. 
-In that case, the sum of weights approaches $1$, and it makes sense to regard Eq.~\eqref{eq:gb} as an exponential weighted average.
+So $d_{t+1}$ has the correct expectation.
+
+
+\end{answer}
+
+%\subsection{Exponential moving averages}
+%The exponential moving average gradient estimator was,
+%\begin{align}
+%  \gb_{t+1} &= \beta_1 \gb_t + (1-\beta_1) \g_t
+%\end{align}
+%But in what sense is this an ``exponential moving average''?
+%
+%We know,
+%\begin{align}
+%  \gb_{t} &= \beta_1 \gb_{t-1} + (1-\beta_1) \g_{t-1}\\
+%  \gb_{t-1} &= \beta_1 \gb_{t-2} + (1-\beta_1) \g_{t-2}\\
+%  \gb_{t-2} &= \beta_1 \gb_{t-3} + (1-\beta_1) \g_{t-3}
+%\end{align}
+%Now, substituting $\gb_t$ into $\gb_{t+1}$,
+%\begin{align}
+%  \gb_{t+1} &= \beta_1 (\beta_1 \gb_{t-1} + (1-\beta_1) \g_{t-1}) + (1-\beta_1) \g_t\\
+%  \gb_{t+1} &= \beta_1^2 \gb_{t-1} + (1-\beta_1) (\g_t + \beta_1 \g_{t-1}).
+%\end{align}
+%Now, substituting $\gb_{t-1}$ into this expression,
+%\begin{align}
+%  \gb_{t+1} &= \beta_1^2 (\beta_1 \gb_{t-2} + (1-\beta_1) \g_{t-2}) + (1-\beta_1) (\g_t + \beta_1 \g_{t-1})\\
+%  \gb_{t+1} &= \beta_1^3 \gb_{t-2} + (1-\beta_1) (\g_t + \beta_1 \g_{t-1} + \beta^2 \g_{t-2}).
+%\end{align}
+%If we continued doing this, we'd get,
+%\begin{align}
+%  \gb_{t+1} &= \beta_1^{t+1} \gb_{1} + (1-\beta_1) \sum_{\tau=0}^{t-1}\beta_1^{\tau} \g_{t-\tau}
+%\end{align}
+%Additionally, we assume that we initialize $\gb_1 = \0$,
+%\begin{align}
+%  \gb_{t+1} &= (1-\beta_1) \sum_{\tau=0}^{t-1}\beta_1^{\tau} \g_{t-\tau}
+%\end{align}
+%This can be interpreted as a weighted average, 
+%\begin{align}
+%  \gb_{t+1} &= \sum_{\tau=0}^{t-1}w_\tau \g_{t-\tau}
+%\end{align}
+%with weights,
+%\begin{align}
+%  w_{\tau} &= (1-\beta_1) \beta_1^{\tau}
+%\end{align}
+%For this to be an exponential moving average, we need the sum of the weights to be $1$.
+%\begin{align}
+%  \sum_{\tau=0}^{t-1} w_{\tau} &= (1-\beta_1) \underbrace{\sum_{\tau=0}^{t-1} \beta_1^{\tau}}_{\mathclap{\text{geometric series}}}
+%\end{align}
+%For geometric series, we know,
+%\begin{align}
+%  \sum_{k=0}^{n-1} r^k &= \frac{1-r^n}{1-r}
+%\end{align}
+%(for $0 \leq r < 1$).
+%Therefore,
+%\begin{align}
+%  \sum_{\tau=0}^{t-1} w_{\tau} &= (1-\beta_1) \frac{1-\beta_1^t}{1-\beta_1} = 1-\beta_1^t
+%\end{align}
+%As $0 \leq \beta_1 < 1$, it will quickly approach $0$ as $t$ gets large. 
+%In that case, the sum of weights approaches $1$, and it makes sense to regard Eq.~\eqref{eq:gb} as an exponential weighted average.
 
 \end{document}
 
