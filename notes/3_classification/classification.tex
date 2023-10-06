@@ -239,32 +239,59 @@ Further, we can check that the resulting probabilities sum to $1$,
 \end{align}
 as the numerator and denominator are the same.
 
+\section{Maximum likelihood vs cross-entropy loss}
+
+While the maximum likelihood perspective is the right way to motivate the binary and multi-class classification objectives, deep learning types don't use this viewpoint.
+Instead, they typically say that in classification, we use a ``cross entropy loss''.
+Mathematically, this is just the negative log-probability, so it is equivalent to the maximum likelihood framework above (maximizing the log-probability is equivalent to minimizing the negative log-probability),
+\begin{align}
+  \L &= - \sum_i \log p_{y_i}(\x_i).
+\end{align}
+Remember, this is a sum over datapoints, and $p_{y_i}$ picks out the predicted probability of the actual target class.
+
+Why do they call it a ``cross-entropy''?
+If we look at the general definition of cross-entropy, it is a function of \textit{two} probability distributions,
+\begin{align}
+  H(q, p) &= - \sum_c q_c \log p_c
+\end{align}
+where the sum is now over image classes, rather than datapoints.
+If we make a couple of choices, this becomes equal to the loss for a single datapoint.
+Specifically, we take $q_c$ to be a distribution which puts all its mass at the true target class, and we take $p_c$ to be our predicted probabilties,
+\begin{align}
+  q_c &= \delta_{c, y_i}\\
+  p_c &= p_{c}(\x_i).
+  \intertext{Then,}
+  H(q, p) &= - \sum_c q_c \log p_c \\
+  H(q, p) &= - \sum_c \delta_{c, y_i} \log p_{c}(\x_i).
+  \intertext{The Kronecker-delta picks out the element of the sum for which $c=y_i$,}
+  H(q, p) &= - \log p_{y_i}(\x_i).
+\end{align}
+And this is exactly our loss for the $i$th datapoint.
+
 \section{Gradient descent for binary classification}
 Now, we have discussed the loss function for binary and multiclass classification, we need to think about how to actually use this objective to optimize the weights.
-We'll focus on the binary setting (to keep things slightly simpler) and use gradient descent.
+We'll focus on the binary setting (to keep things slightly simpler) and use gradient descent (i.e. compute the gradient of the loss wrt the weights).
 But first-things-first, it turns out to be useful to rearrange the objective itself into a simpler form.
 Remember that the objective is the log-probability of class-labels under our model,
 \begin{align}
-  \L(\w) &= \log \P{y_1,\dotsc,y_N| \w, \x_1,\dotsc,\x_N}\\
-  \intertext{The class-labels for different inputs are independent,}
-  \L(\w) &= \sum_{i=1}^N \log \P{y_i| \w, \x_i}\\
+  \L(\w) &= - \sum_{i=1}^N \log \P{y_i| \w, \x_i}\\
   \intertext{Using the coin-flipping probability from Eq.~\eqref{eq:coin}}
-  \L(\w) &= \sum_{i=1}^N \log (p_{\w}(\x_i)^{y_i} (1-p_{\w}(\x_i))^{1-y_i})\\
+  \L(\w) &= - \sum_{i=1}^N \log (p_{\w}(\x_i)^{y_i} (1-p_{\w}(\x_i))^{1-y_i})\\
   \intertext{The log turns products into sums,}
-  \L(\w) &= \sum_{i=1}^N \sqb{\log (p_{\w}(\x_i)^{y_i}) + \log((1-p_{\w}(\x_i))^{1-y_i})}.\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{\log (p_{\w}(\x_i)^{y_i}) + \log((1-p_{\w}(\x_i))^{1-y_i})}.\\
   \intertext{Next, the log turns powers into products, (mirroring the coin flipping result in Eq.~\ref{eq:coin_flip_prob})}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log (p_{\w}(\x_i)) + (1-y_i)\log((1-p_{\w}(\x_i)))}.\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log (p_{\w}(\x_i)) + (1-y_i)\log((1-p_{\w}(\x_i)))}.\\
   \intertext{Substituting the value of $p_{\w}(\x)$ (Eq.~\ref{eq:sigmoid_prob}), (keeping the sigmoid in the first term, but using the explicit form for the sigmoid in the second term),}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x) + (1-y_i)\log\b{1 - \frac{1}{1+e^{-\w^T \x}}}}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x) + (1-y_i)\log\b{1 - \frac{1}{1+e^{-\w^T \x}}}}
   \intertext{Using, $1 = (1+e^{-\w \x_i^T}) /(1+e^{-\w \x_i^T})$,}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\b{\frac{1+e^{-\w \x_i^T}}{1+e^{-\w \x_i^T}} - \frac{1}{1+e^{-\w^T \x}}}},\\
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1 +e^{-\w^T \x_i} - 1}{1+e^{-\w^T \x_i}}},\\
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{e^{-\w^T \x_i}}{1+e^{-\w^T \x_i}}}.
-  \intertext{Multiplying the numerator and denominator by $e^{\w^T \x}$,}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{(e^{-\w^T \x_i}) e^{\w^T \x_i}}{(1+e^{-\w^T \x_i}) e^{\w^T \x_i}}},\\
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1}{1 + e^{\w^T \x_i}}}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\b{\frac{1+e^{-\w \x_i^T}}{1+e^{-\w \x_i^T}} - \frac{1}{1+e^{-\w^T \x}}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1 +e^{-\w^T \x_i} - 1}{1+e^{-\w^T \x_i}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{e^{-\w^T \x_i}}{1+e^{-\w^T \x_i}}}.
+  \intertext{Multiplying the numerator and denominator of the fraction by $e^{\w^T \x}$,}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{(e^{-\w^T \x_i}) e^{\w^T \x_i}}{(1+e^{-\w^T \x_i}) e^{\w^T \x_i}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1}{1 + e^{\w^T \x_i}}}
   \intertext{Finally, notice that the final term is another sigmoid,}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log \sigma(-\w^T \x_i)}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log \sigma(-\w^T \x_i)}
 \end{align}
 
 Now, we want to differentiate this objective wrt a weight.
@@ -274,36 +301,37 @@ Specifically, we're going to compute the chain-rule using the following sequence
 We're first going to compute the product of features and weights,
 \begin{align}
   a^i &= \sum_\lambda w_\lambda X_{\lambda i}\\
-  \intertext{Then we're going to apply the sigmoid,}
+  \intertext{Then we're going to apply the sigmoid to $a^i$ (for the first term) and $-a^i$ (for the second term),}
   s^i_0 &= \sigma(-a^i) &
   s^i_1 &= \sigma(a^i),\\
-  \intertext{Then we're going to apply the log,}
+  \intertext{Then we're going to apply the log to both of the resulting probabilities}
   l^i_0 &= \log s^i_0 & 
   l^i_1 &= \log s^i_1,
   \intertext{Then we're going to compute the objective,}
-  \L(\w) &= \sum_{i=1}^N \sqb{y_i l^i_1 + (1-y_i) l^i_0}.
+  \L(\w) &= -\sum_{i=1}^N \sqb{y_i l^i_1 + (1-y_i) l^i_0}.
 \end{align}
 The gradient is therefore,
 \begin{align}
-  \dd[\L(\w)]{w_\nu} &= \sum_{i=1}^N \sqb{y_i \dd[l^i_1]{w_\nu} + (1-y_i) \dd[l^i_0]{w_\nu}}.
+  \dd[\L(\w)]{w_\nu} &= -\sum_{i=1}^N \sqb{y_i \dd[l^i_1]{w_\nu} + (1-y_i) \dd[l^i_0]{w_\nu}}.
   \intertext{Applying the chain rule,}
-  \dd[\L(\w)]{w_\nu} &= \sum_{i=1}^N \sqb{y_i \dd[l^i_1]{s^i_1} \dd[s^i_1]{a^i_1} \dd[a^i]{w_\nu} + (1-y_i) \dd[l^i_0]{s^i_0} \dd[s^i_0]{a^i} \dd[a^i_0]{w_\nu}}.
+  \dd[\L(\w)]{w_\nu} &= -\sum_{i=1}^N \sqb{y_i \dd[l^i_1]{s^i_1} \dd[s^i_1]{a^i_1} \dd[a^i]{w_\nu} + (1-y_i) \dd[l^i_0]{s^i_0} \dd[s^i_0]{a^i} \dd[a^i_0]{w_\nu}}.
 \end{align}
 Now, we need to compute the individual derivatives in the chain rule.
 To start, we look at the linear combination of weights and features,
 \begin{align}
   \dd[a^i]{w_\nu} &= \dd{w_\nu}\sqb{\sum_\lambda w_\lambda X_{\lambda i}} = \sum_\lambda \delta_{\nu \lambda} X_{\lambda i} = X_{\nu i}\\
-  \intertext{(see the last exercise of ``Mathematical Prerequisites'' for details).  For the sigmoid (you're going to work out the form for this derivative in the exercises)}
+  \intertext{(see the last exercise of ``Mathematical Prerequisites'' for details).  For the sigmoid,}
   \dd[s^i_0]{a^i} &= \dd[\sigma(-a^i_0)]{a^i_0} = -\sigma(a^i) \sigma(-a^i)\\
   \dd[s^i_1]{a^i} &= \dd[\sigma(a^i_1)]{a^i_1} = \sigma(a^i) \sigma(-a^i)\\
-  \intertext{And finally the log,}
+  \intertext{(You're going to work out the form for this derivative in the exercises.)  And finally the log,}
   \dd[l^i_0]{s^i_0} &= \dd[\log s^i_0]{s^i_0} = \frac{1}{s^i_0} = \frac{1}{\sigma(-a^i)}\\
   \dd[l^i_1]{s^i_1} &= \dd[\log s^i_1]{s^i_1} = \frac{1}{s^i_0} = \frac{1}{\sigma(a^i)}
 \end{align}
 Putting everything back together, we get something reasonably simple,
 \begin{align}
-  \dd[\L(\w)]{w_\nu} &= \sum_{i=1}^N \sqb{y_i \dd[l^i_1]{s^i_1} \dd[s^i_1]{a^i_1} \dd[a^i_1]{w_\nu} + (1-y_i) \dd[l^i_0]{s^i_0} \dd[s^i_0]{a^i_0} \dd[a^i]{w_\nu}}\\
-  &= \sum_{i=1}^N X_{i \nu} \sqb{y_i \sigma(-a^i) - (1-y_i) \sigma(a^i)}
+  \dd[\L(\w)]{w_\nu} &= - \sum_{i=1}^N \sqb{y_i \dd[l^i_1]{s^i_1} \dd[s^i_1]{a^i_1} \dd[a^i_1]{w_\nu} + (1-y_i) \dd[l^i_0]{s^i_0} \dd[s^i_0]{a^i_0} \dd[a^i]{w_\nu}}\\
+  \dd[\L(\w)]{w_\nu} &= - \sum_{i=1}^N X_{i \nu} \sqb{y_i \frac{\sigma(a^i) \sigma(- a^i)}{\sigma(a^i)} + \frac{-\sigma(a^i) \sigma(- a^i)}{\sigma(-a^i)} (1-y_i) }\\
+  &= - \sum_{i=1}^N X_{i \nu} \sqb{y_i \sigma(-a^i) - (1-y_i) \sigma(a^i)}
 \end{align}
 While we \textit{could} compute these derivatives, it was pretty darn tedious.
 It would be great if we could get the computer to do it for us!
@@ -351,10 +379,11 @@ Substituting in the derivatives,
   0 &= \b{\sum_{i=1}^N x_i}\frac{1}{p} - \b{N - \sum_{i=1}^N x_i} \frac{1}{1-p}
   \intertext{To get the $p$'s out of the denominators, we multiply both sides by $p (1-p)$,}
   0 &= \b{\sum_{i=1}^N x_i}\frac{p (1-p)}{p} - \b{N - \sum_{i=1}^N x_i} \frac{p (1-p)}{1-p}\\
-  0 &= \b{\sum_{i=1}^N x_i}(1-p) - \b{N - \sum_{i=1}^N x_i} p
+  \intertext{And cancel terms,}
+  0 &= \b{\sum_{i=1}^N x_i}(1-p) - \b{N - \sum_{i=1}^N x_i} p.
   \intertext{Now, we separate out all the terms,}
   0 &= \b{\sum_{i=1}^N x_i} - \b{\sum_{i=1}^N x_i}p - N p + \b{\sum_{i=1}^N x_i} p.
-  \intertext{And cancel the second and fourth term,}
+  \intertext{The plus and minus $\b{\sum_{i=1}^N x_i}p$ terms cancel,}
   0 &= \b{\sum_{i=1}^N x_i} - N p.
   \intertext{Now, we add $N p$ to both sides,}
   Np &= \sum_{i=1}^N x_i
@@ -368,7 +397,7 @@ Substituting in the derivatives,
   \begin{align}
     \dd[\sigma(a)]{a} &= \dd{a} \frac{1}{1+e^{-a}}
     \intertext{Apply the chain rule, with $u=1+e^{-a}$,}
-    \sigma(a) &= u^{-1}
+    \sigma(a) &= u^{-1}\\
     \dd[\sigma(a)]{a} &= \dd[u^{-1}]{u} \dd[u]{a}
     \intertext{The individual derivatives are,}
     \dd[u^{-1}]{u} &= -u^{-2}\\
@@ -376,10 +405,10 @@ Substituting in the derivatives,
     \intertext{Putting everything back together,}
     \dd[\sigma(a)]{a} &= \dd[u^{-1}]{u} \dd[u]{a} = \frac{e^{-a}}{u^2} = \frac{e^{-a}}{(1+e^{-a})^2}
     \intertext{Split up the denominator,}
-    \dd[\sigma(a)]{a} &= \frac{1}{(1+e^{-a})} \frac{e^{-a}}{(1+e^{-a})}\\
-    \intertext{The first term is a sigmoid, and in the second term, we divide the numerator and denominator by $e^{-a}$,}
+    \dd[\sigma(a)]{a} &= \frac{1}{1+e^{-a}} \frac{e^{-a}}{1+e^{-a}}\\
+    \intertext{The $1/(1+e^{-a})$ term is a sigmoid. For the other term, we multiply the numerator and denominator by $e^{a}$,}
     \dd[\sigma(a)]{a} &= \sigma(a) \frac{1}{(1+e^a)}\\
-    \intertext{So the second term is also a sigmoid, just with the argument negated,}
+    \intertext{Now, $1/(1+e^a)$ term is also a sigmoid, just with the argument negated,}
     \dd[\sigma(a)]{a} &= \sigma(a) \sigma(-a).
   \end{align}
 \end{answer}
