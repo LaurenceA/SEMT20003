@@ -14,7 +14,6 @@ Notebooks:
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/3_classification/classification.pdf) | [notes video 1 (21:56)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdYiRNRTlEpDlyQwvCi7YzYBpESvfvI6xU-B9J5tS7-sDQ) |
-| | [notes video 2 ()]() |
+| | [notes video 2 (24:31)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ebnm32pzEaJOrBq743-UxOsByQpQ8SqRjJVPg23m_mztQA) |
 | | [notes video 3 ()]() |
-| | [notes video 4 ()]() |
 | [Notebook 3: Linear Classification](https://colab.research.google.com/drive/1XuazbDaJA88AJbdsm9mcw_foBfyQR2bH?usp=sharing) | N/A |
