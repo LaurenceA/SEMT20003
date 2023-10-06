@@ -43,18 +43,17 @@
 
 \maketitle
 
-
-
-\section{We can't do gradient descent on the classification error}
+\section{An loss function for classification error}
 
 Doing regression by gradient descent is pretty straightforward, because all the distances between the real data, $y_i$ and targets, $\yh(\x_i)$ are continuous and differentiable (almost everywhere).
+We can therefore define the loss as the sum-of-squared-errors.
 However, things become much harder when it comes to classification.
-For instance:
+In classification, we take inputs (here, $x_0$ and $x_1$) and try to determine which of a fixed number of discrete classes the datapoint belongs to:
 \begin{center}
   \includegraphics{clust_example.pdf}
 \end{center}
-Our goal is to learn a mapping from $\x \rightarrow y$ that looks like the mapping in the data.
-For instance, we could use,
+Looking back at regression, the starting point was to define a prediction-function which takes $x_0$ and $x_1$ as inputs, gives predictions as outputs, and has parameters that you can tweak.
+For instance, if we have two classes (class 0 and class 1) we could use,
 \begin{align}
   \yh_\w(\x) &= \Theta(\x \w)
 \end{align}
@@ -69,7 +68,7 @@ The obvious choice is classification error:
 \begin{align}
   \label{eq:class_error}
   \L(\w) &= \text{number of wrong classifications}\\
-  &= \sum_{i=1}^N \text{different}(y_i, \yh_\w(\x_i))
+  \L(\w) &= \sum_{i=1}^N \text{different}(y_i, \yh_\w(\x_i))
   \intertext{where,}
   \text{different}(y, \hat{y}) &= 
   \begin{cases} 
@@ -98,8 +97,8 @@ We're going to set up classification as maximum-likelihood in a probabilistic mo
 When tossing a biased coin, our random variable, $x$, can take on values of $1$ or $0$.
 In coin flipping, $x=1$ corresponds to heads and $x=0$ corresponds to tails.
 In classification (which we'll get on to), $x=1$ corresponds to class 1, while $x=0$ corresponds to class $0$ (logically enough).
-Because this is a biased coin, there is a parameter, $p$, which controls the probability of heads vs tails (or $x=1$ vs $x=0$).
-Specifically, the probability is,
+Because this is a biased coin, there is a parameter, $p$, which controls the probability of heads vs tails (or class 0 vs class 1).
+Specifically,
 \begin{subequations}
 \begin{align}
   \label{eq:bern}
@@ -116,24 +115,28 @@ We can write this as,
 \begin{align}
   \label{eq:coin}
   \P{x| p} &= p^x (1-p)^{1-x}
-  \intertext{Note that there isn't really a ``derivation'' for this.  It just happens to be a general form that gives the right answer when we substitute $x=1$ and $x=0$,}
+  \intertext{Note that there isn't really a ``derivation'' for this.  It just happens to be an expression gives the right answer when we substitute $x=1$ or $x=0$,}
   \P{x=1| p} &= p^1 (1-p)^0 = p \times 1 = p,\\
   \P{x=0| p} &= p^0 (1-p)^1 = 1 \times (1-p) = (1-p).
 \end{align}
 
-Anyway: lets get back to our maximum likelihood problem.  We have a dataset of tosses from a biased coin, $x_1,\dotsc,x_N$.
-Our goal is to estimate the probability, $p$, that generated these coin tosses.
-To do that, we find the $p$ that makes the observed data most probable. 
+Now, lets consider a classic problem: we have a dataset of tosses from a biased coin, $x_1,\dotsc,x_N$, and our goal is to estimate the probability, $p$, that generated these coin tosses.
+To do that, we find the $p$ that makes the observed data most probable (i.e.\ maximum likelihood),
 \begin{align}
   \L(p) &= \log \P{x_1,\dotsc,x_N| p}
 \end{align}
-Specifically, we maximize the maximize the \textit{log} probability, for the reasons in the Prerequisites part:
+Specifically, we maximize the maximize the \textit{log} probability.
+As the logarithm is a monotonically increasing function, this gives the right answer.
+Specifically, the value of $p$ at which $\P{x_1,\dotsc,x_N| p}$ is maximized is the same as the value of $p$ at which $\log \P{x_1,\dotsc,x_N| p}$ is maximized,
+\begin{align}
+  p^* &= \operatorname*{argmax}_p \P{x_1,\dotsc,x_N| p} = \operatorname*{argmax}_p \log \P{x_1,\dotsc,x_N| p}.
+\end{align}
+Moreover, using logarithms is very useful for two reasons discussed in the Prerequisites:
 \begin{itemize}
-  \item The logarithm is a monotonically increasing function, so the maximum of the probability as a function of the parameter, $p$ is the same place as the maximum of the log-probability as a function of $p$.      
   \item Logarithms turn products into sums, and its much easier to differentiate sums than products.
   \item Raw probabilities can be very large or very small once we take products over a large number of datapoints.  That can cause numerical issues (i.e. over/underflow).  
 \end{itemize}
-We assume that coin tosses are independent, so $\P{x_1,\dotsc,x_N| p} =\prod_{i=1}^N \P{x_i| p}$, and 
+Now, we assume that coin tosses are independent, so $\P{x_1,\dotsc,x_N| p} =\prod_{i=1}^N \P{x_i| p}$, and 
 \begin{align}
   \L(p) &= \log \prod_{i=1}^N \P{x_i| p} \\
   \intertext{The log turns the product into a sum,}
@@ -146,8 +149,6 @@ We assume that coin tosses are independent, so $\P{x_1,\dotsc,x_N| p} =\prod_{i=
   \label{eq:coin_flip_prob}
   \L(p) &= \sum_{i=1}^N \b{x_i\log p + (1-x_i) \log(1-p)}
   \intertext{Applying the sum to each term separately, and noting that $p$ is independent of $i$,}
-  \L(p) &= \b{\sum_{i=1}^N x_i} \log p + \b{\sum_{i=1}^N (1-x_i)}\log(1-p)
-  \intertext{And finally, separating out the two terms in the second sum,}
   \label{eq:coin_flip_ll}
   \L(p) &= \underbrace{\b{\sum_{i=1}^N x_i}}_{\text{a constant number}} \log p + \underbrace{\b{N - \sum_{i=1}^N x_i}}_{\text{another constant number}}\log(1-p)
   \intertext{So we can treat this as,}
@@ -160,7 +161,7 @@ where,
 \end{align}
 Notice that we've extracted the sums over data into constant multipliers, $a$ and $b$.
 This has simplified the loss, $\L(p)$, dramatically.
-So finding the maximum-likelihood value for $p$ is now a calculus problem!
+So finding the maximum-likelihood value for $p$ is now a tractable, univariate calculus problem!
 
 Moreover, notice that despite the data, $x_i$, being discrete, the objective is a continuous and differentiable function of the parameter, $p$. 
 As such, we can find the most likely probability, $p^*$, by doing gradient descent!
@@ -174,31 +175,36 @@ If we did that, we'd end up with the sensible answer (see Exercises),
 \label{sec:binary_obj}
 In the previous section, we saw that we can get a continuous, differentiable loss for discrete data by setting the problem up as maximum-likelihood.
 So how do we apply the same idea to get a differentiable loss for binary classification?
-The basic idea is that we first use a bunch of weights to get ``logits'',
+The basic idea is that we first do the usual thing of taking the dot-product of the input vector with some weights,
 \begin{align}
-  \logits = f_\w(\x_i) &= \x_i \w
+  \logits = f_\w(\x_i) &= \x_i \w.
 \end{align}
-The problem is that the logits could be from $-\infty$ to $\infty$, while we want a probability, between $0$ and $1$.
-To solve this problem, we transform the logits by applying a function, the ``logistic sigmoid'' (or sigmoid for short), denoted $p = \sigma(\logits)$ from a logits in $-\infty$ to $\infty$, to a probability from $0$ to $1$.
-Specifically, the probability is,
-\begin{align}
-  \label{eq:sigmoid_prob}
-  p_\w(\x) &= \sigma(\logits = f_\w(\x_i))
-\end{align}
-The key question is then how do we define the sigmoid function, $\sigma$, to solve these problems?
-Answer: the sigmoid function!
+The problem is that the result, $\logits$, could be from $-\infty$ to $\infty$, while we want a probability, between $0$ and $1$.
+If the input features, $\x_i$ are bounded (e.g.\ they could be bounded between $0$ and $1$), then we could find bounds on $\w$ that ensure that the result of this dot-product is always between $0$ and $1$.
+But that sounds hard.
+And it won't work in more complex architectures like neural networks, where we can't find the required constraints on the parameters.
+
+As such, we need to do something else. 
+In particular, we don't take take $\logits$ to be the probability; instead, we take $\logits$ to be the ``logits'', which could be anything from $-\infty$ to $\infty$.
+We can transform from the logits to the probability by applying the ``logistic sigmoid'' function (or sigmoid\footnote{From Wikipedia: a sigmoid function is a mathematical function having a characteristic ``S''-shaped curve or sigmoid curve, so the logistic sigmoid is a specific function with an ``S''-shaped curve.} for short), denoted $p = \sigma(\logits)$.
+The sigmoid function takes any $\logits$ (from $-\infty$ to $\infty$) and returns a number from $0$ to $1$:
 \begin{align}
   \sigma(\logits) &= \frac{1}{1+e^{-\logits}}
 \end{align}
-The sigmoid function takes any $\logits$ (from $-\infty$ to $\infty$) and returns a number from $0$ to $1$:
+Graphically, the sigmoid looks like,
 \begin{center}
   \includegraphics{sigmoid.pdf}
 \end{center}
-As such, the sigmoid does indeed give a valid probability (i.e.\ a number between $0$ and $1$).
+Now, we can use the logistic sigmoid to give the probability for class $1$ for input $\x$,
+\begin{align}
+  \label{eq:sigmoid_prob}
+  p_\w(\x) &= \sigma(f_\w(\x))\\
+  \P{y=1| \x_i} &= p_\w(\x_i).
+\end{align}
 
 \section{A smooth, maximum-likelihood objective for multi-class classification}
 \label{sec:multi_obj}
-In the last section, we were looking at classification problems where there's two possible classes.
+In the previous section, we were looking at classification problems where there's two possible classes.
 But almost always, there's multiple classes.
 For instance, we might want to classify handwritten digits as 0--9, in which case, there's ten classes.
 \begin{center}
@@ -208,24 +214,26 @@ Again, to train a model for multi-class classification, we need an objective.
 Classification error (Eq.~\ref{eq:class_error}) also makes sense in the multi-class setting, but again, can't be used as an objective as it is non-differentiable.
 As in the binary classification setting, we need an objective that is a continuous, differentiable function of the parameters (weights).
 To get such an objective, we're again going to consider a probability distribution over classes.
-In multi-class classification, the probability distribution is over the integers $0$--$9$ (or in general, over the integers $0$--$C$, where $C$ is the number of classes), instead of just over $\{0, 1\}$.
+In multi-class classification, the probability distribution is over the integers $0$--$9$ (or in general, over the integers $0$--$C$, where $C$ is the number of classes), instead of just over $\{0, 1\}$, as in binary classification in the previous section.
 
-The first problem is that previously, we just had one scalar logits for each datapoint, $\logits = f_\w(\x_i) = \x_i \w$. 
-It is not at all clear how to turn that scalar into a probability distribution over multiple classes.
-As such, in multi-class classification, we use a whole \textit{vector} of logits, $\vlogits$, for each datapoint.
+The first problem is that previously, we just had one scalar logits for each datapoint, $\logits = f_\w(\x_i) = \x_i \w$, and we can't turn just a single scalar into a probability distribution over multiple classes.
+Instead, in multi-class classification, we use a whole \textit{vector} of logits, $\vlogits$, for each datapoint.
 This vector has length $C$, so there's one logits for each class,
 \begin{align}
   \underbrace{\vlogits}_{1 \times C} = \f_{\W}(\x) = \underbrace{\x}_{1 \times D} \underbrace{\W}_{D \times C}.
 \end{align}
-Note that we get a vector of logits by changing the usual $D \times 1$ weight vector, $\w$, with a $D\times C$ weight matrix, $\W$.
+Note that we get a vector of logits by replacing the usual $D \times 1$ weight vector, $\w$, with a $D\times C$ weight matrix, $\W$.
 
-Again, we have the problem of how to set the probability for each class, given that the individual logits values can be anywhere from $-\infty$ to $\infty$.
+Now we have a vector of $C$ logits, $\vlogits$.
+But we are again, left with the problem of how to set the probability for each class, given that the individual logits values can be anywhere from $-\infty$ to $\infty$.
+We use the so-called ``softmax'' function,
 \begin{align}
   p_c(\x) &= \softmax{\vlogits = \f_{\W}(\x)} = \frac{e^{\logits_c}}{\sum_{c'} e^{\logits_{c'}}}
 \end{align}
 where $c$ is the class label.
-Remember that the probabilities must all be bigger than $0$ and sum to $1$.
-It is straightforward to check that the resulting probabilities sum to $1$,
+Remember that the probabilities must all be non-negative and sum to $1$.
+Non-negativity is straightforward, as the logits are real, so all the exponentials are non-negative.
+Further, we can check that the resulting probabilities sum to $1$,
 \begin{align}
   \sum_{c} p_c(\x) &= \frac{\sum_c e^{\logits_c}}{\sum_{c'} e^{\logits_{c'}}} = 1
 \end{align}
