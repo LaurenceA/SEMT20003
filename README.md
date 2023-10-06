@@ -18,15 +18,20 @@ The course is taught in a "flipped classroom model".  So there are no in-person 
 
 ## Course Materials for TB1:
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
-* There are pdf notes for every week of taught material.
-* The pdf notes will _usually, but not always_ include questions.
-* All questions will have worked answers.
-* There will _usually, but not always_ be iPython notebooks (which are examinable), discussing practical aspects of training neural networks.  _It is critical for your understanding that you play around with the material in the notebooks.  Open up your own Colab notebook and enter the commands yourself; play with the commands; try things that are a little bit different!
-* These iPython notebooks _occasionally_ have exercises.
-* The concepts in the iPython notebooks are examinable.
-* There will be videos of me going through the material in the pdf notes.
-* Where appropriate there _may_ also be videos of me going through the iPython notebooks.  These videos won't add anything to the underlying notes/notebooks.  So if you read + understand the notes / notebooks, the videos are optional.  If you are going to look at the videos, then open up your own Colab notebook alongside and follow along.  Try the things that I'm doing.  Try something a bit different!  (Feel free to pause the video to do this!).
-* The videos are not intended to add anything to the underlying material.  The exam is based on the notes/notebooks, _not_ the videos.  So if you're happy with the material in the notes/notebooks, you do not necessarily need to go through all the videos.
+* Notes
+  - There are pdf notes for every week of taught material.
+  - The notes are often long-ish, but that's only because I'm trying to be _thorough_ (e.g. I'm trying to include all the steps in derivations).  So the notes shouldn't in general be very dense.
+  - The pdf notes will _usually, but not always_ include questions.
+  - All questions will have worked answers.
+* Notebooks
+  - Each week, there will _usually, but not always_ be iPython notebooks, discussing practical aspects of training neural networks.
+  - These iPython notebooks _occasionally_ have exercises.
+  - The concepts in the iPython notebooks are examinable.
+  - You don't learn code (well) by just reading.  Even if I haven't done exercises, open up your own Colab notebook alongside and type the code in to follow along.  Try the things that I'm doing.  Try something a bit different!
+* Videos
+  - There are always videos of me going through the pdf notes, and may sometimes be videos of me going through the iPython notebooks.
+  - _Watching the videos isn't necessary!!!_  The videos just go through (slowly and thoroughly) the material in the underlying pdf notes / iPython notebook.  So if you read + understand the underlying notes / notebooks, the videos are not necessary.
+  - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
  
 ## Feedback: 
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
@@ -68,7 +73,7 @@ To download the notes, use the download button highlighted with the red circle:
 
 ## Weekly material
 
-#### Week 1
+#### Week 1: Prereqs
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
@@ -80,3 +85,14 @@ To download the notes, use the download button highlighted with the red circle:
 | [Notebook 1.2: Introduction to PyTorch](https://colab.research.google.com/drive/1AV5pzM-9AIIDWldQZ6Id7XH8_yRGztGP?usp=sharing) | [notebook video (39:45)](https://uob.sharepoint.com/:v:/t/grp-LA/ESaKTjytko5Hjk4yMg-s1m8BNPJql5GrAGNf0foBA0i3FA) | 
 | [Notebook 1.3: GPUs with PyTorch](https://colab.research.google.com/drive/1EjqE4eDioEdWJwWm_KnO0CPTds3LHKyC?usp=sharing) | N/A | 
 | N/A | [Week 1 QA (34:10)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EXezUO44d2dBrZ2vyfWoyKIB4Cdcnj-MzMttYVCp3vGl_A?e=kGgxfO) |
+
+#### Week 2: Linear Regression
+
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [notes](notes/2_regression/regression.pdf) | [notes video 1 (24:57)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ER4Iry8y6ndItNCFzORtK6YBOzMyo96zjKgcPogap8L0uA) |
+| | [notes video 2 (13:30)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaVCMXsQp_lHjfygzWUdCREBOzaCsmyDvj4z17sasdK85g) |
+| | [notes video 3 (23:43)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZbSaoApXjVOvEKCf1f-A7kBOHhWlk-Bs4o4KP_9RonDxw) |
+| | [notes video 4 (27:27)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ee3CZ5XfG_NPsh_fCN4U-P0Bnfg0RPd63sa-N5tfzYSQsg) |
+| [Notebook 2: Linear Regression](https://colab.research.google.com/drive/1wrgZfRJaWC-Hh_zgrDd-ubgdIAq0Qd_q?usp=sharing) | N/A |
+
