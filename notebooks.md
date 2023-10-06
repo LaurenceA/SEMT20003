@@ -13,7 +13,7 @@ Notebooks:
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/3_classification/classification.pdf) | [notes video 1 ()]() |
+| [notes](notes/3_classification/classification.pdf) | [notes video 1 (21:56)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdYiRNRTlEpDlyQwvCi7YzYBpESvfvI6xU-B9J5tS7-sDQ) |
 | | [notes video 2 ()]() |
 | | [notes video 3 ()]() |
 | | [notes video 4 ()]() |
