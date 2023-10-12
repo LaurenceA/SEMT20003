@@ -11,9 +11,18 @@ Notebooks:
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
 
+## Week 4: NNs
+
+This week, we introduce NNs, building on linear regression + classification in the previous weeks.
+This week is a bit unusual, as the notes are very short, with no exercises, but I expect the Python notebooks to be more challenging.
+That's because mathematically defining NNs is somewhat straightforward.
+To be honest, using NNs from PyTorch isn't too hard either, if you just follow e.g. an internet tutorial without thinking too hard about what PyTorch is actually doing.
+But actually applying NNs to research/real-world problems is almost always going to require some modifications.
+And you'll only be able to do those modifications if you actually understand how PyTorch is implementing NNs.
+And that's what we'll be doing this week!
+
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/3_classification/classification.pdf) | [notes video 1 (21:56)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdYiRNRTlEpDlyQwvCi7YzYBpESvfvI6xU-B9J5tS7-sDQ) |
-| | [notes video 2 (24:31)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ebnm32pzEaJOrBq743-UxOsByQpQ8SqRjJVPg23m_mztQA) |
-| | [notes video 3 (22:41)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaFZZAf4Bg5FofmwNDjWRUoBhpMXIBYRuthKn_EsU99FpA) |
-| [Notebook 3: Linear Classification](https://colab.research.google.com/drive/1XuazbDaJA88AJbdsm9mcw_foBfyQR2bH?usp=sharing) | N/A |
+| [notes](notes/4_nn/nn.pdf) | [notes video 1 ()]() |
+| [Notebook 4.1: NNs in PyTorch](https://colab.research.google.com/drive/1XuazbDaJA88AJbdsm9mcw_foBfyQR2bH?usp=sharing) | [notebook video ()]() |
+| [Notebook 4.2: NNs with torch.nn](https://colab.research.google.com/drive/1dXEYDmW7Bu31rC2ejkNXfdTHfwVO_vrC?usp=sharing) | [notebook video ()]() |
