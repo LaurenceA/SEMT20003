@@ -11,11 +11,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument('filename', type=str)
 args = parser.parse_args()
 
-N = 10
+N = 20
 
 xs = t.linspace(-5, 5, 100)[:, None]
 X = t.linspace(-4, 4, N)[:, None]
-y = t.sin(X) + 0.3*t.randn(N, 1)
+y = t.sin(X) + 0.5*t.randn(N, 1)
+#N = 10
+#
+#xs = t.linspace(-5, 5, 100)[:, None]
+#X = t.linspace(-4, 4, N)[:, None]
+#y = t.sin(X) + 0.3*t.randn(N, 1)
 
 plt.scatter(x=X, y=y, label='Data', c='k')
 plt.xlabel('$x$')
@@ -36,21 +41,17 @@ net = nn.Sequential(
 opt = t.optim.SGD(net.parameters(), lr=0.03, momentum=0.8)
 #opt = t.optim.Adam(net.parameters(), lr=0.03)
 
-i = 0
-lines = 4
-exponent = 6
-l = 1
-plt.plot(xs, net(xs).detach(), c='tab:blue', alpha=1/(lines+1), label=f"NN; random init")
-while l < lines:
-    i +=1
+lines = [50, 250, 1250]
+l = 0
+for i in range(lines[-1]+1):
     L = ((net(X) - y)**2).mean()
     L.backward()
     opt.step()
     opt.zero_grad()
 
-    if math.log(i, exponent).is_integer() and i != 1:
+    if i in lines:
         l += 1
-        plt.plot(xs, net(xs).detach(), c='tab:blue', alpha=l/(lines+1), label=f"NN after {i} iters")
+        plt.plot(xs, net(xs).detach(), c='tab:blue', alpha=l/len(lines), label=f"NN after {i} iters")
 
 plt.legend()
 plt.savefig(args.filename, bbox_inches='tight')

@@ -111,62 +111,87 @@ One of the reasons was the following reasoning:
   \item Models with loads of parameters tend to overfit.
   \item So neural networks should overfit really badly.
 \end{itemize}
-Surprisingly, it turns out that overfitting is only a very minor issue in NNs.
-Specifically, if you just do the naive thing do SGD with the cross-entropy loss for classification or the sqaured error loss for regression, and you'll get pretty darn good result.
-You definitely won't get anything like the extreme predictions that sometimes happen in a linear model.
+That led many people to expect that overfitting in NNs would be catastropic.
+In actuality, it turns out that overfitting in NNs isn't catastropic at all (unlike some of the examples from linear models).
+But overfitting is still an issue, and there are a large number of approaches to mitigating overfitting in neural netowrks.
 
-\newpage
-\section{Training dynamics}
-
-\includegraphics[width=\textwidth]{smooth_interp.pdf}
-
-Here, I fitted a three-layer network with width 100 hidden layer, to 20 datapoints drawn from $\sin(x) + \text{noise}$.
-
-There are two features to notice here.
-\begin{itemize}
-  \item Earlier in training (lighter lines) the function is smooth, it gradually gets more "details" as training progresses.
-  \item Later in training (darker lines), the line basically goes through all the datapoints. Strictly speaking, this is overfitting, as its fitting the noise rather than the ``real underlying'' sin function (especially see the ``dip'' about $x=-1$.  But actually, this is a pretty darn reasonable prediction, e.g.\ nothing has blown up.
-\end{itemize}
-Finally, once the network has found a line that goes through all the datapoints, then there are no more gradients, and the weights don't change any more.
-
-\newpage
-\section{Adam vs SGD}
-
-\includegraphics[width=\textwidth]{adam_vs_sgd.pdf}
-
-It seems that:
-\begin{itemize}
-  \item Adam is better at capturing ``fine details'' than SGD.
-  \item Adam tends to overfit more than SGD.
-\end{itemize}
-These are really just two sides of the same coin: overfitting \textit{is} capturing the fine details (specifically, fine details in the noise).
-
-So which is best Adam or SGD?  Depends on whether you care about mitigating overfitting or capturing fine-details.
-\begin{itemize}
-  \item SGD tends to be better for ConvNets (which we'll look at next week) for image recognition, as it mitigates overfitting.
-  \item Adam tends to be better for transformers (which we'll look at in a couple of weeks), RL where capturing fine-details seems to be mroe relevant.
-\end{itemize}
-
-\newpage
-\section{Warm up}
-
-Why does SGD tend to avoid capturing fine-details?  Well, once the function is close-enough, the gradients are small, so SGD makes little progress.
-How can we improve?  We can increase the gradients after 
-
-\newpage
-\section{Minibatch noise}
 
 \newpage
 \section{Weight decay}
 \includegraphics[width=\textwidth]{weight_decay.pdf}
 
 \newpage
-\subsection{``Decoupled'' weight decay}
+\section{``Decoupled'' weight decay}
 \includegraphics[width=\textwidth]{decoupled_weight_decay.pdf}
 
 \newpage
 \section{Dropout}
 \includegraphics[width=\textwidth]{dropout.pdf}
+
+\newpage
+\section{Adam vs SGD}
+
+\includegraphics[width=\textwidth]{adam_vs_sgd.pdf}
+
+Here, I ran both Adam and SGD for a long time (1000 iterations).
+It seems that:
+\begin{itemize}
+  \item Adam is better at capturing ``fine details'' than SGD.
+  \item Adam tends to overfit more than SGD.
+\end{itemize}
+Of course, these are really just two sides of the same coin: overfitting \textit{is} capturing the fine details (specifically, fine details in the noise).
+Moreover, note that these patterns obviously depend on the ``hyperparameters'' (e.g.\ learning rate and momentum).  
+But this is the general ``rule of thumb'' that does seem to hold very generally in NNs.
+
+So which is best Adam or SGD?  Depends on whether you care about mitigating overfitting or capturing fine-details.
+\begin{itemize}
+  \item SGD tends to be better for ConvNets (which we'll look at next week) for image recognition, as it mitigates overfitting.
+  \item Adam tends to be better for transformers (which we'll look at in a couple of weeks), RL where routing information in complex ways is important.
+\end{itemize}
+
+\newpage
+\section{Early stopping}
+
+\includegraphics[width=\textwidth]{early_stopping.pdf}
+
+Here, I fitted a three-layer network with width 100 hidden layer, to 20 datapoints drawn from $\sin(x) + \text{noise}$.
+I used SGD with a learning rate of 0.01, and momentum of 0.8.
+I then plotted the prediction at different points throughout training.
+
+Late on in training (darker lines), the line basically goes through all the datapoints. Strictly speaking, this is overfitting, as its fitting the noise rather than the ``real underlying'' sin function (especially see the ``dip'' about $x=-1$.  
+But this is still a pretty reasonable prediction, e.g.\ nothing has blown up.
+Importantly, earlier in training (lighter lines) the function is smooth, it gradually gets more "details" as training progresses.
+So we can use ``early stopping'' as a regularisation technique!
+And early stopping is great because it gives us a nice excuse to cut training short (so training with early-stopping takes less time).
+
+\newpage
+\section{Minibatch noise}
+
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{schedule.png}
+\end{center}
+
+Typical practice in training neural networks involves starting with a high learning rate, then decaying the learning rate in steps.
+In the above plot (blue line), the learning rate is decayed by a factor of 5 in steps at epochs 60 and 120 (epochs is a measure of time through training; one epoch means we've gone over all datapoints once).
+Notice that as you decay the learning rate, the training cross-entropy drops quickly, then becomes somewhat static.
+What seems to be going on is that minibatch noise stops you from converging to the actual optimum. to the real
+Instead, minibatch noise causes you to bounce around the solution.
+You can reduce the effective amount of noise by reducing the learning rate (see previous section on Optimizers).
+Alternatively (red line), you can reduce the effective noise by increasing the batch size, so each batch averages over more datapoints.
+However, we usually reduce the learning rate rather than increasing the batch size, as we don't have the GPU memory to increase the batch size.
+
+
+\newpage
+\section{High learning rates}
+
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{schedule.png}
+\end{center}
+
+The previous plot would suggest that we should aggressively reduce learning rates.
+But that isn't true!
+Specifically, loss landscapes look
+
 
 \section{Exercises}
 

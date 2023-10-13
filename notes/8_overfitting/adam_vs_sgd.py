@@ -45,9 +45,8 @@ def train(opt, opt_kwargs, col, label, alpha=1):
 
     plt.plot(xs, net(xs).detach(), c=col, label=label, alpha=alpha)
 
-train(t.optim.SGD, {'lr': 0.01, 'momentum':0.8}, 'tab:blue', 'SGDM, lr=0.01', alpha=0.4)
-train(t.optim.SGD, {'lr': 0.1, 'momentum':0.8}, 'tab:blue', 'SGDM, lr=0.1')
-train(t.optim.Adam, {'lr': 0.03}, 'tab:orange', 'Adam')
+train(t.optim.SGD, {'lr': 0.03, 'momentum':0.8}, 'tab:blue', 'SGDM, lr=0.03, mom=0.03')
+train(t.optim.Adam, {'lr': 0.03}, 'tab:orange', 'Adam, lr=0.03')
 
 
 plt.legend()

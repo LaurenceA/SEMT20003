@@ -59,7 +59,7 @@ But we can use \textit{any} function here.
 So what function should we use?
 Well, there's a few requirements.
 \begin{itemize}
-  \item lots of parameters (so we have lots of knobs to twiddle to improve the function).      
+  \item lots of parameters (so gradient descent has lots of knobs to twiddle to improve the function).      
   \item doesn't reduce to something simpler.
   \item fast (e.g. uses matmuls).
 \end{itemize}
@@ -187,14 +187,26 @@ This is commonly known as a 3-layer network, as there are three weight-matrices.
 \textbf{Q: Why don't we have a nonlinearity in the final layer (i.e.\ for producing the output, $\f$)?}
 Nonlinearities can impose constraints on their outputs.
 For instance, ReLU can't return negative numbers.
-Alternatively, people sometimes use a sigmoid as a nonlinearity, but that can only output numbers between $0$ and $1$.
+Alternatively, in the 1990's people sometimes used a sigmoid as a nonlinearity, but that can only output numbers between $0$ and $1$.
 We don't want to impose such constraints on our outputs, which is why we don't apply the output at the final layer.
 
-\textbf{Q: Is there a better way of understanding what nonlinearities are doing?}
+\textbf{Q: Is there a better way of understanding what nonlinearities are doing than just ``not being linear''?}
 Yes ... but you need quite a bit of theory to get there.
 
 \textbf{Q: Why is relu far more commonly used than e.g. sigmoid?}
-This is to do with propagation of the gradients (we'll see some of this in the next part on backprop).
+This is to do with propagation of the gradients.
+Specifically, the gradients of the sigmoid are often very small: if $h = \phi_\text{sigmoid}(a) = \sigma(a)$, 
+\begin{center}
+  \includegraphics{sigmoid}
+\end{center}
+then the gradient, $\partial h / \partial a$, is small for large positive or large negative $a$.
+That makes gradient descent difficult, as lots of the gradients get too small.
+In contrast, the gradients for relu don't explode/vanish, as the gradient, $\partial h / \partial a = 1$ for all $a>0$.
+
+\section{Exercises}
+
+There are no exercises this week!  (See CoLab notebooks).
+
 
 \end{document}
 
