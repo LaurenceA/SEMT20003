@@ -24,5 +24,5 @@ And that's what we'll be doing this week!
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/4_nn/nn.pdf) | [notes video 1 ()]() |
-| [Notebook 4.1: NNs in PyTorch](https://colab.research.google.com/drive/1XuazbDaJA88AJbdsm9mcw_foBfyQR2bH?usp=sharing) | [notebook video ()]() |
+| [Notebook 4.1: NNs in PyTorch](https://colab.research.google.com/drive/1UyJM01YKfxszLffd-F2EU2yTFxmKb7e9?usp=sharing) | [notebook video ()]() |
 | [Notebook 4.2: NNs with torch.nn](https://colab.research.google.com/drive/1dXEYDmW7Bu31rC2ejkNXfdTHfwVO_vrC?usp=sharing) | [notebook video ()]() |
