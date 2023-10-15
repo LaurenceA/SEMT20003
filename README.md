@@ -75,6 +75,10 @@ To download the notes, use the download button highlighted with the red circle:
 
 #### Week 1: Prereqs
 
+We have students from quite a few different cohorts on this course.  So I'm going to try to go over at least some of the prerequistes here.  Even if the notes look easy, please do skim through to the end, and check out the exercises.  
+
+In any case, there will definitely be material you haven't seen in notebook 1.2 (Introduction to PyTorch) and notebook 1.3 (GPUs with PyTorch).
+
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/1_prereqs/prereqs.pdf) | [notes video 1 (28:22)](https://uob.sharepoint.com/:v:/t/grp-LA/EcJ4IReynmZPpNCG2_kUMnIBguvkENLttVZaime8khzJKg) |
