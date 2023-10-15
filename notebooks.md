@@ -13,13 +13,10 @@ Notebooks:
 
 ## Week 4: NNs
 
-This week, we introduce NNs, building on linear regression + classification in the previous weeks.
+This week, we introduce NNs!
 This week is a bit unusual, as the notes are very short, with no exercises, but I expect the Python notebooks to be more challenging.
 That's because mathematically defining NNs is somewhat straightforward.
-To be honest, using NNs from PyTorch isn't too hard either, if you just follow e.g. an internet tutorial without thinking too hard about what PyTorch is actually doing.
-But actually applying NNs to research/real-world problems is almost always going to require some modifications.
-And you'll only be able to do those modifications if you actually understand how PyTorch is implementing NNs.
-And that's what we'll be doing this week!
+However, understanding how PyTorch implements NNs requires a bit more thought, especially if you're going to understand things well enough to do modifications/tweaks for research/real-world problems!
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
@@ -27,4 +24,4 @@ And that's what we'll be doing this week!
 | [Notebook 4.1: objects and classes](https://colab.research.google.com/drive/1aERh1n1RdUVZJR_9VwPdEtNzdjqYB21c?usp=sharing) | N/A |
 | [Notebook 4.2: NNs in PyTorch](https://colab.research.google.com/drive/1UyJM01YKfxszLffd-F2EU2yTFxmKb7e9?usp=sharing) | N/A |
 | [Notebook 4.3: NNs with torch.nn](https://colab.research.google.com/drive/1dXEYDmW7Bu31rC2ejkNXfdTHfwVO_vrC?usp=sharing) | N/A |
-| [Notebook 4.4: NNs with torch.nn](https://colab.research.google.com/drive/1zjH9hiu7Q85fWRuL5vfvMpfsOTv4q0tn?usp=sharing) | N/A |
+| [Notebook 4.4: NN exercises](https://colab.research.google.com/drive/1zjH9hiu7Q85fWRuL5vfvMpfsOTv4q0tn?usp=sharing) | N/A |
