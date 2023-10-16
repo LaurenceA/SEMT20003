@@ -73,7 +73,7 @@ To download the notes, use the download button highlighted with the red circle:
 
 ## Weekly material
 
-#### Week 1: Prereqs
+#### Week 1: Prereqs and intro to PyTorch
 
 We have students from quite a few different cohorts on this course.  So I'm going to try to go over at least some of the prerequistes here.  Even if the notes look easy, please do skim through to the end, and check out the exercises.  
 
