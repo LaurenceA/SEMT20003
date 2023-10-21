@@ -12,17 +12,16 @@ Notebooks:
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
 
-## Week 4: NNs
+## Week 5: Backprop
 
-This week, we introduce NNs!
-This week is a bit unusual, as the notes are very short, with no exercises, but I expect the Python notebooks to be more challenging.
-That's because mathematically defining NNs is somewhat straightforward.
-However, understanding how PyTorch implements NNs requires a bit more thought, especially if you're going to understand things well enough to do modifications/tweaks for research/real-world problems!
+The key bit of magic in PyTorch is the ability to compute gradients of the loss through arbitrary compute graphs.
+PyTorch does this using the backprop algoritm, and the backprop algorithm to compute gradients is at the heart of all modern AI.
+This might be a bit tougher than other weeks, as it involves going back-and-forth between the math and the code.
+But once you really understand backprop, you'll really know (and be able to reason about) what goes on in modern AI.
+
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/4_nn/nn.pdf) | [notes video 1 (19:32)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EQgb2YmkGuxLvrFdM20sjV4BWlh8SBXTqW3O4m5pFiucZQ) |
-| [Notebook 4.1: objects and classes](https://colab.research.google.com/drive/1aERh1n1RdUVZJR_9VwPdEtNzdjqYB21c?usp=sharing) | N/A |
-| [Notebook 4.2: NNs in PyTorch](https://colab.research.google.com/drive/1UyJM01YKfxszLffd-F2EU2yTFxmKb7e9?usp=sharing) | N/A |
-| [Notebook 4.3: NNs with torch.nn](https://colab.research.google.com/drive/1dXEYDmW7Bu31rC2ejkNXfdTHfwVO_vrC?usp=sharing) | N/A |
-| [Notebook 4.4: NN exercises](https://colab.research.google.com/drive/1zjH9hiu7Q85fWRuL5vfvMpfsOTv4q0tn?usp=sharing) | N/A |
+| [notes](notes/5_backprop/backprop.pdf) | [notes video 1 ()]() |
+| [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
+| [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
