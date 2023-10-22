@@ -22,6 +22,6 @@ But once you really understand backprop, you'll really know (and be able to reas
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/5_backprop/backprop.pdf) | [notes video 1 ()]() |
+| [notes](notes/5_backprop/backprop.pdf) | [notes video 1 (20:06)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EbbvdyCRZRJMoa9YBt0SLKYB7R5FSZqzQPk6dr9352uomw) |
 | [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
 | [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
