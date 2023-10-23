@@ -56,6 +56,12 @@
 \newcommand{\wo}{\w^*}
 
 \renewcommand{\L}{\mathcal{L}}
+\newcommand{\Lreg}{\L_\text{reg}}
+\newcommand{\Lunreg}{\L_\text{unreg}}
+\newcommand{\dLreg}{\dt[\Lreg]}
+\newcommand{\dLunreg}{\dt[\Lunreg]}
+\newcommand{\greg}{g_\text{reg}}
+\newcommand{\gunreg}{g_\text{unreg}}
 \newcommand{\Li}{\L_i}
 \newcommand{\Lmb}{\L_\text{mb}}
 \newcommand{\Lfb}{\L_\text{fb}}
@@ -92,7 +98,7 @@
 \newcommand{\lrtrad}{\eta_\text{trad}}
 \newcommand{\lravg}{\eta_\text{avg}}
 
-\title{EMAT31530, Part 7: How to train your NN}
+\title{EMAT31530: Overfitting, and other topics in NN training}
 \author{Laurence Aitchison}
 \date{}
 
@@ -112,17 +118,90 @@ One of the reasons was the following reasoning:
   \item So neural networks should overfit really badly.
 \end{itemize}
 That led many people to expect that overfitting in NNs would be catastropic.
-In actuality, it turns out that overfitting in NNs isn't catastropic at all (unlike some of the examples from linear models).
-But overfitting is still an issue, and there are a large number of approaches to mitigating overfitting in neural netowrks.
+In actuality, it turns out that overfitting in NNs isn't catastropic at all: if you ignore overfitting while training your neural net, you should get a pretty reasonable fit.
+But overfitting is still an issue, and there are a large number of approaches to mitigating overfitting in neural networks.
+That's what we'll look at this week.
 
 
 \newpage
 \section{Weight decay}
 \includegraphics[width=\textwidth]{weight_decay.pdf}
+Perhaps the most standard approach to mitigating overfitting is weight-decay.
+In weight decay, we add a term to the loss, penalising large weights,
+\begin{align}
+  \label{eq:weight_decay_loss}
+  \Lreg = \Lunreg + \tfrac{\lambda}{2} \sum_i w_i^2.
+\end{align}
+Here, $\Lunreg$ is the original unregularised loss (e.g.\ just the cross-entropy), and $\Lreg$ is the regularised loss.
+To keep consistency with the \href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{PyTorch docs}, we assume that $\Lreg$ and $\Lunreg$ are either: 
+\begin{itemize}
+  \item the loss for a single minibatch.
+  \item the \textit{average} loss across minibatches.
+\end{itemize}
+Importantly, this doesn't yet look like weight ``decay''.  
+
+To understand where ``weight decay'' arises, consider the gradients for a single parameter, $w$,
+\begin{align}
+  \gunreg &= \dLunreg{w}\\
+  \greg &= \dLreg{w} = \dLunreg{w} + \lambda w
+\end{align}
+Thus, the update becomes,
+\begin{align}
+  \Delta w &= \underbrace{- \eta \dLunreg{w}}_\text{original update} \underbrace{- \eta \lambda w}_\text{decay term}
+\end{align}
+Now, the $-\eta \lambda w$ is a decay term that pushes $w$ towards zero.
 
 \newpage
-\section{``Decoupled'' weight decay}
+\section{``Decoupled'' weight decay, or AdamW}
 \includegraphics[width=\textwidth]{decoupled_weight_decay.pdf}
+Almost all of deep learning is framed as optimization of loss functions.
+That's why weight decay, which is fundamentally defined by Eq.~\eqref{eq:weight_decay_loss} makes alot of sense.
+However, there is an alternative type of weight decay, which is these days used alot in training / finetuning transformers.
+In particular, consider what happens with standard weight decay and Adam.
+Remember that standard weight decay always works in terms of a modified loss.
+So what happens when we put gradients of this modified loss into RMSProp?
+\begin{align}
+  \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}}\\
+  \intertext{Substituting for the gradient of the regularised loss,}
+  \Delta w &= -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
+  \intertext{And splitting up terms,}
+  \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\greg^2}}}}_\text{original update} \quad\underbrace{- \eta \lambda \frac{w_i}{\sqrt{\ab{\greg^2}}}}_\text{Adam weight decay}
+\end{align}
+One thing you'll notive is that the updates no longer have a ``simple'' weight decay structure.  Instead, the weight decay is normalized by the squared gradient.
+``Decoupled'' weight decay (or AdamW) is what you get when you remove the normalization (and you use the unregularised gradients in the denominator),
+\begin{align}
+  \Delta w &= \underbrace{-\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
+\end{align}
+This is \textit{super-weird} from the perspective of standard deep learning, as it can no longer be understood as gradient descent on a modified objective.
+So why bother introducing AdamW?
+Well, it seems to work well in particular cases like transformers, which is reason-enough for the deep learning community.
+
+But we can go a bit further than that.
+In particular, consider a single parameter, with a gradient, $g$, that's constant across minibatches and constant across a large range of parameters.
+We can now solve for the steady-state value of $w$.
+For Adam, as everything is framed in terms of an objective. 
+Thus, we can find the steady-state by finding the location at which the gradients are zero,
+\begin{align}
+  0 &= \greg = g + \lambda w\\
+  w &= -\frac{g}{\lambda}
+\end{align}
+So stronger gradients imply bigger weights.
+In contrast, AdamW can't be framed in terms of an objective, so we need to work with the full updates,
+\begin{align}
+  \Delta w &= -\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} - \eta \lambda w_i.
+\end{align}
+Following the analysis of RMSProp last week, we're going to take,
+\begin{align}
+  \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} \approx \text{sign}(\gunreg),
+\end{align}
+Thus, at steady-state,
+\begin{align}
+  0 &\approx -\eta \text{sign}(\gunreg) - \eta \lambda w_i,\\
+  w_i &\approx \frac{\text{sign}(\gunreg)}{\lambda}.
+\end{align}
+So the steady-state weights for AdamW point in the same direction as the gradients, but they don't scale with the gradients!
+
+
 
 \newpage
 \section{Dropout}
