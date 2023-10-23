@@ -267,6 +267,19 @@ Specifically, we take $q_c$ to be a distribution which puts all its mass at the 
   H(q, p) &= - \log p_{y_i}(\x_i).
 \end{align}
 And this is exactly our loss for the $i$th datapoint.
+We can simplify this loss, and rename it to a form that is more usual in deep learning.
+In the multiclass setting:
+\begin{align}
+  \text{cross entropy}(\vlogits, y) &= -\log \logits_y + \log \sum_{c} \exp(\logits_c).
+\end{align}
+where $y$ is the target class label, and $\vlogits$ is the vector of logits that would usually come from the neural network.
+In the binary classification setting,
+\begin{align}
+  \text{cross entropy}(\logits, y) &= \begin{cases} 
+    \log (1+e^{-\logits}) & \text{if } y=1\\
+    \log (1+e^{\logits}) & \text{if } y=0
+  \end{cases}
+\end{align}
 
 \section{Gradient descent for binary classification}
 Now, we have discussed the loss function for binary and multiclass classification, we need to think about how to actually use this objective to optimize the weights.

@@ -81,7 +81,8 @@ In this part, we'll:
 
 Unfortunately, the field of deep learning has gotten a bit confused about partial, $\partial$, and total, $d$, derivatives.
 I'm going to try to adopt clear and consistent notation.
-But be aware that the field itself is a bit of a mess, so if you look at other resources, you will see other choices of notation.
+But I won't always succeede.  
+And the field itself is a bit of a mess, so if you look at other resources, you will see other choices of notation.
 
 It is actually simplest to define the partial derivative.  Consider a function of two arguments, $f(x, y)$.
 There are two partial derivatives for $f$, one for each argument,
@@ -98,7 +99,7 @@ Ultimately, the partial derivative takes a \textit{function} (here, $f$) and tel
 Then we come on to the total derivative.
 While you may be more familiar with the total derivative, the total deriative is actually harder to define.
 That's because the total derivative describes how changes propagate through a ``compute graph'' (a term from deep learning that turns out to be very useful in our context), not just a single function.
-For instance, consider computing $y$ from $x$, so we end up with $f(x, y(x))$.
+For instance, consider the setting where we have $f(x, y(x))$, i.e.\ $y$ is itself a function of $x$.
 The resulting compute graph looks like:
 \begin{center}
 \begin{tikzpicture}
@@ -226,7 +227,7 @@ Indeed it is correct to write,
 \end{align}
 The problem is that using partial derivatives in this way requires us to constantly implicitly redefine the arguments to our functions. 
 It's therefore a really bad idea if we're trying to be precise.
-
+But the fact that deep learning people have got themselves in such a mess probably indicates that it doesn't actually matter too much.
 
 \section{Setting up the problem of backprop in a neural network}
 
@@ -239,7 +240,8 @@ To understand what backprop is doing, we'll consider a neural network written in
   \sqerr\b{\f, \y} = \tfrac{1}{2} \sum_i (f_i - y_i)^2.
 \end{align}
 \end{subequations}
-In this entire document, we're going to consider just a single input datapoint, so vectors represent multiple features for that single datapoint.
+In this entire document, we're going to consider just a single input datapoint. 
+So e.g.\ the vector $\h$ represents multiple intermediate layer features for one datapoint.
 This extends to $\sqerr\b{\f, \y}$, which represents a squared-error loss for regression with multiple output features, $f_i$, and targets, $y_i$, for each datapoint.
 In $\sqerr\b{\f, \y}$, we use $\f$ to represent the output from our network, while $\y$ is the targets from the training data.
 We'll consider a 3-layer network (note the three linear layers),
@@ -322,7 +324,7 @@ In particular, we're going to work backwards through the compute graph, computin
   \def\xsep{1.8cm}
   \def\de{0.4cm}
 
-  \node (x)  at (0, 0) {$\textcolor{gray}{\dd[\L]{\x}}$};
+  \node (x)  at (0, 0) {$\textcolor{gray}{\dL{\x}}$};
   \node (a1) at ({1*\xsep}, 0) {$\dL{\a_1}$};
   \node (h1) at ({2*\xsep}, 0) {$\dL{\h_1}$};
   \node (a2) at ({3*\xsep}, 0) {$\dL{\a_2}$};
@@ -362,7 +364,8 @@ In particular, we're going to work backwards through the compute graph, computin
 \end{tikzpicture}
 \end{center}
 We have greyed-out $\dL{\x}$ and $\dL{\y}$ because these are gradients wrt data ($\x$ and $\y$), not parameters.
-Data are fixed, not tunable, so we're going to throw away these gradients.
+While research papers do sometimes use these papers, that's rare.
+In standard settings, data are fixed, not tunable, so we're going to throw away these gradients.
 
 That's great, but how do we actually compute these gradients?
 By applying the chain rule \textit{alot}.
@@ -382,7 +385,6 @@ Then we use the chain rule to compute total derivatives for variables and parame
   \dots &\phantom{=} \dots
 \end{align}
 \end{subequations}
-Note that we start by directly computing the gradient of the loss, $\L$ wrt $f_m$ that arises through the $\sqerr$ function.
 
 \section{Implementing backprop}
 
@@ -415,9 +417,8 @@ Concretely, for the $\relu$ function,
 \end{align}
 \end{subequations}
 Note that $\dd[\h]{\a}$ is just $\dd[h_i]{a_j}$ interpreted as a matrix (like $\mathbf{A}$ vs $A_{ij}$).  
-We aren't going to work with Jacobians in matrix / vector notation, as things quickly get confusing.
-For instance, what does $\dd[\a]{\W}$ mean as a matrix?
-But we can work with total derivatives wrt the loss, e.g. $\dL{\h}$.  
+We aren't usually going to e.g. do matrix multiplication with Jacobians written as $\dd[\h]{\a}$, as things quickly get confusing.
+But we can work with total derivatives wrt the loss, e.g. $\dL{\h}$.
 We'll follow PyTorch and use the convention is always that $\dL{\h}$ has the same shape as $\h$.
 As we treat $\h$ as a row-vector, that means $\dL{\h}$ is also a row-vector.
 
@@ -475,28 +476,30 @@ In contrast, the Jacobian (Eq.~\ref{eq:relu:jac}) has $D^2$ elements, so explici
 It turns out that in almost every operations there are huge efficiencies like this that can be exploited, and PyTorch is implemented to make sure that these efficiencies are exploited!
 
 \subsection{Implementing backprop without explicit Jacobians}
-In the previous subsection, we saw that computing the chain rule by directly summing over the Jacobian can often be quite inefficient.
-In contrast, if you explicitly expand the chain rule, you can often find considerable efficiencies.
-That leads us to an alternative strategy: implementing backprop without explicit Jacobians.
+In the previous subsection, we saw that there were two ways to compute the chain rule: Eq.~\eqref{eq:relu:chain} and Eq.~\eqref{eq:relu:back}.
+The first (Eq.~\ref{eq:relu:chain}) explicitly summed over the Jacobian.
+The key insight in the second equation (Eq.~\ref{eq:relu:back}) was that we didn't need the Jacobian explicitly.
+Instead, we just need an expression to compute $\dL{\a}$ from $\dL{\h}$.
+And such an expression can often be much simpler and more efficient than working with Jacobians explicitly.
+This is the key idea behind how backprop is implemented in practice.
 Specifically, PyTorch implements ``forward'' for each operation (e.g.\ $\linear$ or $\relu$),
 \begin{align}
   \outputs &= \func\b{\inputs}.
 \end{align}
-PyTorch also gives us a way to apply the chain rule,
+PyTorch also gives us a way to apply the chain rule.
+Remember that the chain rule is usually defined in terms of the Jacobian,
 \begin{align}
   \label{eq:generic_chain_rule}
   \dL{\inputs} = \sum_j \dd[\outputs_j]{\inputs} \dL{\outputs_j}.
 \end{align}
-Specifically, the chain rule for each operation is implemented by defining a backward function for each operation,
+But PyTorch doesn't implement this function directly.  
+Instead, it defines a backward function for each operation,
 \begin{align}
 \label{eq:general_forward_backward}
   \dL{\inputs} &= \funcback\b{\dL{\outputs}; \inputs}
 \end{align}
 This function takes the original inputs, along with the gradient of the objective wrt the output, $\dL{\outputs}$, and returns the gradient of the objective wrt the inputs, $\dL{\inputs}$.
-To see why this function needs the $\inputs$, note that it is going to implicitly use the Jacobian, and computing the Jacobian requires knowledge of the inputs (Eq.~\ref{eq:general_jacobian}). 
-Alternatively check the example in Eq.~\ref{eq:relu:back}.
-Critically though, while $\funcback$ \textit{could} explicitly compute the Jacobian and perform the sum in Eq.~\eqref{eq:generic_chain_rule}, it doesn't have to.  
-If available, it can use efficient strategies such as Eq.~\eqref{eq:relu:back}.
+The result is equal to multiplying by the Jacobian (Eq.~\eqref{eq:generic_chain_rule}), but can be much more efficient, as we don't have to explicitly form the Jacobian.
 
 Concretely, we for the ReLU:
 \begin{subequations}
@@ -554,9 +557,10 @@ Overall, the backprop algorithm is:
 \subsection{Memory consumption of backprop}
 Note that to perform the backward pass, we need to retain all the values of the variables in the forward pass (e.g.\ Eq.~\ref{eq:general_forward_backward} and \ref{eq:backward}). 
 This requirement to keep copies of all the variables from the forward pass implies a big memory consumption.
-This memory consumption is to a large extent unavoidable, but does nonetheless cause lots of issues.
+This memory consumption is largely unavoidable, and causes lots of issues (in fact, huge amounts of deep learning research is about reducing/mitigating memory issues).
 In contrast, if we \textit{just} run the forward pass at test time (also known as ``inference''), then the memory consumption is much less.
 That's because you don't need to retain all variables in the whole forward pass: you can almost always throw away variables that are earlier in the compute graph that you aren't going to need any more.
+For instance, in Eq.~\ref{eq:forward}, once you have computed $\a_2$, you don't need $\h_1$ anymore, so you can throw away $\h_1$, and reuse its memory.
 
 \section{Exercises}
 All these exercises relate to the linear function,

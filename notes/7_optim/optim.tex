@@ -92,7 +92,7 @@
 \newcommand{\lrtrad}{\eta_\text{trad}}
 \newcommand{\lravg}{\eta_\text{avg}}
 
-\title{EMAT31530, Part 6: Practical optimization in AI}
+\title{EMAT31530: Practical optimization in AI}
 \author{Laurence Aitchison}
 \date{}
 
@@ -101,22 +101,7 @@
 \maketitle
 
 Now, we know how PyTorch computes gradients.
-However, to optimize practical neural networks, you need a bit more than just gradients.
-In this part, we'll see:
-\begin{itemize}
-  \item Minibatching.
-  \item SGD with momentum.
-  \item Preconditioning in general.
-  \begin{itemize}
-    \item RMSProp
-    \item Adam
-    \item AdamW
-  \end{itemize}
-  \item Other considerations:
-  \begin{itemize}
-    \item Local optima (their mysterious absence)
-  \end{itemize}
-\end{itemize}
+However, to practically optimize neural networks, you need a bit more than just gradients: and that's what we'll look at this week!
 
 \section{Minibatching}
 So far, we've computed the full gradient based on all the training data in one big batch computation.
