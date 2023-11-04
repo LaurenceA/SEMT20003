@@ -113,11 +113,11 @@ As an alternative, we usually use minibatches.
 A minibatch is a small subset of the training data (e.g. 128 images out of 60,000 images in the full dataset).
 In minibatched training, we calculate the loss, compute the gradients and update the parameters for only the minibatch.
 
-To write down minibatched updates, we need notation for the gradient for an individual datapoint,
+To write down minibatched updates, we need notation for the gradient for the $i$th datapoint,
 \begin{align}
-  \g_i &= \dLi{\w}
+  \g_i &= \dLi{\w}.
 \end{align}
-where $\Li$ is the loss for an individual datapoint.
+Here, $\Li$ is the loss for the $i$th datapoint, and $\g_i$ is the gradient for the $i$th datapoint.
 We can use the individual datapoint gradient to write down the minibatched gradient. 
 The minibatched gradient is just the gradient, averaged over datapoints in the minibatch,
 \begin{align}
@@ -128,42 +128,44 @@ Here, $\mbsize$ is the minibatch size, and ``$\iinmb$'' gives the set of indicie
 However, it is quite awkward to use this expression directly in PyTorch, as, taken literally, it seems to involve backpropagating through $M$ single-datapoint losses, $\Li$.
 In contrast, PyTorch only allows us to (easily) work with a single loss.
 We therefore need to define a minibatched loss.
-Note that we again use an \textit{average}, rather than a sum, as it makes the code + analytics slightly easier.
+Note that we again use an \textit{average}, rather than a sum, as it makes the code + maths slightly easier.
 \begin{align}
   \Lmb &= \mbavg \L_i.
 \end{align}
-Using PyTorch to differentiate the minibatch loss gives 
+Using PyTorch to differentiate the minibatch loss gives the minibatched gradient, $\gmb$,
 \begin{align}
-  \dLmb{\w} &= \dt{\w} \b{\mbavg \L_i} = \mbavg \dLi{\w} = \mbavg \g_i = \gmb,
+  \dLmb{\w} &= \dt{\w} \b{\mbavg \L_i} = \mbavg \dLi{\w} = \mbavg \g_i = \gmb.
 \end{align}
-which gives the required averaged gradients.
-
 The simplest optimizer that uses minibatching is called ``stochastic gradient descent'', commonly abbreviated to SGD.
 This is very similar to gradient descent that we've seen previously, but it uses minibatched gradients, rather than the full batch gradient,
 \begin{align}
-  \w_{t+1} &= \w_t - \eta \gmbt.
+  \w_{t+1} &= \w_t - \eta \gmbt,
 \end{align}
-The ``stochastic'' in SGD refers to the stochasticity induced by randomness in the choice of minibatches.
+where $\gmbt$ is the minibatched gradient at time $t$.
+Note that the ``stochastic'' in SGD refers to the stochasticity induced by randomness in the choice of minibatches.
 
-This additional stochasticity raises a question: does SGD actually work?
-Specifically, does it converge to the minimum of the loss?
-Indeed, if you use a fixed learning rate, it will get close to the optimum, but won't actually exactly converge to exactly the optimum. 
+This additional stochasticity raises a question: what theory do we have to say that SGD still ``works''?
+And what do we even mean by ``works'' in this context?
+Well, a pretty important feature of an algorithm is whether it eventually converges to the minimum of the loss.
+That will (assuming there are no instabilities) happen for e.g.\ SGD applied in the full-batch setting with a fixed learning rate.
+However, if you use a fixed learning rate, SGD will get close to the optimum, but won't actually exactly converge to exactly the optimum. 
 Instead, it bounce around the optimum forever due to the ``noisy'' minibatched gradient estimates.
 
-However, it turns out we can prove convergence in once setting: when the learning rate, $\eta$, goes to zero.
-Specifically, we can show that if you reduce the learning rate $\eta$, and at the same time, consider an increasing number number of iterations, $T(\eta) = 1/\eta$, then you expect the SGD updates to move the parameters to the same place, but the variance decreasing variance, as we in-effect end up averaging over more samples of the minibatch noise.
+However, it turns out we can prove convergence in a slightly modified setting: as the learning rate, $\eta$, decays towards.
+Specifically, we can show that if you reduce the learning rate $\eta$, and at the same time, consider an increasing number number of iterations, $T(\eta) = 1/\eta$, then you expect the SGD updates to move the parameters to the same place, but with decreasing variance (the variance is induced by stochasticity in the choice of minibatches). 
+Reducing the learning rate as we increase the number of timesteps in effect implies we are averaging over more samples of the minibatch noise.
 
-To define the notion of the ``right expectation'', we need to go back to the original full batch setting.
+We start by proving that the expected minibatched update is the same as the full-batch update.
 Specifically, we're going to write the full batch loss again as an average,
 \begin{align}
   \Lfb &= \fbavg \Li.
 \end{align}
 where $N$ is the number of datapoints in the full dataset.
-The full batch gradient is again the average of individual datapoint gradients,
+The full batch gradient, $\gfb$ is again the average of individual datapoint gradients,
 \begin{align}
   \gfb &= \dLfb{\w} = \fbavg \dLi{\w} = \fbavg \g_i.
 \end{align}
-Now, we can think of the indidivual datapoint gradient as a random variable, which is equally likely to be the gradient corresponding to any individual datapoint,
+Now, we can think of the individual datapoint gradient as a random variable, which is equally likely to be the gradient corresponding to any individual datapoint,
 \begin{align}
   \P{\gsd} &= \fbavg \delta(\gsd - \g_i)
 \end{align}
@@ -178,9 +180,10 @@ And as the minibatched gradient is just the average of a bunch of independent re
 it also has the right expectation.
 
 Thus, we interpreted the single-datapoint, $\gsd$, or minibatched, $\gmb$, gradients as random variables, and proved that they have the right expectation, $\gfb$.
-In language from statistics, we could consider $\gsd$ and $\gmb$ as estimators of $\gfb$, and because the expectation of $\gsd$ and $\gmb$ equals the desired value, $\gfb$, we say these estimators are ``unbiased''.
-It turns out that having unbiased gradient estimates provably works: as the learning rate goes to zero, the noise in each minibatch estimate ``averages out''.
-To prove this kind of convergence, we consider reducing the learning rate $\eta$, and at the same time, increasing number of timesteps,
+A statistician would say that $\gsd$ and $\gmb$ are ``unbiased estimators'' of $\gfb$, because $\E{\gsd} = \gfb$ and $\E{\gmb} = \gfb$.
+Now, to get a really good estimate of the true-batch gradient, $\gfb$, all we need to do is to average over many independent realisations of $\gsb$ or $\gmb$.
+And it turns out we can do this implicitly by considering shrinking the learning rate as we increase the number of timesteps.
+Specifically, we consider a number of timesteps that is inversely proportional to the learning rate,
 \begin{align}
   \label{eq:T(eta)}  
   T(\eta) = \tfrac{1}{\eta}.
@@ -195,7 +198,7 @@ Writing $\eta = 1/T(\eta)$,
   \Delta w &= \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \gsmbt
 \end{align}
 Thus, $\Delta w$ is just the average of $T(\eta)$ independent realisations of the minibatched gradient, $\gsmbt$.
-Assuming that we consider a small number of iterations, such that the expected gradient doesn't change much across the small part of the trajectory considered (i.e.\ $\E{\gsmbt} = \gsfb$, where $\gsfb$ doesn't change over timesteps), the expected change in weights becomes,
+Assuming that we consider small changes in $w$, such that the expected gradient doesn't change much across the small part of the trajectory considered (i.e.\ $\E{\gsmbt} = \gsfb$, where $\gsfb$ doesn't change over timesteps), the expected change in weights becomes,
 \begin{align}
   \E{\Delta w} &= \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \E{\gsmbt} = \frac{1}{T(\eta)} \sum_{t=1}^{T(\eta)} \gsfb = \gsfb,
 \end{align}
@@ -229,28 +232,36 @@ Thus, as $\eta \rightarrow 0$, the variance in the change in weights $\Var{\Delt
 Theory is great, but deep learning is a practical subject, so there's a few points of ``wisdom'' and/or common practice. Specifically:
 \begin{itemize}
   \item Each pass through the full training dataset is called an ``epoch''.  Deep learning training progress is typically measured in epochs.  Each epoch is composed of many minibatches (minibatches per epoch = dataset size / minibatch size).
-  \item Within each epoch, it works slightly better to randomise the minibatches, rather than going through the same fixed set of minibatches at each epoch again and again (that's what \verb|shuffle=True| does).
+  \item Within each epoch, it works slightly better to randomise exactly which datapoints are part of each minibatch, rather than going through the same fixed set of minibatches at each epoch again and again (that's what \verb|shuffle=True| does).
 \end{itemize}
 
-\section{Momentum}
+\section{The problem with NN optimization}
 
-The simple form of SGD described above is rarely used in practice.
-The problems all come down to the interactions between the size of gradients and the learning rates.
+The simple form of SGD described above doesn't work well, and is rarely used in practice.
+The problem all comes down to the interactions between the size of gradients and the learning rates.
 Specifically:
 \begin{itemize}
   \item If all the gradients are small, then we'd like to use large learning rates to converge reasonably quickly.
   \item If all the gradients are large, then we'd like to use small learning rates to avoid instability.
 \end{itemize}
 The problem is in practice, gradients in some directions are large, and gradients in some directions are small.
-That sets up a conflict: for directions with a large gradient, you'd like to use a small learning rate (to avoid instabilities along directions with large gradients).
-But for for directions with a small gradient, you'd like to use a large learning rate (to converge reasonably quickly).
+That sets up a conflict: for directions with a large gradient, you'd like to use a small learning rate (to avoid instability).
+But for directions with a small gradient, you'd like to use a large learning rate (to converge reasonably quickly).
+
+In practice, real problems have some small and some large gradients.
+In that case, you're forced to use a low learning rate (to avoid instability along directions with large gradients), which implies slow convergence along directions with small gradients.
+It is this problem that all the optimization tricks discussed below are trying to address.
+
+\section{Momentum}
+
 Momentum is one way to mitigate these issues, as it stabilises learning with large-ish learning rates along high gradient directions.
-That allows you to push up the learning rate a bit, allowing faster convergence in the small-gradient directions, before you hit instabilities in the large-gradient directions.
+That allows you to push up the learning rate a bit, allowing faster convergence in the small-gradient directions.
 Specifically, the instabilities often look like the diagram below,
 \begin{center}
   \includegraphics[width=\textwidth]{momentum.pdf}
 \end{center}
-If the learning rate is large, SGD can oscillate, as at each step, it jumpts over the ``horizontal'' in these diagrams.
+SGD with no momentum is plotted in the blue lines.
+If the learning rate is large, SGD with no momentum can oscillate: at each step, it jumps over the ``horizontal'' in these diagrams.
 That's okay if the oscillations decay (i.e.\ left plot below with $\eta=0.1$), in which case you will still converge.
 But as the learning rate increases, the oscillations grow, and the learning process diverges (middle and right plots).
 Momentum (orange line) allows you to increase learning rates a bit while avoiding this instability.
@@ -263,8 +274,8 @@ The objective, $\L(\w)$ describes the height of the landscape at any location, $
 \begin{align}
   \F(\w) &= - \lrtrad \gfb.
 \end{align}
-(Note that I'm using two slightly different notions of gradient, $\lrtrad$, the ``traditional'' gradient used in standard formulations of SGD with momentum that you'll find on the internet, and $\lravg$: a slightly different notion of momentum that I think makes the effect of momentum far clearer).
-Taking the mass to be $1$ for simplicity, the equations of motion are,
+(Note that I'm using two slightly different versions of the momentum update, with two slightly different learning rates: a traditional formaulation with learning rate, $\lrtrad$, that you'll find on the internet, and an ``average'' formulation with learning rate $\lravg$ that makes the effect of momenutum and the connection to later methods such as Adam far clearer).
+Taking the mass and gravitational acceleration to be $1$ for simplicity, the equations of motion are,
 \begin{subequations}
 \begin{align}
   \dt[\mom]{t} &= - (1-\mu) \mom + \F(\w) = - (1-\mu) \mom - \lrtrad \gfb\\
@@ -294,9 +305,9 @@ Discretising these equations with a timestep of $1$ and using the minibatched gr
   \w_{t+1} &= \w_t + \dt[\w]{t} = \w_{t} + \mom_{t+1}.
 \end{align}
 \end{subequations}
-This is the parametrisation used in PyTorch (\href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{SGD docs}). Typically we use a momentum of $\mu=0.9$, while the learning rate, $\lrtrad$, needs extensive tuning.
+This is the traditional parametrisation e.g.\ used in PyTorch (\href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{SGD docs}). Typically we use a momentum of $\mu=0.9$, while the learning rate, $\lrtrad$, needs extensive tuning.
 
-However, I'm really not a fan of this parameterisation: it doesn't help us to understand what's really going on, and conflicts with how other learning rules such as Adam are written down.
+However, I'm really not a fan of the traditional parameterisation: it doesn't help us to understand what's really going on, and conflicts with how other learning rules such as Adam are written down.
 These other learning rules use an exponential moving average gradient,
 \begin{align}
   \label{eq:gb}
@@ -304,7 +315,7 @@ These other learning rules use an exponential moving average gradient,
 \end{align}
 This looks alot the ``velocity'' updates in Eq.~\eqref{eq:sgdm:trad:mom}, in that they both have an exponentially decay, with an additive term that depends on the minibatch gradient (the exponential decay is for $\mom$ in Eq.~\eqref{eq:sgdm:trad:mom} and for $\gb$ in Eq.~\eqref{eq:gb}).
 However, this form is much easier to interpret, as it is an exponential moving average of minibatch gradients that just estimates the full batch gradient (see exercises for details).
-That's why we denote this quantity $\gmbt$ (angle brackets are often used to denote some type of average).
+That's why we denote this quantity $\gb_t$ (angle brackets are often used to denote some type of average).
 %Specifically, if we are in a region where the underlying gradient doesn't change much,
 %\begin{align}
 %  \E{\gb_{t}} &= \gfb
@@ -320,17 +331,23 @@ Now, we can write an alternative set of momentum updates,
 \end{subequations}
 This is alot more similar to traditional SGD, in that the parameter updates are again just a learning rate times an estimate of the gradient.
 In SGD, we just use a single minibatched gradient estimate, while here, we use an exponential-moving-average over previous minibatch gradient estimates.
-This averaging allows us to reduce alternating gradients (as in the original diagram), and stabilise learning at larger learning rates.
 
-This raises a question: how does this ``average'' parameterisation relate to the ``traditional'' parameterisation?
-Our goal is to find relationships between the so-called ``hyperparameters'' in the traditional formulation (i.e.\ $\mu$ and $\lrtrad$) and the hyperparameters in the alternative formulation (i.e.\ $\beta_1$ and $\lravg$) that give exactly the same parameter updates at all timesteps.
-Specifically, we need the parameter update from the traditional formulation (Eq.~\ref{eq:sgdm:trad:w}) equal to the update from the alternative formulation (Eq.~\ref{eq:sgdm:avg:w}) at timestep $t$ and $t+1$,
+This notion of the exponential-moving-averaging gradients allows us to understand why momentum stabilises learning by suppressing oscillations.
+Specifically, what happens if we do an exponential moving average over gradients that alternate sign?
+Well, the positive and negative terms in that exponential moving average are going to partially cancel, leading to an average gradient that's much smaller in magnitude in these oscillating directions.
+And that much smaller gradient implies smaller updates and improved stability.
+
+Now, the existence of these two parameterisations raises the question of how they interrelate.
+Specifically, we want to find relationships between $\mu$ and $\lrtrad$ in the traditional formulation and $\beta_1$ and $\lravg$ in the average formulation such that the traditional and average formulations give exactly the same parameter updates at all timesteps.
+Specifically, we need the parameter update from the traditional formulation (Eq.~\ref{eq:sgdm:trad:w}) to equal to the update from the alternative formulation (Eq.~\ref{eq:sgdm:avg:w}) at timestep $t$ and $t+1$,
+\begin{subequations}
 \begin{align}
   \label{eq:prop:t}
   \mom_{t} &= - \lravg \gb_{t} \\
   \label{eq:prop:t+1}
   \mom_{t+1} &= - \lravg \gb_{t+1}.
 \end{align}
+\end{subequations}
 This indicates that we need the momentum in the traditional formulation to be directly proportional to the average gradient.
 To achieve that, lets substitute the updates for $\mom_{t+1}$ (Eq.~\ref{eq:sgdm:trad:mom}) and for $\gb_{t+1}$ (Eq.~\ref{eq:sgdm:avg:g}) into Eq.~\eqref{eq:prop:t+1},
 \begin{align}
@@ -338,7 +355,7 @@ To achieve that, lets substitute the updates for $\mom_{t+1}$ (Eq.~\ref{eq:sgdm:
   \mu \mom_t - \lrtrad \gmbt &= - \lravg \b{\beta_1 \gb_t + (1-\beta_1) \gmbt} \\
   &= - \lravg \beta_1 \gb_t - \lravg (1-\beta_1) \gmbt.
 \end{align}
-Now, lets substitute the value of $\mom_t$ in terms of the average gradient (Eq.~\ref{eq:prop:t}),
+Now, lets use (Eq.~\ref{eq:prop:t}) to substitute for $\mom_t$ on the LHS,
 \begin{align}
   - \mu \lravg \gb_{t} - \lrtrad \gmbt &= - \lravg \beta_1 \gb_t - \lravg (1-\beta_1) \gmbt.
 \end{align}
@@ -395,6 +412,7 @@ Now, the weight update is,
   \end{cases}
 \end{align}
 So the magnitude of the updates is always around $\eta$, no matter how big the gradients are.
+This turns out to be super-important (but not widely understood) intuition for setting $\eta$ to sensible values and for setting up your model to work well with Adam/RMSProp.
 
 \section{Adam}
 
@@ -408,8 +426,8 @@ To combine RMSProp with momentum, we just replace the gradient, $\gsmbt$, in Eq.
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
   w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
 \end{align}
-However, there's another problem with these updates. 
-Specifically, $\gssqb_{t+1}$ is too small for about the first $1000$ timesteps.
+These equations show Adam updates without debiasing.
+However, there's a problem with these updates: specifically, $\gssqb_{t+1}$ is too small for about the first $1000$ timesteps.
 In particular, we typically use a long timescale for the exponential moving average for $\gssqb_{t+1}$: the default is $\beta_2 = 0.999$, which implies a timescale of about $1000$ timesteps.
 Moreover, in the absence of any better information, we initialize $\gssqb_0 = 0$.
 Combining all this, we have $1-\beta_2 = \tfrac{1}{1000}$, so
@@ -417,6 +435,8 @@ Combining all this, we have $1-\beta_2 = \tfrac{1}{1000}$, so
   \gssqb_1 &= \tfrac{1}{1000} g_{\text{mb}; t=1}^2,
 \end{align}
 thus the first estimate of $\gssqb$ is about 1000 times too small.
+Over about 1000 timesteps, $\gssqb$ will converge to more sensible values.
+But it still will have spent a long time with a value that is too high.
 To fix this issue, the full Adam updates do bias correction:
 \begin{align}
   \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
@@ -427,6 +447,33 @@ To fix this issue, the full Adam updates do bias correction:
 \end{align}
 To understand what bias correction is doing, see Exercises.
 
+\section{Gradient clipping}
+
+The key problem inducing instability was that the gradients in some directions were too large.
+Clipping is perhaps the simplest way to prevent this problem.
+Usually, the clip function is defined as,
+\begin{align}
+  \text{clip}(x, \text{max}, \text{min}) &= \begin{cases}
+    \text{max} & \text{if } \text{max} < x\\
+    \text{min} & \text{if } x < \text{min} \\
+    x & \text{otherwise}
+  \end{cases}
+\end{align}
+In gradient clipping, we'd apply clip to the gradients, with $\text{min} = -\text{max}$.
+
+Gradient clipping seems to work reasonably well in practice, and is often applied.
+However, there is an important health-warning when applying gradient clipping in the context of minibatched optimization.
+Remember that a key property that we need for optimization to work (e.g.\ to converge to the right answer) was that the expected minibatch gradient should be equal to the full batch gradient,
+\begin{align}
+  \E{\gmb} &= \gfb.
+\end{align}
+The problem is that the expected \textit{clipped} gradient is no longer equal to the full batch gradient,
+\begin{align}
+  \E{\text{clip}(\gmb, \text{min}, \text{max})} &\neq \gfb,
+\end{align}
+because $\text{clip}$ is a nonlinear function.
+This might not be a problem if it happens rarely, or if it happens increasingly rarely if the model converges.
+But it is always worth bearing in mind when using clipping!
 
 \section{Exercises}
 
@@ -475,7 +522,7 @@ Part 1: We begin by taking the expectation of the update (Eq.~\ref{eq:ex:abX})
   a_{t+1} &= \beta^2 (\beta a_{t-2} + (1- \beta) \mu)+ (1- \beta) \mu (1 + \beta)\\
   a_{t+1} &= \beta^3 a_{t-2} + (1- \beta) \mu (1 + \beta + \beta^2).
   \intertext{Repeating until we get to $a_0$,}
-  a_{t+1} &= \beta^3 a_0 + (1- \beta) \mu \sum_{\tau=0}^{t}\beta^\tau.
+  a_{t+1} &= \beta^{t+1} a_0 + (1- \beta) \mu \sum_{\tau=0}^{t}\beta^\tau.
   \intertext{As we initialize at $a_0=0$,}
   a_{t+1} &= (1- \beta) \mu \sum_{\tau=0}^{t}\beta^\tau.
   \intertext{Now, the $\sum_{\tau=0}^{t}\beta^\tau$ term is a geometric series.  You can look geometric series up.  Or we can find the value ourselves.  There's a ``trick'' to the proof for a geometric series, which is to consider,}
@@ -484,15 +531,13 @@ Part 1: We begin by taking the expectation of the update (Eq.~\ref{eq:ex:abX})
   (1-\beta) \sum_{\tau=0}^{t}\beta^\tau &= \sum_{\tau=0}^{t}\beta^\tau - \sum_{\tau=1}^{t+1}\beta^\tau\\
   \intertext{Now, notice that almost all the terms cancel, except those for $\tau=0$ and $\tau=T+1$,}
   (1-\beta) \sum_{\tau=0}^{t}\beta^\tau &= 1 - \beta^{t+1}.
-  \intertext{Thus,}
-  \sum_{\tau=0}^{t}\beta^\tau &= \frac{1 - \beta^{t+1}}{1-\beta}.
   \intertext{Substituting this back into our form for $a_{t+1}$ gives,}
   \label{eq:ans:a}
   a_{t+1} &= (1-\beta^{t+1}) \mu 
 \end{align}
 Of course, assuming that $0<\beta<1$, then as $t+1$ goes to infinity, we have,
 \begin{align}
-  \lim_{t \rightarrow \infty} \beta^{t+1} &= 0
+  \lim_{t \rightarrow \infty} \beta^{t+1} &= 0 &
   \lim_{t \rightarrow \infty} a_{t+1} &= \mu
 \end{align}
 The problem is what happens for smaller numbers of timesteps.

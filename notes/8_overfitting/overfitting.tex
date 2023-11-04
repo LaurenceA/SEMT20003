@@ -28,6 +28,7 @@
 \newcommand{\y}{\mathbf{y}}
 \newcommand{\f}{\mathbf{f}}
 \newcommand{\h}{\mathbf{h}}
+\renewcommand{\d}{\mathbf{d}}
 \newcommand{\g}{\mathbf{g}}
 \newcommand{\mom}{\mathbf{v}}
 \newcommand{\F}{\mathbf{F}}
@@ -74,6 +75,7 @@
 \newcommand{\linear}{\operatorname{linear}}
 \newcommand{\relu}{\operatorname{relu}}
 \newcommand{\sqerr}{\operatorname{sqerr}}
+\newcommand{\dropout}{\operatorname{dropout}}
 
 \newcommand{\func}{\operatorname{func}}
 \newcommand{\funcback}{\operatorname{func{.}backward}}
@@ -133,51 +135,74 @@ In weight decay, we add a term to the loss, penalising large weights,
   \Lreg = \Lunreg + \tfrac{\lambda}{2} \sum_i w_i^2.
 \end{align}
 Here, $\Lunreg$ is the original unregularised loss (e.g.\ just the cross-entropy), and $\Lreg$ is the regularised loss.
-To keep consistency with the \href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{PyTorch docs}, we assume that $\Lreg$ and $\Lunreg$ are either: 
-\begin{itemize}
-  \item the loss for a single minibatch.
-  \item the \textit{average} loss across minibatches.
-\end{itemize}
-Importantly, this doesn't yet look like weight ``decay''.  
+(To keep consistency with the \href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{PyTorch docs}, we assume that $\Lreg$ and $\Lunreg$ are the loss for a single minibatch.)
+Importantly, Eq.~\eqref{eq:weight_decay_loss} does not yet look like weight ``decay''.  
 
-To understand where ``weight decay'' arises, consider the gradients for a single parameter, $w$,
+To understand where the ``weight decay'' arises, consider the gradients for a single parameter, $w$,
 \begin{align}
   \gunreg &= \dLunreg{w}\\
   \greg &= \dLreg{w} = \dLunreg{w} + \lambda w
 \end{align}
-Thus, the update becomes,
+Thus, the SGD update becomes,
 \begin{align}
-  \Delta w &= \underbrace{- \eta \dLunreg{w}}_\text{original update} \underbrace{- \eta \lambda w}_\text{decay term}
+  \Delta w &= - \eta \greg = \underbrace{- \eta \dLunreg{w}}_\text{original update} \underbrace{- \eta \lambda w}_\text{decay term}
 \end{align}
-Now, the $-\eta \lambda w$ is a decay term that pushes $w$ towards zero.
+Thus, the update now contains a decay term, $-\eta \lambda w$, that pushes $w$ towards zero.
 
 \newpage
 \section{``Decoupled'' weight decay, or AdamW}
 \includegraphics[width=\textwidth]{decoupled_weight_decay.pdf}
-Almost all of deep learning is framed as optimization of loss functions.
-That's why weight decay, which is fundamentally defined by Eq.~\eqref{eq:weight_decay_loss} makes alot of sense.
-However, there is an alternative type of weight decay, which is these days used alot in training / finetuning transformers.
-In particular, consider what happens with standard weight decay and Adam.
-Remember that standard weight decay always works in terms of a modified loss.
-So what happens when we put gradients of this modified loss into RMSProp?
+
+Unfortunately, the simple connection between weight-decay and a modified loss breaks down when we consider RMSProp/Adam.
+Specifically, consider just using the modified loss (Eq.~\ref{eq:weight_decay_loss}) with RMSProp, (we use RMSProp rather than Adam in our examples as it simplifies things slightly to drop the exponential moving average gradient),
 \begin{align}
-  \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}}\\
-  \intertext{Substituting for the gradient of the regularised loss,}
-  \Delta w &= -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
+  \label{eq:adamL2}
+  \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}} = -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
   \intertext{And splitting up terms,}
   \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\greg^2}}}}_\text{original update} \quad\underbrace{- \eta \lambda \frac{w_i}{\sqrt{\ab{\greg^2}}}}_\text{Adam weight decay}
 \end{align}
-One thing you'll notive is that the updates no longer have a ``simple'' weight decay structure.  Instead, the weight decay is normalized by the squared gradient.
-``Decoupled'' weight decay (or AdamW) is what you get when you remove the normalization (and you use the unregularised gradients in the denominator),
-\begin{align}
-  \Delta w &= \underbrace{-\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
-\end{align}
-This is \textit{super-weird} from the perspective of standard deep learning, as it can no longer be understood as gradient descent on a modified objective.
-So why bother introducing AdamW?
-Well, it seems to work well in particular cases like transformers, which is reason-enough for the deep learning community.
+This equation is a bit odd, as the updates don't really seem to really take on a simple ``weight decay'' form anymore.
+Instead, the weight decay is also normalized by the exponential moving average gradient-squared.
+Unfortunately for historical reasons this form is termed the ``standard'' version of weight decay, so the terms ``weight decay'', ``standard weight decay'', ``Adam with weight decay'' all refer to updates of this form.
 
-But we can go a bit further than that.
-In particular, consider a single parameter, with a gradient, $g$, that's constant across minibatches and constant across a large range of parameters.
+That raises a question, what if we ``decoupled'' the weight decay from the normalizer, and just used,
+\begin{align}
+  \label{eq:adamw}
+  \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
+\end{align}
+This is ``decoupled'' weight decay.  And Adam with decoupled weight decay is known as AdamW.
+
+What consequences does this have?
+
+First, the AdamW/decoupled weight decay updates cannot be written in terms of minimizing a loss.
+That makes these updates incredibly weird: almost all of deep learning is framed as/derived as optimizing loss functions.
+I'm not sure the field has really thought-through the consequences of this point.
+
+
+
+%Almost all of deep learning is framed as optimization of loss functions.
+%That's why weight decay, which is fundamentally defined by Eq.~\eqref{eq:weight_decay_loss} makes alot of sense.
+%However, there is an alternative type of weight decay, which is these days used alot in training / finetuning transformers.
+%In particular, consider what happens with standard weight decay and Adam.
+%Remember that standard weight decay always works in terms of a modified loss.
+%So what happens when we put gradients of this modified loss into RMSProp?
+%\begin{align}
+%  \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}}\\
+%  \intertext{Substituting for the gradient of the regularised loss,}
+%  \Delta w &= -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
+%  \intertext{And splitting up terms,}
+%  \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\greg^2}}}}_\text{original update} \quad\underbrace{- \eta \lambda \frac{w_i}{\sqrt{\ab{\greg^2}}}}_\text{Adam weight decay}
+%\end{align}
+%One thing you'll notive is that the updates no longer have a ``simple'' weight decay structure.  Instead, the weight decay is normalized by the squared gradient.
+%``Decoupled'' weight decay (or AdamW) is what you get when you remove the normalization (and you use the unregularised gradients in the denominator),
+%\begin{align}
+%  \Delta w &= \underbrace{-\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
+%\end{align}
+%This is \textit{super-weird} from the perspective of standard deep learning, as it can no longer be understood as gradient descent on a modified objective.
+%So why bother introducing AdamW?
+%Well, it seems to work well in particular cases like transformers, which is reason-enough for the deep learning community.
+
+Second, we can understand the differences between the Adam and AdamW updates by considering a ``toy'' setting with a single parameter, with a gradient, $g$, that's constant across minibatches and constant across a large range of parameters.
 We can now solve for the steady-state value of $w$.
 For Adam, as everything is framed in terms of an objective. 
 Thus, we can find the steady-state by finding the location at which the gradients are zero,
@@ -206,6 +231,64 @@ So the steady-state weights for AdamW point in the same direction as the gradien
 \newpage
 \section{Dropout}
 \includegraphics[width=\textwidth]{dropout.pdf}
+Dropout is perhaps the most well-known of a class of methods that add some kind of noise to the training process.
+The basic idea in dropout is to ``turn off'' features with some probability (typically 0.5).
+This seems to regularise neural network training (there are some more specific ideas for what its doing, but I'm not sure I believe any of them).
+Specifically, dropout samples a binary mask. 
+The probability $p$ is the probability of dropping out a feature (i.e.\ the probability of the mask being $0$!).
+For instance, if a hidden layer has 14 features, this binary mask might look like:
+\begin{align}
+  \mathbf{m} &= (0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0).
+\end{align}
+The dropout operation then:
+\begin{align}
+  \dropout_i^\text{train}(\h) = \tfrac{1}{1-p} m_i h_i
+\end{align}
+Alternatively, we can write this operation in vectorised form, using the Hadamard (pointwise) product,
+\begin{align}
+  \dropout^\text{train}(\h) = \tfrac{1}{1-p} \mathbf{m} \odot \mathbf{h}.
+\end{align}
+Importantly, this only happens at \textit{train} time.  At test time we often want a determinstic output.  And to get a deterministic output the dropout layers stop doing anything:
+\begin{align}
+  \dropout^\text{test}(\h) = \h.
+\end{align}
+Now, we can see where the $\tfrac{1}{1-p}$ factor comes from.
+Specifically, we want the expected output of dropout at train-time to be the same as the output of dropout at test-time.
+\begin{align}
+  \E{\dropout_i^\text{train}(\h)} = \tfrac{1}{1-p} \E{m_i} h_i = \tfrac{1-p}{1-p} h_i = h_i = \dropout_i^\text{test}(\h).
+\end{align}
+Remember that $p$ is the probability of dropping out a feature (not of keeping the feature).  So $\E{m_i} = 1=p$,
+
+A network with dropout might look like:
+\begin{subequations}
+\label{eq:forward}
+\begin{align}
+  \a_1 &= \linear\b{\x, \W_1, \bv_1}\\
+  \h_1 &= \relu\b{\a_1}\\
+  \d_1 &= \dropout\b{\h_1}\\
+  \a_2 &= \linear\b{\d_1, \W_2, \bv_2}\\
+  \h_2 &= \relu\b{\a_2}\\
+  \d_2 &= \dropout\b{\h_2}\\
+  \f &= \linear\b{\d_2, \W_3, \bv_3}\\
+  \label{eq:L}
+  \L &= \sqerr\b{\f, \y}.
+\end{align}
+\end{subequations}
+
+Finally, one important point to raise about dropout is that it raises the possibility of lots of irritiating bugs.
+Specifically, the network now behaves differently at train and test time.
+So you need to set the network in training mode, or in evaluation model.
+Using \verb|torch.nn| modules you set the network into training mode using
+\begin{verbatim}
+  net.train()
+\end{verbatim}
+and you set the network into eval mode using 
+\begin{verbatim}
+  net.eval()
+\end{verbatim}
+Obviously, its super-easy to forget how to do this.  And if you do forget, it won't be obvious (it'll still work, just not quite as well as it might have done).
+
+
 
 \newpage
 \section{Adam vs SGD}
@@ -225,7 +308,7 @@ But this is the general ``rule of thumb'' that does seem to hold very generally 
 So which is best Adam or SGD?  Depends on whether you care about mitigating overfitting or capturing fine-details.
 \begin{itemize}
   \item SGD tends to be better for ConvNets (which we'll look at next week) for image recognition, as it mitigates overfitting.
-  \item Adam tends to be better for transformers (which we'll look at in a couple of weeks), RL where routing information in complex ways is important.
+  \item Adam tends to be better for transformers (which we'll look at in a couple of weeks) and RL where routing information in complex ways is important.
 \end{itemize}
 
 \newpage
@@ -241,7 +324,7 @@ Late on in training (darker lines), the line basically goes through all the data
 But this is still a pretty reasonable prediction, e.g.\ nothing has blown up.
 Importantly, earlier in training (lighter lines) the function is smooth, it gradually gets more "details" as training progresses.
 So we can use ``early stopping'' as a regularisation technique!
-And early stopping is great because it gives us a nice excuse to cut training short (so training with early-stopping takes less time).
+And early stopping is great because it gives us a nice excuse to cut training short.
 
 \newpage
 \section{Minibatch noise}
