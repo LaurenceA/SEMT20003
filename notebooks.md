@@ -12,19 +12,18 @@ Notebooks:
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
 
-## Week 5: Backprop
+## Week 7: Optimization
 
-The key bit of magic in PyTorch is the ability to compute gradients of the loss through arbitrary compute graphs.
-PyTorch does this using the backprop algoritm, and the backprop algorithm to compute gradients is at the heart of all modern AI.
-This might be a bit tougher than other weeks, as it involves going back-and-forth between the math and the code.
-But once you really understand backprop, you'll really know (and be able to reason about) what goes on in modern AI.
+Computing the gradients using backprop was the hard part.
+But there still are a few tricks to using these gradients to quickly train NNs.
+That's what this week is all about.
 
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/5_backprop/backprop.pdf) | [notes video 1 (20:06)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EbbvdyCRZRJMoa9YBt0SLKYB7R5FSZqzQPk6dr9352uomw) |
-| | [notes video 2 (15:48)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ESL-W0p5tYJPriVWJrZdzzkBwHxvFDyGkiQKhHyPrAJIOQ) |
-| | [notes video 3 (15:04)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EUow4gEqGHNNi7kRqL4oussB1Se_WQpl2qExDJx1F0Uv7w) |
-| | [notes video 4 (20:59)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZH1PMMjpXhKtu9rzWHtQSYBkQyrUV1qs_-48zrNNx7VBA) |
-| [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
-| [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
+| [notes](notes/7_optim/optim.pdf) | [notes video 1 ()]() |
+| | [notes video 2 ()]() |
+| | [notes video 3 ()]() |
+| | [notes video 4 ()]() |
+| [Notebook 7.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing) | N/A |
+| [Notebook 7.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing) | N/A |
