@@ -55,7 +55,7 @@ Other points:
 * You won't need to install PyTorch.  All the iPython notebooks in the taught material are presented using [Google Colab](https://colab.research.google.com).  And you can do your group project there too!
 
 ## Exam (50% of total mark):
-* These exams are in Christmas, and examine the taught material from TB1.
+* These exams are in the standard TB1 assessment period, and examine the taught material from TB1.
 * I don't yet have confirmation on the exam format, but it will be 2 hours long.
 * The exam is mainly based on theory/maths.  But material in the iPython notebooks will be examinable.  But the exam will be paper-based, so you won't actually need to do any coding.  For instance, the question might give a piece of code, and you have to work out the shape of a tensor in that code.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
