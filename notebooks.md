@@ -21,7 +21,7 @@ That's what this week is all about.
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/7_optim/optim.pdf) | [notes video 1 ()]() |
+| [notes](notes/7_optim/optim.pdf) | [notes video 1 (21:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYMScaA6QF1NjGhnKxUmGWgBG-Ralhi-0hw-j1-IQ0hguw) |
 | | [notes video 2 ()]() |
 | | [notes video 3 ()]() |
 | | [notes video 4 ()]() |
