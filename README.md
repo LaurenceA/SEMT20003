@@ -142,3 +142,22 @@ But once you really understand backprop, you'll really know (and be able to reas
 | | [notes video 4 (20:59)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZH1PMMjpXhKtu9rzWHtQSYBkQyrUV1qs_-48zrNNx7VBA) |
 | [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
 | [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
+
+#### Week 6: Reading week!
+
+#### Week 7: Optimization
+
+Computing the gradients using backprop was the hard part.
+But there still are a few tricks to using these gradients to quickly train NNs.
+That's what this week is all about.
+
+
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [notes](notes/7_optim/optim.pdf) | [notes video 1 (21:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYMScaA6QF1NjGhnKxUmGWgBG-Ralhi-0hw-j1-IQ0hguw) |
+| | [notes video 2 (7:13)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVZfCjSaIBRPvcVmGFB69QkB9j14ZtIq4zyeEB8mDaFOmQ) |
+| | [notes video 3 (23:16)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVUUejzjQvhLr7cTbPe30RsBb1uex86gLs3grQF1v48neg) |
+| | [notes video 4 (24:00)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ERisNZHAOTpPtvwVGOjeBtYBJugU7BMwmf-Hn4aK7ez67w) |
+| [Notebook 7.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing) | N/A |
+| [Notebook 7.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing) | N/A |
+
