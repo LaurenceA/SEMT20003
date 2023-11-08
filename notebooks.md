@@ -11,6 +11,7 @@ Notebooks:
 * [6.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing)
 * [6.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing)
 * [7 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing)
+* [9 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing)
 
 ## Week 7: Optimization
 
