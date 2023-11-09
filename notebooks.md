@@ -22,7 +22,7 @@ Note that there are no exercises this week.
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [Notebook 8 Overfitting]() | [notebook video (16:47](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Eehq1IzytbFDpyT7l0N4z1kBzMOn7iQ3xCTPmzMI1JY6mw?e=IV8Op9) |
+| [Notebook 8 Overfitting]() | [notebook video (16:47)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Eehq1IzytbFDpyT7l0N4z1kBzMOn7iQ3xCTPmzMI1JY6mw?e=IV8Op9) |
 | [notes](notes/8_overfitting/overfitting.pdf) | [notes video 1 ()]() |
 | | [notes video 2 ()]() |
 
