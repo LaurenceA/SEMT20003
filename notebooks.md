@@ -15,11 +15,14 @@ Notebooks:
 
 ## Week 8: Overfitting
 
+This week is a bit unusual, because I'd advise looking at the CoLab notebook first.  That notebook introduces overfitting and cross-validation in linear models.
+The pdf notes then go on to talk about overfitting in neural networks.
 
-
+Note that there are no exercises this week.
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
+| [Notebook 8 Overfitting]() | N/A |
 | [notes](notes/8_overfitting/overfitting.pdf) | [notes video 1 ()]() |
 | | [notes video 2 ()]() |
-| [Notebook 8 Overfitting]() | N/A |
+
