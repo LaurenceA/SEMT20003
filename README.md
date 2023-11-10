@@ -32,11 +32,10 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - There are always videos of me going through the pdf notes, and may sometimes be videos of me going through the iPython notebooks.
   - _Watching the videos isn't necessary!!!_  The videos just go through (slowly and thoroughly) the material in the underlying pdf notes / iPython notebook.  So if you read + understand the underlying notes / notebooks, the videos are not necessary.
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
- 
-## Feedback: 
+
+## Synchronus sessions.
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
-  - *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework!!!!*
-  - There is no extra content for these classes.  You're expected to bring questions from the material from that week, and ask the TAs.  The TAs will be wandering around the room.
+  - *This is time set aside for you to work on the exercises in the pdf notes + CoLab notebooks for that week.*  There will be TAs present to answer any questions.
 * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
   - Again, this is for feedback on all parts of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework.
   - A couple of you will have clashes.  Apologies.  Timetabling have worked hard to minimize clashes, but it isn't actually possible to eliminate clashes, given the wide range of cohorts on the course.  The sessions will be recorded, and you can e.g. ask some else to submit your question.
