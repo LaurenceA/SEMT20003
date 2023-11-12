@@ -33,7 +33,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - _Watching the videos isn't necessary!!!_  The videos just go through (slowly and thoroughly) the material in the underlying pdf notes / iPython notebook.  So if you read + understand the underlying notes / notebooks, the videos are not necessary.
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
 
-## Synchronus sessions.
+## Synchronous sessions.
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
   - *This is time set aside for you to work on the exercises in the pdf notes + CoLab notebooks for that week.*  There will be TAs present to answer any questions.
 * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
