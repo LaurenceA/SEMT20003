@@ -32,11 +32,10 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - There are always videos of me going through the pdf notes, and may sometimes be videos of me going through the iPython notebooks.
   - _Watching the videos isn't necessary!!!_  The videos just go through (slowly and thoroughly) the material in the underlying pdf notes / iPython notebook.  So if you read + understand the underlying notes / notebooks, the videos are not necessary.
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
- 
-## Feedback: 
+
+## Synchronous sessions.
 * TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
-  - *These labs/problem classes are the primary route for feedback on all aspects of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework!!!!*
-  - There is no extra content for these classes.  You're expected to bring questions from the material from that week, and ask the TAs.  The TAs will be wandering around the room.
+  - *This is time set aside for you to work on the exercises in the pdf notes + CoLab notebooks for that week.*  There will be TAs present to answer any questions.
 * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
   - Again, this is for feedback on all parts of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework.
   - A couple of you will have clashes.  Apologies.  Timetabling have worked hard to minimize clashes, but it isn't actually possible to eliminate clashes, given the wide range of cohorts on the course.  The sessions will be recorded, and you can e.g. ask some else to submit your question.
@@ -56,8 +55,8 @@ Other points:
 
 ## Exam (50% of total mark):
 * These exams are in the standard TB1 assessment period, and examine the taught material from TB1.
-* I don't yet have confirmation on the exam format, but it will be 2 hours long.
-* The exam is mainly based on theory/maths.  But material in the iPython notebooks will be examinable.  But the exam will be paper-based, so you won't actually need to do any coding.  For instance, the question might give a piece of code, and you have to work out the shape of a tensor in that code.
+* The exam will be a 2 hour, 15 question, multiple choice, in-person exam.
+* The exam is based on the theoretical material in the pdf notes, along with the more practical material in the CoLab notebooks. But the exam will be MCQ and paper-based, so you won't actually need to do any coding.  For instance, a coding question might give you a little bit of code, and ask you to work out the shape of a tensor in that code.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
 * I will post a practice exam once details are available.
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  Exactly what I mean by that will be more obvious once the practice exam is available.
@@ -142,3 +141,36 @@ But once you really understand backprop, you'll really know (and be able to reas
 | | [notes video 4 (20:59)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZH1PMMjpXhKtu9rzWHtQSYBkQyrUV1qs_-48zrNNx7VBA) |
 | [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
 | [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
+
+#### Week 6: Reading week!
+
+#### Week 7: Optimization
+
+Computing the gradients using backprop was the hard part.
+But there still are a few tricks to using these gradients to quickly train NNs.
+That's what this week is all about.
+
+
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [notes](notes/7_optim/optim.pdf) | [notes video 1 (21:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYMScaA6QF1NjGhnKxUmGWgBG-Ralhi-0hw-j1-IQ0hguw) |
+| | [notes video 2 (7:13)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVZfCjSaIBRPvcVmGFB69QkB9j14ZtIq4zyeEB8mDaFOmQ) |
+| | [notes video 3 (23:16)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVUUejzjQvhLr7cTbPe30RsBb1uex86gLs3grQF1v48neg) |
+| | [notes video 4 (24:00)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ERisNZHAOTpPtvwVGOjeBtYBJugU7BMwmf-Hn4aK7ez67w) |
+| [Notebook 7.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing) | N/A |
+| [Notebook 7.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing) | N/A |
+
+## Week 8: Overfitting
+
+This week is a bit unusual, because I'd advise looking at the CoLab notebook first.  That notebook introduces overfitting and cross-validation in linear models.
+The pdf notes then go on to talk about overfitting in neural networks.
+
+Note that there are no exercises this week.
+
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [Notebook 8 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing) | [notebook video (16:47)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Eehq1IzytbFDpyT7l0N4z1kBzMOn7iQ3xCTPmzMI1JY6mw?e=IV8Op9) |
+| [notes](notes/8_overfitting/overfitting.pdf) | [notes video 1 (17:01)](https://uob.sharepoint.com/:v:/t/grp-LA/Ee4MriT4lbtHs9c_x3bhaBwBGO2FLz-_Q5Xz85MDSwsSUw) |
+|  | [notes video 2 (21:59)](https://uob.sharepoint.com/:v:/t/grp-LA/EQI-cw16ysBCovXNC0f2-IoBiMKDwYoXTdVWql4NkhJKqA) |
+
+
