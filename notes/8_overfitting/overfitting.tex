@@ -108,7 +108,8 @@
 
 \maketitle
 
-I advise that you take a look at the iPython notebook for this week first, as it discusses overfitting in the simpler setting of linear models.  We take the next step, by discussing Here, we discuss overfitting in the more complex setting of neural networks and how to mitigate overfitting in these models.
+I advise that you take a look at the iPython notebook for this week first, as it discusses overfitting in the simpler setting of linear models.  
+Here, we take the next step, by discussing overfitting, and strategies to mitigate overfitting, in the more complex setting of neural networks.
 
 \section{Overfitting is not catastrophic in NNs}
 
@@ -138,7 +139,7 @@ Here, $\Lunreg$ is the original unregularised loss (e.g.\ just the cross-entropy
 (To keep consistency with the \href{https://pytorch.org/docs/stable/generated/torch.optim.SGD.html}{PyTorch docs}, we assume that $\Lreg$ and $\Lunreg$ are the loss for a single minibatch.)
 Importantly, Eq.~\eqref{eq:weight_decay_loss} does not yet look like weight ``decay''.  
 
-To understand where the ``weight decay'' arises, consider the gradients for a single parameter, $w$,
+To understand why ``weight decay'' is called ``weight decay'', consider the gradients for a single parameter, $w$,
 \begin{align}
   \gunreg &= \dLunreg{w}\\
   \greg &= \dLreg{w} = \dLunreg{w} + \lambda w
@@ -154,18 +155,18 @@ Thus, the update now contains a decay term, $-\eta \lambda w$, that pushes $w$ t
 \includegraphics[width=\textwidth]{decoupled_weight_decay.pdf}
 
 Unfortunately, the simple connection between weight-decay and a modified loss breaks down when we consider RMSProp/Adam.
-Specifically, consider just using the modified loss (Eq.~\ref{eq:weight_decay_loss}) with RMSProp, (we use RMSProp rather than Adam in our examples as it simplifies things slightly to drop the exponential moving average gradient),
+Specifically, consider just using the modified loss (Eq.~\ref{eq:weight_decay_loss}) with RMSProp, (we use RMSProp rather than Adam in our examples as it simplifies things slightly while keeping the effect we're interested in),
 \begin{align}
   \label{eq:adamL2}
   \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}} = -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
   \intertext{And splitting up terms,}
   \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\greg^2}}}}_\text{original update} \quad\underbrace{- \eta \lambda \frac{w_i}{\sqrt{\ab{\greg^2}}}}_\text{Adam weight decay}
 \end{align}
-This equation is a bit odd, as the updates don't really seem to really take on a simple ``weight decay'' form anymore.
+This equation is a bit odd, as the updates don't really seem to really take on a simple ``weight decay'' form.
 Instead, the weight decay is also normalized by the exponential moving average gradient-squared.
-Unfortunately for historical reasons this form is termed the ``standard'' version of weight decay, so the terms ``weight decay'', ``standard weight decay'', ``Adam with weight decay'' all refer to updates of this form.
+Unfortunately for historical reasons this form is termed the ``standard'' version of weight decay, so the terms ``weight decay'', ``standard weight decay'', ``Adam with weight decay'' all refer to updates like this.
 
-That raises a question, what if we ``decoupled'' the weight decay from the normalizer, and just used,
+That raises a question: what if we ``decoupled'' the weight decay from the normalizer, and just used,
 \begin{align}
   \label{eq:adamw}
   \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
@@ -173,58 +174,34 @@ That raises a question, what if we ``decoupled'' the weight decay from the norma
 This is ``decoupled'' weight decay.  And Adam with decoupled weight decay is known as AdamW.
 
 What consequences does this have?
+Well, I'm not sure anyone really knows.
+But at least, it means that the AdamW/decoupled weight decay updates cannot be written in terms of minimizing a loss.
+That makes these updates incredibly weird: almost all of deep learning is derived from optimizing a loss function.
+I'm not sure the field has really thought-through the consequences of this point ... but it is really weird.
 
-First, the AdamW/decoupled weight decay updates cannot be written in terms of minimizing a loss.
-That makes these updates incredibly weird: almost all of deep learning is framed as/derived as optimizing loss functions.
-I'm not sure the field has really thought-through the consequences of this point.
 
-
-
-%Almost all of deep learning is framed as optimization of loss functions.
-%That's why weight decay, which is fundamentally defined by Eq.~\eqref{eq:weight_decay_loss} makes alot of sense.
-%However, there is an alternative type of weight decay, which is these days used alot in training / finetuning transformers.
-%In particular, consider what happens with standard weight decay and Adam.
-%Remember that standard weight decay always works in terms of a modified loss.
-%So what happens when we put gradients of this modified loss into RMSProp?
+%Second, we can understand the differences between the Adam and AdamW updates by considering a ``toy'' setting with a single parameter, with a gradient, $g$, that's constant across minibatches and constant across a large range of parameters.
+%We can now solve for the steady-state value of $w$.
+%For Adam, as everything is framed in terms of an objective, we can find the steady-state by finding the location at which the regularised gradients are zero,
 %\begin{align}
-%  \Delta w &= -\eta \frac{\greg}{\sqrt{\ab{\greg^2}}}\\
-%  \intertext{Substituting for the gradient of the regularised loss,}
-%  \Delta w &= -\eta \frac{\gunreg + \lambda w}{\sqrt{\ab{\greg^2}}}\\
-%  \intertext{And splitting up terms,}
-%  \Delta w &= \underbrace{-\eta \frac{\gunreg}{\sqrt{\ab{\greg^2}}}}_\text{original update} \quad\underbrace{- \eta \lambda \frac{w_i}{\sqrt{\ab{\greg^2}}}}_\text{Adam weight decay}
+%  0 &= \greg = \gunreg + \lambda w\\
+%  w &= -\frac{\gunreg}{\lambda}.
 %\end{align}
-%One thing you'll notive is that the updates no longer have a ``simple'' weight decay structure.  Instead, the weight decay is normalized by the squared gradient.
-%``Decoupled'' weight decay (or AdamW) is what you get when you remove the normalization (and you use the unregularised gradients in the denominator),
+%So stronger gradients imply bigger weights.
+%In contrast, AdamW can't be framed in terms of an objective, so we need to work with the full updates,
 %\begin{align}
-%  \Delta w &= \underbrace{-\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}}}_\text{original update} \quad \underbrace{- \eta \lambda w_i}_\text{``decoupled'' weight decay}
+%  \Delta w &= -\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} - \eta \lambda w_i.
 %\end{align}
-%This is \textit{super-weird} from the perspective of standard deep learning, as it can no longer be understood as gradient descent on a modified objective.
-%So why bother introducing AdamW?
-%Well, it seems to work well in particular cases like transformers, which is reason-enough for the deep learning community.
-
-Second, we can understand the differences between the Adam and AdamW updates by considering a ``toy'' setting with a single parameter, with a gradient, $g$, that's constant across minibatches and constant across a large range of parameters.
-We can now solve for the steady-state value of $w$.
-For Adam, as everything is framed in terms of an objective. 
-Thus, we can find the steady-state by finding the location at which the gradients are zero,
-\begin{align}
-  0 &= \greg = g + \lambda w\\
-  w &= -\frac{g}{\lambda}
-\end{align}
-So stronger gradients imply bigger weights.
-In contrast, AdamW can't be framed in terms of an objective, so we need to work with the full updates,
-\begin{align}
-  \Delta w &= -\eta \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} - \eta \lambda w_i.
-\end{align}
-Following the analysis of RMSProp last week, we're going to take,
-\begin{align}
-  \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} \approx \text{sign}(\gunreg),
-\end{align}
-Thus, at steady-state,
-\begin{align}
-  0 &\approx -\eta \text{sign}(\gunreg) - \eta \lambda w_i,\\
-  w_i &\approx \frac{\text{sign}(\gunreg)}{\lambda}.
-\end{align}
-So the steady-state weights for AdamW point in the same direction as the gradients, but they don't scale with the gradients!
+%Following the analysis of RMSProp last week, we're going to take,
+%\begin{align}
+%  \frac{\ab{\gunreg}}{\sqrt{\ab{\gunreg^2}}} \approx \text{sign}(\gunreg),
+%\end{align}
+%Thus, at steady-state,
+%\begin{align}
+%  0 &\approx -\eta \text{sign}(\gunreg) - \eta \lambda w_i,\\
+%  w_i &\approx \frac{\text{sign}(\gunreg)}{\lambda}.
+%\end{align}
+%So the steady-state weights for AdamW point in the same direction as the gradients, but they don't scale with the gradients!
 
 
 
@@ -232,9 +209,10 @@ So the steady-state weights for AdamW point in the same direction as the gradien
 \section{Dropout}
 \includegraphics[width=\textwidth]{dropout.pdf}
 Dropout is perhaps the most well-known of a class of methods that add some kind of noise to the training process.
-The basic idea in dropout is to ``turn off'' features with some probability (typically 0.5).
+The basic idea in dropout is to ``turn off'' features with some probability (typically 0.5), and to scale up the other features to compenstate.
 This seems to regularise neural network training (there are some more specific ideas for what its doing, but I'm not sure I believe any of them).
-Specifically, dropout samples a binary mask. 
+
+More formally, dropout samples a binary mask. 
 The probability $p$ is the probability of dropping out a feature (i.e.\ the probability of the mask being $0$!).
 For instance, if a hidden layer has 14 features, this binary mask might look like:
 \begin{align}
@@ -244,11 +222,9 @@ The dropout operation then:
 \begin{align}
   \dropout_i^\text{train}(\h) = \tfrac{1}{1-p} m_i h_i
 \end{align}
-Alternatively, we can write this operation in vectorised form, using the Hadamard (pointwise) product,
-\begin{align}
-  \dropout^\text{train}(\h) = \tfrac{1}{1-p} \mathbf{m} \odot \mathbf{h}.
-\end{align}
-Importantly, this only happens at \textit{train} time.  At test time we often want a determinstic output.  And to get a deterministic output the dropout layers stop doing anything:
+The mask drops out features, while the $\tfrac{1}{1-p}$ factor multiplicatively increases the other factors to compensate.
+
+Importantly, this only happens at \textit{train} time.  At test time we usually want a determinstic output.  And to get a deterministic output the dropout layers stop doing anything:
 \begin{align}
   \dropout^\text{test}(\h) = \h.
 \end{align}
@@ -257,7 +233,7 @@ Specifically, we want the expected output of dropout at train-time to be the sam
 \begin{align}
   \E{\dropout_i^\text{train}(\h)} = \tfrac{1}{1-p} \E{m_i} h_i = \tfrac{1-p}{1-p} h_i = h_i = \dropout_i^\text{test}(\h).
 \end{align}
-Remember that $p$ is the probability of dropping out a feature (not of keeping the feature).  So $\E{m_i} = 1=p$,
+Remember that $p$ is the probability of dropping out a feature (not of keeping the feature).  So $\E{m_i} = 1-p$,
 
 A network with dropout might look like:
 \begin{subequations}
@@ -316,13 +292,13 @@ So which is best Adam or SGD?  Depends on whether you care about mitigating over
 
 \includegraphics[width=\textwidth]{early_stopping.pdf}
 
-Here, I fitted a three-layer network with width 100 hidden layer, to 20 datapoints drawn from $\sin(x) + \text{noise}$.
-I used SGD with a learning rate of 0.01, and momentum of 0.8.
-I then plotted the prediction at different points throughout training.
+%Here, I fitted a three-layer network with width 100 hidden layer, to 20 datapoints drawn from $\sin(x) + \text{noise}$.
+%I used SGD with a learning rate of 0.01, and momentum of 0.8.
+%I then plotted the prediction at different points throughout training.
 
-Late on in training (darker lines), the line basically goes through all the datapoints. Strictly speaking, this is overfitting, as its fitting the noise rather than the ``real underlying'' sin function (especially see the ``dip'' about $x=-1$.  
-But this is still a pretty reasonable prediction, e.g.\ nothing has blown up.
-Importantly, earlier in training (lighter lines) the function is smooth, it gradually gets more "details" as training progresses.
+Here, I trained using SGD, with a learning rate of 0.1, and momentum of 0.8.
+Late on in training (darker lines), the line overfits, as it basically goes through all the datapoints. 
+In contrast, earlier on in training (lighter lines), we get a smoother curve, and hence less overfitting.
 So we can use ``early stopping'' as a regularisation technique!
 And early stopping is great because it gives us a nice excuse to cut training short.
 
@@ -336,32 +312,20 @@ And early stopping is great because it gives us a nice excuse to cut training sh
 Typical practice in training neural networks involves starting with a high learning rate, then decaying the learning rate in steps.
 In the above plot (blue line), the learning rate is decayed by a factor of 5 in steps at epochs 60 and 120 (epochs is a measure of time through training; one epoch means we've gone over all datapoints once).
 Notice that as you decay the learning rate, the training cross-entropy drops quickly, then becomes somewhat static.
-What seems to be going on is that minibatch noise stops you from converging to the actual optimum. to the real
-Instead, minibatch noise causes you to bounce around the solution.
+What seems to be going on is that minibatch noise stops you from converging to the actual optimum.
+Instead, minibatch noise causes you to bounce around the optimum.
 You can reduce the effective amount of noise by reducing the learning rate (see previous section on Optimizers).
 Alternatively (red line), you can reduce the effective noise by increasing the batch size, so each batch averages over more datapoints.
 However, we usually reduce the learning rate rather than increasing the batch size, as we don't have the GPU memory to increase the batch size.
 
-
-\newpage
-\section{High learning rates}
-
-\begin{center}
-  \includegraphics[width=0.5\textwidth]{schedule.png}
-\end{center}
-
-The previous plot would suggest that we should aggressively reduce learning rates.
-But that isn't true!
-Specifically, loss landscapes look
-
+Interestingly, that means we can use the noise induced by SGD with small batches and high learning rates as a regulariser!
+And that causes lots of confusion in deep learning: is it better to use high learning rates and small batches to get lots of minibatch noise, and hence regularise more?  
+Or is it better to use lower learning rates and larger batches to get less minibatch noise and hence converge better to the optimum?
+Well, like many thing in AI, it depends on lots of details of the task, dataset, architecture etc.\ and the only real way of finding out in any given setting is to experiment.
 
 \section{Exercises}
 
-\begin{exercise}
-\end{exercise}
-
-\begin{answer}
-\end{answer}
+No exercises this week!
 
 
 \end{document}
