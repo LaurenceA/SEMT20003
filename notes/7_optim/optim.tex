@@ -337,6 +337,15 @@ Specifically, what happens if we do an exponential moving average over gradients
 Well, the positive and negative terms in that exponential moving average are going to partially cancel, leading to an average gradient that's much smaller in magnitude in these oscillating directions.
 And that much smaller gradient implies smaller updates and improved stability.
 
+The two formulations are equivalent if we set:
+\begin{align}
+  \mu &= \beta_1 &
+  \lravg &= \tfrac{1}{1 -\beta_1} \lrtrad.
+\end{align}
+That means if we increase momentum (typically we use $\mu=\beta_1=0.9$) while keeping the traditional momentum, $\lrtrad$, the same, then we are in effect increasing the learning rate, $\lravg$.
+
+\subsection{Proof of relationship between the two formulations [non-examinable]}
+
 Now, the existence of these two parameterisations raises the question of how they interrelate.
 Specifically, we want to find relationships between $\mu$ and $\lrtrad$ in the traditional formulation and $\beta_1$ and $\lravg$ in the average formulation such that the traditional and average formulations give exactly the same parameter updates at all timesteps.
 Specifically, we need the parameter update from the traditional formulation (Eq.~\ref{eq:sgdm:trad:w}) to equal to the update from the alternative formulation (Eq.~\ref{eq:sgdm:avg:w}) at timestep $t$ and $t+1$,
@@ -378,7 +387,7 @@ Thus,
   \lrtrad &= \lravg (1-\beta_1) & 
   \lravg &= \tfrac{1}{1 -\beta_1} \lrtrad.
 \end{align}
-That means if we increase momentum (typically we use $\mu=\beta_1=0.9$) while keeping the traditional momentum, $\lrtrad$, the same, then we are in effect increasing the learning rate, $\lravg$.
+Which gives our result.
 
 \section{RMSProp}
 
