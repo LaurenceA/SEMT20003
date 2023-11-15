@@ -64,6 +64,12 @@ Other points:
 ## Group coursework (50% of total mark):
 There will be a group coursework in TB2, which will run roughly for the first half of the teaching block.  Details are again not yet nailed down, and I will announce as soon as information is available.
 
+## Other resources:
+
+* [Deep learning book](https://www.deeplearningbook.org)
+* [3Blue1Brown (YouTube Channel)](https://www.youtube.com/c/3blue1brown)
+* Usually searching Google for a given topic will give a bunch of blog posts on the subject (often in places like [Towards Data Science](https://towardsdatascience.com))
+
 ## Downloading the notes
 
 To download the notes, use the download button highlighted with the red circle:
