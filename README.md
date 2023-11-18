@@ -169,7 +169,7 @@ That's what this week is all about.
 Major Updates post initial release:
 * Proof of equivalence between the different formulations of SGD is now non-examinable.
 
-## Week 8: Overfitting
+#### Week 8: Overfitting
 
 This week is a bit unusual, because I'd advise looking at the CoLab notebook first.  That notebook introduces overfitting and cross-validation in linear models.
 The pdf notes then go on to talk about overfitting in neural networks.
