@@ -14,16 +14,15 @@ Notebooks:
 * [9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing)
 * [9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing)
 
-## Week 8: Overfitting
+## Week 9: CNNs
 
-This week is a bit unusual, because I'd advise looking at the CoLab notebook first.  That notebook introduces overfitting and cross-validation in linear models.
-The pdf notes then go on to talk about overfitting in neural networks.
-
-Note that there are no exercises this week.
+This week we'll look at architectures for neural networks for images.
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [Notebook 8 Overfitting]() | [notebook video (16:47)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Eehq1IzytbFDpyT7l0N4z1kBzMOn7iQ3xCTPmzMI1JY6mw?e=IV8Op9) |
-| [notes](notes/8_overfitting/overfitting.pdf) | Notes videos coming on Monday |
+| [notes](notes/9_cnn/cnn.pdf) | [notebook video (28:33)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVoYdfR1gdhIgJgyEPyUfDABpCfhDDkkshDNg8gj8CeVpg) |
+| | [notebook video (11:27)](https://uob-my.sharepoint.com/:v:/g/personal/ei19760_bristol_ac_uk/ERgnidh9URtDlUN0cHrthrgB6w_otIfknTJQsNyzAMi8YA) |
+| [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
+| [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
 
 
