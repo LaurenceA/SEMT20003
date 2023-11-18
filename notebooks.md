@@ -20,8 +20,9 @@ This week we'll look at architectures for neural networks for images.
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
-| [notes](notes/9_cnn/cnn.pdf) | [notebook video (28:33)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVoYdfR1gdhIgJgyEPyUfDABpCfhDDkkshDNg8gj8CeVpg) |
-| | [notebook video (11:27)](https://uob-my.sharepoint.com/:v:/g/personal/ei19760_bristol_ac_uk/ERgnidh9URtDlUN0cHrthrgB6w_otIfknTJQsNyzAMi8YA) |
+| [notes](notes/9_cnn/cnn.pdf) | [notebook video 1 (28:33)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVoYdfR1gdhIgJgyEPyUfDABpCfhDDkkshDNg8gj8CeVpg) |
+| | [notebook video 2 (11:27)](https://uob-my.sharepoint.com/:v:/g/personal/ei19760_bristol_ac_uk/ERgnidh9URtDlUN0cHrthrgB6w_otIfknTJQsNyzAMi8YA) |
+| | [notebook video 3 (18:24)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EQ1Kg8lHCqNFg055rGfnCCABQORuJkKhxcTchU31H9k5mA?e=uRUsme) |
 | [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
 | [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
 
