@@ -186,6 +186,8 @@ The pdf notes then go on to talk about overfitting in neural networks.
 
 This week we'll look at architectures for neural networks for images.
 
+**There are no exercises in the pdf notes this week, but there are exercises in the CoLab notebooks.**
+
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/9_cnn/cnn.pdf) | [notebook video 1 (28:33)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVoYdfR1gdhIgJgyEPyUfDABpCfhDDkkshDNg8gj8CeVpg) |
