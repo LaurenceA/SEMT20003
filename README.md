@@ -68,6 +68,7 @@ There will be a group coursework in TB2, which will run roughly for the first ha
 
 * [Deep learning book](https://www.deeplearningbook.org)
 * [3Blue1Brown (YouTube Channel)](https://www.youtube.com/c/3blue1brown)
+* [Andrej Karpathy's course on building neural networks, from scratch, in code.](https://karpathy.ai/zero-to-hero.html)
 * Usually searching Google for a given topic will give a bunch of blog posts on the subject (often in places like [Towards Data Science](https://towardsdatascience.com))
 
 ## Downloading the notes
