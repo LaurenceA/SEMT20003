@@ -121,90 +121,97 @@ These weights are $3 \times 3$, so we say that the ``kernel size'' is 3.
 We slide these weights over the input image/feature map.
 At each location, we calculate the product between the weight and the image pixel.
 We sum all these products to get the output in the current location.
+\newcommand{\convfig}[3]{
+\begin{minipage}{0.32\textwidth}
+\centering
+$x=#2, y=#3$
+\includegraphics[width=1.0\textwidth]{#1}
+\end{minipage}}
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_00.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_01.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_02.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_03.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_04.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_05.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_06.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_07.pdf}
-    \includegraphics[width=0.32\textwidth]{pdf/numerical_no_padding_no_strides_08.pdf}
+  \convfig{pdf/numerical_no_padding_no_strides_00.pdf}{1}{1}
+  \convfig{pdf/numerical_no_padding_no_strides_01.pdf}{2}{1}
+  \convfig{pdf/numerical_no_padding_no_strides_02.pdf}{3}{1}
+  \convfig{pdf/numerical_no_padding_no_strides_03.pdf}{1}{2}
+  \convfig{pdf/numerical_no_padding_no_strides_04.pdf}{2}{2}
+  \convfig{pdf/numerical_no_padding_no_strides_05.pdf}{3}{2}
+  \convfig{pdf/numerical_no_padding_no_strides_06.pdf}{1}{3}
+  \convfig{pdf/numerical_no_padding_no_strides_07.pdf}{2}{3}
+  \convfig{pdf/numerical_no_padding_no_strides_08.pdf}{3}{3}
     \caption{\label{fig:numerical_no_padding_no_strides} 
-      Computing the output of a simple convolutional layer.  The blue $5 \times 5$ square shows the inputs, the green $3 \times 3$ square shows the output.  The darker $3\times 3$ square in the input shows the current location of the patch of weights as it slides over the image.  This diagram along with others in this pdf are taken from ``A guide to convolution arithmetic for deep learning'', by Vincent Dumoulin and Francesco Visin.  This is a great article to check out if you're interested in filling in any gaps.
+      Computing the output of a simple convolutional layer.  The blue $5 \times 5$ square shows the inputs ($h$ in Eq.~\ref{eq:conv2d_scalar}), the green $3 \times 3$ square shows the output ($a_{x,y}$ in Eq.~\ref{eq:conv2d_scalar}).  The darker $3\times 3$ square in the input shows the current location of the patch of weights as it slides over the image.  This diagram along with others in this pdf are taken from ``A guide to convolution arithmetic for deep learning'', by Vincent Dumoulin and Francesco Visin.  This is a great article to check out if you're interested in filling in any gaps.
     }
 \end{figure}
-Specifically, the formula for this simple convolution is,
+Specifically, the formula for this convolution is,
 \begin{align}
   \label{eq:conv2d_scalar}
   a_{x,y} &= \sum_{\delta_x=-1}^1 \sum_{\delta_y=-1}^1 h_{x+\delta_x, y+\delta_y} W_{\delta_x, \delta_y}
 \end{align}
 here:
 \begin{itemize}
-  \item $a_{x, y}$ is the output image / feature map. In this example, the outputs are size $3\times 3$. So the indices $x$ and $y$ represent location in the output image, and range from $1$ to $3$.  As an example, looking at the previous diagram, and starting our indexing in the top-left, $a_{1, 1} = 12.0$.
-  \item $h_{x+\delta_x, y+\delta_y}$ is the input image / feature map. In this example, the inputs are size $5\times 5$.  So the indices $x + \delta_x$ and $y + \delta_y$ represent location on the input image, and range from $0$ to $4$.  As an example, looking at the previous diagram, and starting our indexing in the top-left, $h_{0, 0} = 3$.
+  \item $a_{x, y}$ is the output image / feature map (in green on the right in Fig.~\ref{fig:numerical_no_padding_no_strides}). In this example, the outputs are size $3\times 3$. So the indices $x$ and $y$ represent location in the output image, and range from $1$ to $3$.  As an example, in Fig.~\ref{fig:numerical_no_padding_no_strides}, $a_{1, 1} = 12.0$ (the indexing starts in the top-left).
+  \item $h$ is the input image / feature map (in blue on the left in Fig.~\ref{fig:numerical_no_padding_no_strides}). In this example, the inputs are size $5\times 5$, and the indices range from $0$ to $4$.  As an example, in Fig.~\ref{fig:numerical_no_padding_no_strides}, $h_{0, 0} = 3$.
+  \item The indices $x + \delta_x$ and $y + \delta_y$ represent the location within the darker blue patch location in the inputs, and range from $0$ to $4$.  
   \item $W_{\delta_x, \delta_y}$ is the convolutional weights (in grey in the first image, or in the $3 \times 3$ darker patches in the inputs in Fig.~\ref{fig:numerical_no_padding_no_strides}).  In this example, the weights are size $3 \times 3$. So the indicies $\delta_x$ and $\delta_y$ represent the location within the $3 \times 3$ weight matrix, and range from $-1$ to $1$. As an example, looking at the previous diagram, and starting our indexing in the top-left, $W_{-1, -1} = 0$.
 \end{itemize}
-Note that here, when we say that ``an index ranges from $-1$ to $1$'', we're being flexible for the purposes of making the maths easy.
-In Python/PyTorch, indicies always range from $0$ to $(\text{length}-1)$.
+Note that here, when we say that ``an index ranges from $-1$ to $1$'', that's for the purpose of writing down these equations.
+You can't change how Python/PyTorch indexes tensors (so e.g. in Python/PyTorch, indices always start from $0$).
 
-There are a coupple of ways of interpreting a convolution in terms of matrices and vectors.
-Both of these interpretations are easier to understand if we consider a 1D convolution, where instead of the inputs and outputs being images with 2 spatial dimensions, they just have one spatial dimension, $x$.
-In that case, Eq.~\eqref{eq:conv2d_scalar} becomes,
-\begin{align}
-  \label{eq:conv1d_scalar}
-  a_{x} &= \sum_{\delta=-1}^1 h_{x+\delta} W_{\delta}.
-\end{align}
-Writing out the individual components (for a length five input and a length three output),
-\begin{align}
-  \label{eq:conv1d_scalar_sum}
-  a_{x} &= W_{-1} h_{x-1} + W_0 h_x + W_1 h_{x+1}
-\end{align}
-or,
-\begin{subequations}
-\label{eq:conv1d_scalar_components}
-\begin{align}
-  a_1 &= h_0 W_{-1} + h_1 W_{0} + h_2 W_{1}\\
-  a_2 &= h_1 W_{-1} + h_2 W_{0} + h_3 W_{1} \\
-  a_3 &= h_2 W_{-1} + h_3 W_{0} + h_4 W_{1}
-\end{align}
-\end{subequations}
+%There are a coupple of ways of interpreting a convolution in terms of matrices and vectors.
+%Both of these interpretations are easier to understand if we consider a 1D convolution, where instead of the inputs and outputs being images with 2 spatial dimensions, they just have one spatial dimension, $x$.
+%In that case, Eq.~\eqref{eq:conv2d_scalar} becomes,
+%\begin{align}
+%  \label{eq:conv1d_scalar}
+%  a_{x} &= \sum_{\delta=-1}^1 h_{x+\delta} W_{\delta}.
+%\end{align}
+%Writing out the individual components (for a length five input and a length three output),
+%\begin{align}
+%  \label{eq:conv1d_scalar_sum}
+%  a_{x} &= W_{-1} h_{x-1} + W_0 h_x + W_1 h_{x+1}
+%\end{align}
+%or,
+%\begin{subequations}
+%\label{eq:conv1d_scalar_components}
+%\begin{align}
+%  a_1 &= h_0 W_{-1} + h_1 W_{0} + h_2 W_{1}\\
+%  a_2 &= h_1 W_{-1} + h_2 W_{0} + h_3 W_{1} \\
+%  a_3 &= h_2 W_{-1} + h_3 W_{0} + h_4 W_{1}
+%\end{align}
+%\end{subequations}
 
-\subsection{Interpretation 1: linear operation on patches}
-Notice that the components in Eq.~\eqref{eq:conv1d_scalar_sum} can be written as a big matrix operation,
-\begin{align}
-  a_{x} &= 
-  \underbrace{\begin{pmatrix}
-    h_{x-1} &
-    h_{x} &
-    h_{x+1}
-  \end{pmatrix}
-  }_{=\p_x}
-  \underbrace{\begin{pmatrix}
-    W_{-1} \\
-    W_{0} \\
-    W_{+1}
-  \end{pmatrix}}_{=\W}
-  = \p_x \W
-\end{align}
-Here, $\p_x$ is the inputs in the patch around $h_x$ concatenated together
-\begin{align}
-  \p_{x} &= \begin{pmatrix} 
-    h_{x-1} &
-    h_{x} &
-    h_{x+1}
-  \end{pmatrix},
-\end{align}
-and $\W$ is the weights for all parts of the patch concatenated together,
-\begin{align}
-  \W &= \begin{pmatrix}
-    W_{-1} \\
-    W_{0} \\
-    W_{1}
-  \end{pmatrix}.
-\end{align}
+%\subsection{Interpretation 1: linear operation on patches}
+%Notice that the components in Eq.~\eqref{eq:conv1d_scalar_sum} can be written as a big matrix operation,
+%\begin{align}
+%  a_{x} &= 
+%  \underbrace{\begin{pmatrix}
+%    h_{x-1} &
+%    h_{x} &
+%    h_{x+1}
+%  \end{pmatrix}
+%  }_{=\p_x}
+%  \underbrace{\begin{pmatrix}
+%    W_{-1} \\
+%    W_{0} \\
+%    W_{+1}
+%  \end{pmatrix}}_{=\W}
+%  = \p_x \W
+%\end{align}
+%Here, $\p_x$ is the inputs in the patch around $h_x$ concatenated together
+%\begin{align}
+%  \p_{x} &= \begin{pmatrix} 
+%    h_{x-1} &
+%    h_{x} &
+%    h_{x+1}
+%  \end{pmatrix},
+%\end{align}
+%and $\W$ is the weights for all parts of the patch concatenated together,
+%\begin{align}
+%  \W &= \begin{pmatrix}
+%    W_{-1} \\
+%    W_{0} \\
+%    W_{1}
+%  \end{pmatrix}.
+%\end{align}
 
 
 %Here, $\p_x$ is the represents inputs in the patch around $\h_x$ concatenated together.  Remember that $\h_{x}$, is a row vector of size $\Cin$, so $\p_{x}$ is a bigger row-vector, of length ($3 \Cin$).
@@ -227,38 +234,38 @@ and $\W$ is the weights for all parts of the patch concatenated together,
 %Thus, $\W$ is the right shape to take whole patches, $\p_{x,y}$ (which are vectors of length $3 \Cin $) as inputs.
 
 
-\subsection{Interpretation 2: linear operations on the input image}
-There's an alternative interpretation, which doesn't require us to extract patches, $\p_x$, from the input image.
-Specifically, we can write out the result of Eq.~\eqref{eq:conv1d_scalar_components} as an alternative big matrix-vector operation, with a structured weight matrix,
-\begin{align}
-  \begin{pmatrix}
-    a_1 & a_2 & a_3
-  \end{pmatrix}
-  &= 
-  \begin{pmatrix}
-    h_0 & h_1 & h_2 & h_3 & h_4
-  \end{pmatrix}
-  \begin{pmatrix}
-    W_{-1} &   0    &   0    \\
-    W_{ 0} & W_{-1} &   0    \\
-    W_{ 1} & W_{ 0} & W_{-1} \\
-      0    & W_{ 1} & W_{ 0} \\
-      0    &   0    & W_{ 1}
-  \end{pmatrix}
-\end{align}
-Note that the input and output vectors here are just the standard single-channel input and output vectors, $\h$ and $\a$, so we can write this expression as,
-\begin{align}
-  \a &= \h 
-  \begin{pmatrix}
-    W_{-1} &   0    &   0    \\
-    W_{ 0} & W_{-1} &   0    \\
-    W_{ 1} & W_{ 0} & W_{-1} \\
-      0    & W_{ 1} & W_{ 0} \\
-      0    &   0    & W_{ 1}
-  \end{pmatrix}.
-\end{align}
-In fact, all convolutions can be understood as matrix multiplications with structured weights.
-That interpretation is okay in this simple setting, with one input and output channel, and one spatial dimension, but becomes quite complex as soon as you consider multiple input/output channels, or more than one spatial dimension.
+%\subsection{Interpretation: convolution is a big structured matmul}
+%There's an alternative interpretation, which doesn't require us to extract patches, $\p_x$, from the input image.
+%Specifically, we can write out the result of Eq.~\eqref{eq:conv1d_scalar_components} as an alternative big matrix-vector operation, with a structured weight matrix,
+%\begin{align}
+%  \begin{pmatrix}
+%    a_1 & a_2 & a_3
+%  \end{pmatrix}
+%  &= 
+%  \begin{pmatrix}
+%    h_0 & h_1 & h_2 & h_3 & h_4
+%  \end{pmatrix}
+%  \begin{pmatrix}
+%    W_{-1} &   0    &   0    \\
+%    W_{ 0} & W_{-1} &   0    \\
+%    W_{ 1} & W_{ 0} & W_{-1} \\
+%      0    & W_{ 1} & W_{ 0} \\
+%      0    &   0    & W_{ 1}
+%  \end{pmatrix}
+%\end{align}
+%Note that the input and output vectors here are just the standard single-channel input and output vectors, $\h$ and $\a$, so we can write this expression as,
+%\begin{align}
+%  \a &= \h 
+%  \begin{pmatrix}
+%    W_{-1} &   0    &   0    \\
+%    W_{ 0} & W_{-1} &   0    \\
+%    W_{ 1} & W_{ 0} & W_{-1} \\
+%      0    & W_{ 1} & W_{ 0} \\
+%      0    &   0    & W_{ 1}
+%  \end{pmatrix}.
+%\end{align}
+%In fact, all convolutions can be understood as matrix multiplications with structured weights.
+%That interpretation is okay in this simple setting, with one input and output channel, and one spatial dimension, but becomes quite complex as soon as you consider multiple input/output channels, or more than one spatial dimension.
 
 \FloatBarrier
 \subsection{Convolutions with multiple input and output channels}
@@ -348,14 +355,14 @@ We can make it look at bit more similar by setting, $\delta = -\delta'$
 \begin{align}
   a(x) &= \int_{-\infty}^\infty d\delta \; h(x + \delta) \; w(-\delta).
 \end{align}
-If we write down a discrete version of this expression, we get something that looks alot like an AI-style convolution,
+If we write down a discrete version of this expression, we get something that looks alot like an AI-style convolution, but in 1 dimension,
 \begin{align}
   a_{x} &= \sum_{\delta=-\infty}^\infty h_{x+\delta} W_{-\delta}.
 \end{align}
 There are two key differences:
 \begin{itemize}
-  \item Here, $\delta$ ranges from $-\infty$ to $\infty$.  In contrast, in AI (Eq.~\ref{eq:conv1d_scalar}), $\delta$ has a small range, e.g. often from $-1$ to $1$.
-  \item Here, there's a $-\delta$ in $W_{-\delta}$, while in AI (Eq.~\ref{eq:conv1d_scalar}) there's no minus sign so we just have $W_\delta$.  It turns out that this doesn't matter in AI, as all the elements of the weight are learned.
+  \item Here, $\delta$ ranges from $-\infty$ to $\infty$.  In contrast, in AI (Eq.~\ref{eq:conv2d_scalar}), $\delta$ has a small range, e.g. often from $-1$ to $1$.
+  \item Here, there's a $-\delta$ in $W_{-\delta}$, while in AI (Eq.~\ref{eq:conv2d_scalar}) there's no minus sign so we just have $W_\delta$.  It turns out that this doesn't matter in AI, as all the elements of the weight are learned.
 \end{itemize}
 
 
