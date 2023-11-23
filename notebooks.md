@@ -18,6 +18,8 @@ Notebooks:
 
 This week we'll take a very high-level look at modern large language models.
 
+**There are no exercises in the pdf notes this week, but there are exercises in the CoLab notebooks.**
+
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/10_llms/llm.pdf) | [notebook video 1 ()]() |
