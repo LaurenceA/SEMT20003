@@ -197,5 +197,22 @@ This week we'll look at architectures for neural networks for images.
 | [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
 | [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
 
+## Week 10: Large language models (LLMs)
 
+This week we'll take a very high-level look at modern large language models.
 
+**There are no exercises in the pdf notes this week, but there are exercises in the CoLab notebooks.**
+
+Videos will be released later on Monday.
+
+| Notes/Notebook | Video (if available) |
+| ---- | ---- |
+| [notes](notes/10_llms/llm.pdf) | [notebook video 1 ()]() |
+| | [notebook video 2 ()]() |
+| [Notebook 10.1 Strings](https://colab.research.google.com/drive/11fXTOUD_XJw3aRFQd2SQHxMFsLAqfuoq?usp=sharing) | N/A |
+| [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
+| [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
+
+## Week 11: Revision
+
+## Week 12: Revision
