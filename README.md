@@ -216,9 +216,9 @@ Videos will be released later on Monday.
 #### Week 11: Revision
 (Practice exam out latest Monday Dec 4th).
 
-Lecturer led QA on  7th December and lab session on  8th December are running.  You may use this time to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
+The lecturer led QA on  7th December and lab session on  8th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
 
 
 #### Week 12: Revision
 
-Lecturer led QA on 14th December and lab session on 15th December are running.  You may use this time to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
+The lecturer led QA on 14th December and lab session on 15th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
