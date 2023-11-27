@@ -214,5 +214,6 @@ Videos will be released later on Monday.
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
 #### Week 11: Revision
+(Practice exam out latest Monday Dec 4th).
 
 #### Week 12: Revision
