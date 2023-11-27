@@ -216,4 +216,13 @@ Videos will be released later on Monday.
 #### Week 11: Revision
 (Practice exam out latest Monday Dec 4th).
 
+Lecturer led QA on 7nd December is running.
+
+Lab session on 8th December is running.
+
+
 #### Week 12: Revision
+
+Lecturer led QA on 14nd December is running.
+
+Lab session on 15th December is running.
