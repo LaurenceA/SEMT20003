@@ -61,6 +61,11 @@ Other points:
 * I will post a practice exam once details are available.
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  Exactly what I mean by that will be more obvious once the practice exam is available.
 
+## Practice exam!
+[practice exam](exams/sample.pdf)
+
+[practice exam answers](exams/sample_answers.pdf)
+
 ## Group coursework (50% of total mark):
 There will be a group coursework in TB2, which will run roughly for the first half of the teaching block.  Details are again not yet nailed down, and I will announce as soon as information is available.
 
@@ -213,7 +218,9 @@ This week we'll take a very high-level look at modern large language models.
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
 #### Week 11: Revision
-(Practice exam out latest Monday Dec 4th).
+[practice exam](exams/sample.pdf)
+
+[practice exam answers](exams/sample_answers.pdf)
 
 The lecturer led QA on  7th December and lab session on  8th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
 
