@@ -71,8 +71,9 @@ There will be a group coursework in TB2, which will run roughly for the first ha
 
 ## Other resources:
 
-* [Deep learning book](https://www.deeplearningbook.org)
+* [The little book of deep learning](https://fleuret.org/francois/lbdl.html)
 * [3Blue1Brown (YouTube Channel)](https://www.youtube.com/c/3blue1brown)
+* [Deep learning book](https://www.deeplearningbook.org)
 * [Andrej Karpathy's course on building neural networks, from scratch, in code.](https://karpathy.ai/zero-to-hero.html)
 * Usually searching Google for a given topic will give a bunch of blog posts on the subject (often in places like [Towards Data Science](https://towardsdatascience.com))
 
