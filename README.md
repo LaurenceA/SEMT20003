@@ -56,9 +56,10 @@ Other points:
 ## Exam (50% of total mark):
 * These exams are in the standard TB1 assessment period, and examine the taught material from TB1.
 * The exam will be a 2 hour, 15 question, multiple choice, in-person exam.
-* The exam is based on the theoretical material in the pdf notes, along with the more practical material in the CoLab notebooks. But the exam will be MCQ and paper-based, so you won't actually need to do any coding.  For instance, a coding question might give you a little bit of code, and ask you to work out the shape of a tensor in that code.
+* The exam is primarily based on the theoretical material in the pdf notes.  The material in the CoLab notebooks is examinable.  I'll expect you to know in-detail the material in the first week's CoLab notebooks (as you can see from Q1 and Q2 of the sample exam).  For instance, you should know what `t.ones(2,3,4)` does, or `A.mean(2)`.  The rest of the CoLab notebooks are may be examined in a couple of ways:
+  - They may be there to illustrate concepts (e.g. Q7 and Q10 in the sample exam).
+  - There could be a harder questions where you have to think, but all the required information about details are present.  For instance, I could ask for a verbal description of the following neural network layer: `nn.Sequential(nn.ReLU(), nn.Linear(in_features=100, out_features=200))` (The answer would be "A linear layer that takes vectors with 100 features and returns feature vectors with 200 features, followed by a relu nonlinearity").
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
-* I will post a practice exam once details are available.
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  Exactly what I mean by that will be more obvious once the practice exam is available.
 
 ## Practice exam!
