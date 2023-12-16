@@ -56,11 +56,12 @@ Other points:
 ## Exam (50% of total mark):
 * These exams are in the standard TB1 assessment period, and examine the taught material from TB1.
 * The exam will be a 2 hour, 15 question, multiple choice, in-person exam.
-* The exam is primarily based on the theoretical material in the pdf notes.  The material in the CoLab notebooks is examinable.  I'll expect you to know in-detail the material in the first week's CoLab notebooks (as you can see from Q1 and Q2 of the sample exam).  For instance, you should know what `t.ones(2,3,4)` does, or `A.mean(2)`.  The rest of the CoLab notebooks are may be examined in a couple of ways:
+* The exam is primarily based on the theoretical material in the pdf notes.
+* But the material in the CoLab notebooks is examinable.  I may ask in-detail about the material in the first week's CoLab notebooks (as you can see from Q1 and Q2 of the sample exam).  For instance, you should know what `t.ones(2,3,4)` or `A.mean(2)` does (along with the material in the GPU and intro to Python notebooks).  The rest of the CoLab notebooks may be examined in a couple of ways:
   - The CoLab exams can illustrate examinable concepts (e.g. Q7 and Q10 in the sample exam).
-  - You may need to read more complex code, but where all information required should be clearly available in the code itself.  For instance, I could ask for a verbal description of the following neural network layer: `nn.Sequential(nn.ReLU(), nn.Linear(in_features=100, out_features=200))` (The answer would be "A linear layer that takes vectors with 100 features and returns feature vectors with 200 features, followed by a relu nonlinearity").  But I wouldn't you to do that for `nn.Sequential(nn.ReLU(), nn.Linear(100, 200))` as you'd need need to know which argument was `in_features` and which was `out_features`, and you would just look that up in practice.
+  - You may need to read more neural-network-y code, but where all information required would be clearly available in the code itself.  For instance, I could ask for a verbal description of the following neural network layer: `nn.Sequential(nn.ReLU(), nn.Linear(in_features=100, out_features=200))` (The answer would be "A linear layer that takes vectors with 100 features and returns feature vectors with 200 features, followed by a relu nonlinearity").  But I wouldn't ask you to do that for `nn.Sequential(nn.ReLU(), nn.Linear(100, 200))` as you'd need need to know which argument was `in_features` and which was `out_features`.
 * Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
-* The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.  So focus on understanding the underlying concepts, and don't worry too much about very low-level details.  Exactly what I mean by that will be more obvious once the practice exam is available.
+* The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.
 
 ## Practice exam!
 [practice exam](exams/sample.pdf)
