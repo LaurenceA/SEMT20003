@@ -433,7 +433,7 @@ To combine RMSProp with momentum, we just replace the gradient, $\gsmbt$, in Eq.
 \begin{align}
   \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
-  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
+  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsb_{t+1}.
 \end{align}
 These equations show Adam updates without debiasing.
 However, there's a problem with these updates: specifically, $\gssqb_{t+1}$ is too small for about the first $1000$ timesteps.
