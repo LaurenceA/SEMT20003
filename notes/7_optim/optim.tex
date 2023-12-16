@@ -165,10 +165,7 @@ The full batch gradient, $\gfb$ is again the average of individual datapoint gra
 \begin{align}
   \gfb &= \dLfb{\w} = \fbavg \dLi{\w} = \fbavg \g_i.
 \end{align}
-Now, we can think of the individual datapoint gradient as a random variable, which is equally likely to be the gradient corresponding to any individual datapoint,
-\begin{align}
-  \P{\gsd} &= \fbavg \delta(\gsd - \g_i)
-\end{align}
+Now, we can think of the individual datapoint gradient as the random variable you get by randomly selecting a datapoint, then computing its expectation.
 Critically, this random variable has the right expectation,
 \begin{align}
   \E{\gsd} &= \fbavg \g_i = \gfb.
