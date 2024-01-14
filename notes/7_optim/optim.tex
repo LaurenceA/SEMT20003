@@ -447,8 +447,8 @@ To fix this issue, the full Adam updates do bias correction:
 \begin{align}
   \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
-  \mh_{t+1} &= \frac{\gssqb_{t+1}}{1-(\beta_1)^t}\\
-  \vh_{t+1} &= \frac{\gsb_{t+1}}{1-(\beta_2)^t}\\
+  \mh_{t+1} &= \frac{\gsb_{t+1}}{1-(\beta_1)^t}\\
+  \vh_{t+1} &= \frac{\gssqb_{t+1}}{1-(\beta_2)^t}\\
   w_{t+1} &= w_t + \frac{\eta}{\sqrt{\vh_{t+1}} + \epsilon}\mh_{t+1}.
 \end{align}
 To understand what bias correction is doing, see Exercises.
