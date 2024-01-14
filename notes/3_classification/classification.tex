@@ -270,7 +270,7 @@ And this is exactly our loss for the $i$th datapoint.
 We can simplify this loss, and rename it to a form that is more usual in deep learning.
 In the multiclass setting:
 \begin{align}
-  \text{cross entropy}(\vlogits, y) &= -\log \logits_y + \log \sum_{c} \exp(\logits_c).
+  \text{cross entropy}(\vlogits, y) &= -\logits_y + \log \sum_{c} \exp(\logits_c).
 \end{align}
 where $y$ is the target class label, and $\vlogits$ is the vector of logits that would usually come from the neural network.
 In the binary classification setting,
@@ -294,17 +294,17 @@ Remember that the objective is the log-probability of class-labels under our mod
   \L(\w) &= - \sum_{i=1}^N \sqb{\log (p_{\w}(\x_i)^{y_i}) + \log((1-p_{\w}(\x_i))^{1-y_i})}.\\
   \intertext{Next, the log turns powers into products, (mirroring the coin flipping result in Eq.~\ref{eq:coin_flip_prob})}
   \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log (p_{\w}(\x_i)) + (1-y_i)\log((1-p_{\w}(\x_i)))}.\\
-  \intertext{Substituting the value of $p_{\w}(\x)$ (Eq.~\ref{eq:sigmoid_prob}), (keeping the sigmoid in the first term, but using the explicit form for the sigmoid in the second term),}
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x) + (1-y_i)\log\b{1 - \frac{1}{1+e^{-\w^T \x}}}}
-  \intertext{Using, $1 = (1+e^{-\w \x_i^T}) /(1+e^{-\w \x_i^T})$,}
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\b{\frac{1+e^{-\w \x_i^T}}{1+e^{-\w \x_i^T}} - \frac{1}{1+e^{-\w^T \x}}}},\\
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1 +e^{-\w^T \x_i} - 1}{1+e^{-\w^T \x_i}}},\\
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{e^{-\w^T \x_i}}{1+e^{-\w^T \x_i}}}.
-  \intertext{Multiplying the numerator and denominator of the fraction by $e^{\w^T \x}$,}
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{(e^{-\w^T \x_i}) e^{\w^T \x_i}}{(1+e^{-\w^T \x_i}) e^{\w^T \x_i}}},\\
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log\frac{1}{1 + e^{\w^T \x_i}}}
+  \intertext{Substituting the value of $p_{\w}(\x_i)$ (Eq.~\ref{eq:sigmoid_prob}), (keeping the sigmoid in the first term, but using the explicit form for the sigmoid in the second term),}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\b{1 - \frac{1}{1+e^{-\w \x_i}}}}
+  \intertext{Using, $1 = (1+e^{-\w \x_i}) /(1+e^{-\w \x_i})$,}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\b{\frac{1+e^{-\w \x_i}}{1+e^{-\w \x_i}} - \frac{1}{1+e^{-\w \x}}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\frac{1 +e^{-\w \x_i} - 1}{1+e^{-\w \x_i}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\frac{e^{-\w \x_i}}{1+e^{-\w \x_i}}}.
+  \intertext{Multiplying the numerator and denominator of the fraction by $e^{\w \x_i}$,}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\frac{(e^{-\w \x_i}) e^{\w \x_i}}{(1+e^{-\w \x_i}) e^{\w \x_i}}},\\
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log\frac{1}{1 + e^{\w \x_i}}}
   \intertext{Finally, notice that the final term is another sigmoid,}
-  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w^T \x_i) + (1-y_i)\log \sigma(-\w^T \x_i)}
+  \L(\w) &= - \sum_{i=1}^N \sqb{y_i\log \sigma(\w \x_i) + (1-y_i)\log \sigma(-\w \x_i)}
 \end{align}
 
 Now, we want to differentiate this objective wrt a weight.
