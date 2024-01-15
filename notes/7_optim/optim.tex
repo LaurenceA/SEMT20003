@@ -399,18 +399,18 @@ Specifically, RMSProp computes an exponential moving average of the squared grad
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
   %\vh_{t+1} &= \frac{\gsmbt^2}{1-(\beta_2)^t}\\
   \label{eq:rmsprop:w}
-  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
+  w_{t+1} &= w_t - \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsmbt.
 \end{align}
 Note that $\epsilon$ is a small positive constant (usually set to $10^{-8}$) which ensures that we never divide-by-zero.
 
 To understand how RMS prop functions, we assume that we're in a small region, where the gradient is always the same, $\gsmbt = \gsfb$, and if we're in this region for long enough, $\gssqb_{t+1} = \gsfb^2$. 
 Now, the weight update is,
 \begin{align}
-  w_{t+1} &= w_t + \eta \frac{\gsfb}{\sqrt{\gsfb^2} + \epsilon} 
+  w_{t+1} &= w_t - \eta \frac{\gsfb}{\sqrt{\gsfb^2} + \epsilon} 
   \intertext{And $\sqrt{\gsfb^2} = \abs{\gsfb}$,}
-  w_{t+1} &= w_t + \eta \frac{\gsfb}{\abs{\gsfb} + \epsilon}
+  w_{t+1} &= w_t - \eta \frac{\gsfb}{\abs{\gsfb} + \epsilon}
   \intertext{Setting $\epsilon = 0$ for simplicity,}
-  w_{t+1} &= w_t + \eta \; \text{sign}(\gsfb) \\
+  w_{t+1} &= w_t - \eta \; \text{sign}(\gsfb) \\
   \text{sign}(x) &= \begin{cases}
      1 &\text{if } 0 < x\\
      0 &\text{if } 0 = x\\
@@ -430,7 +430,7 @@ To combine RMSProp with momentum, we just replace the gradient, $\gsmbt$, in Eq.
 \begin{align}
   \gsb_{t+1} &= \beta_1 \gsb_{t} + (1-\beta_1) \gsmbt\\
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
-  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsb_{t+1}.
+  w_{t+1} &= w_t - \frac{\eta}{\sqrt{\gssqb_{t+1}} + \epsilon}\gsb_{t+1}.
 \end{align}
 These equations show Adam updates without debiasing.
 However, there's a problem with these updates: specifically, $\gssqb_{t+1}$ is too small for about the first $1000$ timesteps.
@@ -449,7 +449,7 @@ To fix this issue, the full Adam updates do bias correction:
   \gssqb_{t+1} &= \beta_2 \gssqb_{t} + (1-\beta_2) \gsmbt^2\\
   \mh_{t+1} &= \frac{\gsb_{t+1}}{1-(\beta_1)^t}\\
   \vh_{t+1} &= \frac{\gssqb_{t+1}}{1-(\beta_2)^t}\\
-  w_{t+1} &= w_t + \frac{\eta}{\sqrt{\vh_{t+1}} + \epsilon}\mh_{t+1}.
+  w_{t+1} &= w_t - \frac{\eta}{\sqrt{\vh_{t+1}} + \epsilon}\mh_{t+1}.
 \end{align}
 To understand what bias correction is doing, see Exercises.
 
