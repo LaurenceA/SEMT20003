@@ -83,7 +83,7 @@ To download the notes, use the download button highlighted with the red circle:
 
 ![button to download the notes](screenshot.png)
 
-## Weekly material
+## Weekly material (from 2023/24; there will be some updates for 2024/25)
 
 #### Week 1: Prereqs and intro to PyTorch
 
