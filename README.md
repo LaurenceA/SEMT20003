@@ -1,22 +1,20 @@
-# EMAT31530: Introduction to AI
+# SEMT20003: Introduction to AI
 The course will introduce AI, with a focus on neural networks in PyTorch.
 
 ## Staff
 - [Laurence Aitchison](http://www.gatsby.ucl.ac.uk/~laurence/) [laurence.aitchison@bristol.ac.uk] (unit director)
 
 ## Teaching Block Structure
-* This course runs across TB1 + TB2.
-* TB1: all the teaching happens in TB1.
-* TB2: there is a group project in the first half of TB2.
+* This course runs in TB2.
 
 ## Prerequisites
-EMAT20011, EMAT10006 (or equivalent units, i.e good knowledge and experience with Python and basic statistics)
+Linear algebra, basic statistics, basic Python.
 
 ## Course Structure
 
 The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  Then, you can ask questions through the 2-hour weekly TA-led problem classes, and the 1-hour weekly lecturer-led QA session (see Feedback below).
 
-## Course Materials for TB1:
+## Course Materials
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * Notes
   - There are pdf notes for every week of taught material.
@@ -34,7 +32,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
 
 ## Synchronous sessions.
-* TA-led labs/problem classes on Fridays 11-1 in MVB 1.11.
+* TA-led labs/problem classes on +_TBD_.
   - *This is time set aside for you to work on the exercises in the pdf notes + CoLab notebooks for that week.*  There will be TAs present to answer any questions.
 * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
   - Again, this is for feedback on all parts of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework.
@@ -50,17 +48,16 @@ All the notebooks are going to be in [PyTorch](https://pytorch.org).  These days
 * As we'll see, you can use PyTorch as GPU-enabled-numpy, so it is useful for many applications outside of traditional AI.
 
 Other points:
-* You're going to need PyTorch for the group project.
-* You won't need to install PyTorch.  All the iPython notebooks in the taught material are presented using [Google Colab](https://colab.research.google.com).  And you can do your group project there too!
+* You won't need to install PyTorch.  All the iPython notebooks in the taught material are presented using [Google Colab](https://colab.research.google.com).
 
-## Exam (50% of total mark):
-* These exams are in the standard TB1 assessment period, and examine the taught material from TB1.
-* The exam will be a 2 hour, 15 question, multiple choice, in-person exam.
-* The exam is primarily based on the theoretical material in the pdf notes.
+## Exam
+* These exams are in the standard TB2 assessment period.
+* The exam will be a 2 hour, 20 question, multiple choice, in-person exam.
+* The exam is primarily based on the material in the pdf notes.
 * But the material in the CoLab notebooks is examinable.  I may ask in-detail about the material in the first week's CoLab notebooks (as you can see from Q1 and Q2 of the sample exam).  For instance, you should know what `t.ones(2,3,4)` or `A.mean(2)` does (along with the material in the GPU and intro to Python notebooks).  You aren't expected to know the material in the rest of the CoLab notebooks in that level of detail.  Specifically, the material in the rest of the CoLab notebooks may be examined in a couple of ways:
   - The CoLab exams can illustrate examinable concepts (e.g. Q7 and Q10 in the sample exam).
   - You may need to read more neural-network-y code, but where all information required would be clearly available in the code itself.  For instance, I could ask for a verbal description of the following neural network layer: `nn.Sequential(nn.Linear(in_features=100, out_features=200), nn.ReLU())`. I could give then several possible descriptions, with the correct description being: "A linear layer that takes vectors with 100 features and returns feature vectors with 200 features, followed by a relu nonlinearity".  But I wouldn't ask you to do that for `nn.Sequential(nn.Linear(100, 200), nn.ReLU())` as the code doesn't tell you what argument is `in_features` and which is `out_features`, and you really should to look it up to be sure.
-* Things have changed quite alot since last year, so previous EMAT31530 exams are no longer relevant.
+* Things have changed quite alot since I took over the course, so the previous EMAT31530 exam is relevant, but nothing before that.
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.
 * [Instructions for MCQ exams](exams/OMR-student-intructions.pdf)
 * The formula sheet in the sample exam is the same as that in the paper.
@@ -70,9 +67,6 @@ Other points:
 [practice exam](exams/sample.pdf)
 
 [practice exam answers](exams/sample_answers.pdf)
-
-## Group coursework (50% of total mark):
-There will be a group coursework in TB2, which will run roughly for the first half of the teaching block.  Details are again not yet nailed down, and I will announce as soon as information is available.
 
 ## Other resources:
 
