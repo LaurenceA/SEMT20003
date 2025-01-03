@@ -61,7 +61,7 @@ Other points:
 * The exam will focus on the _concepts_ rather than requiring you to learn specific math equations / PyTorch functions.
 * [Instructions for MCQ exams](exams/OMR-student-intructions.pdf)
 * The formula sheet in the sample exam is the same as that in the paper.
-* As regards the need to memorise other equations, all I able to say is that types of knowledge required for questions in the sample are exactly the same as in the real exam.
+* I'm going to try hard to avoid needing memorisating equations in questions (see practice exams for details).
 
 <!--
 ## Practice exam!
