@@ -102,6 +102,7 @@ In any case, there will definitely be material you haven't seen in notebook 1.2 
 | [Notebook 1.3: GPUs with PyTorch](https://colab.research.google.com/drive/1EjqE4eDioEdWJwWm_KnO0CPTds3LHKyC?usp=sharing) | N/A | 
 | N/A | [Week 1 QA (34:10)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EXezUO44d2dBrZ2vyfWoyKIB4Cdcnj-MzMttYVCp3vGl_A) |
 
+<!--
 #### Week 2: Linear Regression
 
 | Notes/Notebook | Video (if available) |
@@ -229,3 +230,4 @@ The lecturer led QA on  7th December and lab session on  8th December are runnin
 #### Week 12: Revision
 
 The lecturer led QA on 14th December and lab session on 15th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
+-->
