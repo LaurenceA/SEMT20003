@@ -27,9 +27,11 @@ The solution is: try asking modern AI systems!  Specifically, for this kind of t
   - Claude doesn't have access to the internet.  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching some material (e.g. a paper on the topic) to your message to Claude!
   - Claude can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
 
-Claude is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, Claude can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use Claude to help you learn more quicker, and think harder and deeper.  Its not an excuse to switch off brain and have Claude do stuff for you.
+Claude is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, Claude can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use Claude to help you learn more quicker, and think harder and deeper.  Don't switch off brain and have Claude do stuff for you!
 
-There's alot that Claude can't do: it can't build good large programming systems.  It can't write research papers.  But it can accelerate experts as they do those things.  Your goal is to find the best way to use Claude to help you become an expert!
+Finally, there's alot that Claude can't do.  Despite the hype, it can't by itself build large programs/systems, nor can it write (interesting) research papers, and it definitely can't to any mechanical/civil engineering.  But Claude can dramtically accelerate experts as they do those things.  And Claude can definitely help you learn those things.  
+
+Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
 
 ## Course Materials
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
