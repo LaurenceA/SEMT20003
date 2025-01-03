@@ -32,7 +32,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
 
 ## Synchronous sessions.
-* TA-led labs/problem classes on (TBD).
+* TA-led labs/problem classes 11am-1pm on Wednesdays in QUEENS BLDG F.101a/b/c.  These start in week 1 (16th January).
   - *This is time set aside for you to work on the exercises in the pdf notes + CoLab notebooks for that week.*  There will be TAs present to answer any questions.
 <!-- * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
   - Again, this is for feedback on all parts of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework.
