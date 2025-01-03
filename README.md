@@ -14,6 +14,23 @@ Linear algebra, basic statistics, basic Python.
 
 The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  Then, you can ask questions through the 2-hour weekly TA-led problem classes. <!--, and the 1-hour weekly lecturer-led QA session (see Feedback below).-->
 
+## Understanding the capabilities of modern AI, and asking questions
+
+There are two problems:
+* The course will introduce to the basics of how to train modern AI systems.  But it is also important for you to understand the capabilities of modern state-of-the-art AI systems.
+* At the same time, you're going to have questions about the course material.  You can of course ask on the Teams, and in the TA-led problem classes.  But what if you want feedback immediately?
+
+The solution is: try asking modern AI systems!  Specifically, for this kind of thing (programming, math deep learning), most people reckon that [Claude](https://claude.ai) is the best model.  I have been using Claude to help me to e.g. understand recent research in deep learning, so its definitely at the point where it can help you learn!  Note that:
+* The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).
+* If you want to ask about something specific that turns up e.g. in the lecture notes, you can give the lecture notes to Claude!
+* Like a TA, Claude is pretty good in 99% of cases, but it can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research).  Some thoughts on that:
+  - Claude doesn't have access to the internet.  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try pasting in the paper!
+  - Claude can hallucinate if you ask leading questions.  For instance, if its impossible to do <task> in <Python library>, but you ask it  "How do I do <task> in <Python library>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
+
+Claude is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, Claude can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use Claude to help you learn more quicker, and think harder and deeper.  Its not an excuse to switch off brain and have Claude do stuff for you.
+
+There's alot that Claude can't do: it can't build good large programming systems.  It can't write research papers.  But it can accelerate experts as they do those things.  Your goal is to find the best way to use Claude to help you become an expert!
+
 ## Course Materials
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
 * Notes
