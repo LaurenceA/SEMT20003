@@ -63,11 +63,12 @@ Other points:
 * The formula sheet in the sample exam is the same as that in the paper.
 * As regards the need to memorise other equations, all I able to say is that types of knowledge required for questions in the sample are exactly the same as in the real exam.
 
+<!--
 ## Practice exam!
 [practice exam](exams/sample.pdf)
 
 [practice exam answers](exams/sample_answers.pdf)
-
+-->
 ## Other resources:
 
 * [The little book of deep learning](https://fleuret.org/francois/lbdl.html)
