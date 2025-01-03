@@ -23,7 +23,7 @@ There are two problems:
 The solution is: try asking modern AI systems!  Specifically, for this kind of thing (programming, math deep learning), most people reckon that [Claude](https://claude.ai) is the best model.  I have been using Claude to help me to e.g. understand recent research in deep learning, so its definitely at the point where it can help you learn!  Note that:
 * The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).
 * If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
-* Claude is pretty good in 99% of cases.  But like a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research).  Some thoughts on that:
+* Claude is pretty good in 99% of cases.  But like a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
   - Claude doesn't have access to the internet.  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching the paper to your message to Claude!
   - Claude can hallucinate if you ask leading questions.  For instance, if its impossible to do <task> in <Python library>, but you ask it  "How do I do <task> in <Python library>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
 
