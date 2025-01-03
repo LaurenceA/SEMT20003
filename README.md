@@ -14,7 +14,7 @@ Linear algebra, basic statistics, basic Python.
 
 The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  Then, you can ask questions through the 2-hour weekly TA-led problem classes. <!--, and the 1-hour weekly lecturer-led QA session (see Feedback below).-->
 
-## Understanding the capabilities of modern AI, and asking questions
+## Understanding the capabilities of modern AI by it questions about the course
 
 There are two problems:
 * The course will introduce to the basics of how to train modern AI systems.  But it is also important for you to understand the capabilities of modern state-of-the-art AI systems.
