@@ -24,7 +24,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
 * Notebooks
   - Each week, there will _usually, but not always_ be iPython notebooks, discussing practical aspects of training neural networks.
   - These iPython notebooks _occasionally_ have exercises.
-  - The concepts in the iPython notebooks are examinable.
+  - The concepts in the iPython notebooks are examinable (see Exam section below for details on how code will be examined).
   - You don't learn code (well) by just reading.  Even if I haven't done exercises, open up your own Colab notebook alongside and type the code in to follow along.  Try the things that I'm doing.  Try something a bit different!
 * Videos
   - There are always videos of me going through the pdf notes, and may sometimes be videos of me going through the iPython notebooks.
