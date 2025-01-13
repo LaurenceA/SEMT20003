@@ -14,24 +14,6 @@ Linear algebra, basic statistics, basic Python.
 
 The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  There is a weekly 2-hour TA-led problem class.  In that session, you can work on the question sheets and/or iPython notebooks, and ask TAs any questions on that material, or on any other part of the course. <!--, and the 1-hour weekly lecturer-led QA session (see Feedback below).-->
 
-## Understanding the capabilities of modern AI by it questions about the course
-
-There are two problems:
-* The course will introduce to the basics of how to train modern AI systems.  But it is also important for you to understand the capabilities of modern state-of-the-art AI systems.
-* At the same time, you're going to have questions about the course material.  You can of course ask on the Teams, and in the TA-led problem classes.  But what if you want feedback immediately?
-
-The solution is: try asking modern AI systems!  Specifically, for this kind of thing (programming, math deep learning), most people reckon that [Claude](https://claude.ai) is the best model.  I have been using Claude to help me to e.g. understand recent research in deep learning, so its definitely at the point where it can help you learn!  Note that:
-* The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).
-* If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
-* Claude is pretty good in 99% of cases.  But like a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
-  - Claude doesn't have access to the internet.  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching some material (e.g. a paper on the topic) to your message to Claude!
-  - Claude can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
-
-Claude is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, Claude can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use Claude to help you learn more quicker, and think harder and deeper.  Don't switch off brain and have Claude do stuff for you!
-
-Finally, there's alot that Claude can't do.  Despite the hype, it can't by itself build large programs/systems, nor can it write (interesting) research papers, and it definitely can't to any mechanical/civil engineering.  But Claude can dramtically accelerate experts as they do those things.  And Claude can definitely help you learn those things.  
-
-Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
 
 ## Course Materials
 Course materials for each week will be posted here on Monday.  Course materials each week will include some combination of:
@@ -90,6 +72,27 @@ Other points:
 
 [practice exam answers](exams/sample_answers.pdf)
 -->
+
+
+## Understanding the capabilities of modern AI by it questions about the course
+
+There are two problems:
+* The course will introduce to the basics of how to train modern AI systems.  But it is also important for you to understand the capabilities of modern state-of-the-art AI systems.
+* At the same time, you're going to have questions about the course material.  You can of course ask on the Teams, and in the TA-led problem classes.  But what if you want feedback immediately?
+
+The solution is: try asking modern AI systems!  Specifically, for this kind of thing (programming, math deep learning), most people reckon that [Claude](https://claude.ai) is the best model.  I have been using Claude to help me to e.g. understand recent research in deep learning, so its definitely at the point where it can help you learn!  Note that:
+* The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).
+* If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
+* Claude is pretty good in 99% of cases.  But like a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
+  - Claude doesn't have access to the internet.  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching some material (e.g. a paper on the topic) to your message to Claude!
+  - Claude can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
+
+Claude is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, Claude can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use Claude to help you learn more quicker, and think harder and deeper.  Don't switch off brain and have Claude do stuff for you!
+
+Finally, there's alot that Claude can't do.  Despite the hype, it can't by itself build large programs/systems, nor can it write (interesting) research papers, and it definitely can't to any mechanical/civil engineering.  But Claude can dramtically accelerate experts as they do those things.  And Claude can definitely help you learn those things.  
+
+Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
+
 ## Other resources:
 
 * [The little book of deep learning](https://fleuret.org/francois/lbdl.html)
