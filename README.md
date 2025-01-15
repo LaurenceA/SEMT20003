@@ -33,7 +33,7 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
 
 ## Synchronous sessions.
-* TA-led labs/problem classes 11am-1pm on Wednesdays in QUEENS BLDG F.101a/b/c.  These start in week 1 (16th January).  In this time you should:
+* TA-led labs/problem classes 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c.  These start in week 1 (16th January).  In this time you should:
   - Work on the exercises in the pdf notes + CoLab notebooks for that week.
   - Ask TAs about these exercises (or anything else in the course).
   - (Note that more "organised" material in this course is not really possible, as the course is taken so widely that some students have clashes with these sessions).
