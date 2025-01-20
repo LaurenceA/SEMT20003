@@ -127,7 +127,7 @@ In any case, there will definitely be material you haven't seen in notebook 1.2 
 | [Notebook 1.3: GPUs with PyTorch](https://colab.research.google.com/drive/1EjqE4eDioEdWJwWm_KnO0CPTds3LHKyC?usp=sharing) | N/A | 
 | N/A | [Week 1 QA (23/24) (34:10)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EXezUO44d2dBrZ2vyfWoyKIB4Cdcnj-MzMttYVCp3vGl_A) |
 
-<!--
+
 #### Week 2: Linear Regression
 
 | Notes/Notebook | Video (if available) |
@@ -138,7 +138,7 @@ In any case, there will definitely be material you haven't seen in notebook 1.2 
 | | [notes video 4 (27:27)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ee3CZ5XfG_NPsh_fCN4U-P0Bnfg0RPd63sa-N5tfzYSQsg) |
 | [Notebook 2: Linear Regression](https://colab.research.google.com/drive/1wrgZfRJaWC-Hh_zgrDd-ubgdIAq0Qd_q?usp=sharing) | N/A |
 | N/A | [Week 2 QA (19:40)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EUD1dJvk0hZGhF1Ect2x9TYBd3ELuLXQLCgW1l0paMmZ5g) |
-
+<!--
 #### Week 3: Linear Classification
 
 | Notes/Notebook | Video (if available) |
