@@ -529,7 +529,7 @@ Now, we differentiate the loss wrt $w_1$,
   \dd[u_i^2]{u} &= 2u_i = 2\b{\yh(x_i) - y_i}\\
   \dd[u_i]{w_1} &= \dd{w_1}\b{w_1 + w_2 x_i - y_i} = 1
   \intertext{Putting everything together,}
-  \dd{w_1}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_2} = 2\sum_i \b{\yh(x_i) - y_i}
+  \dd{w_1}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_1} = 2\sum_i \b{\yh(x_i) - y_i}
   \intertext{and finally our update is,}
   \Delta w_1 &= - \eta \dd{w_1}\L(w_1, w_2) \\
   &= 2 \eta \sum_i \b{y_i - \yh(x_i)}
@@ -544,9 +544,9 @@ We use the same choice of $u_i$, so we can start at,
   \dd[u_i^2]{u_i} &= 2u_i = 2\b{\yh(x_i) - y_i}\\
   \dd[u_i]{w_2} &= \dd{w_2}\b{w_1 + w_2 x_i - y_i} = x_i
   \intertext{Putting everything together,}
-  \dd{w_1}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_2} = 2\sum_i x_i \b{\yh(x_i) - y_i}
+  \dd{w_2}\L(w_1, w_2) &= \sum_i \dd[u_i^2]{u_i}\dd[u_i]{w_2} = 2\sum_i x_i \b{\yh(x_i) - y_i}
   \intertext{and finally our update is,}
-  \Delta w_2 &= - \eta \dd{w_1}\L(w_1, w_2) \\
+  \Delta w_2 &= - \eta \dd{w_2}\L(w_1, w_2) \\
   &= 2 \eta \sum_i x_i \b{y_i - \yh(x_i)}
 \end{align}
 To interpret these updates, consider a setting where again, the data, $y_i$, is bigger than our prediction, $\yh(x_i)$.
