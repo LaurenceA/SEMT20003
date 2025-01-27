@@ -138,7 +138,7 @@ In any case, there will definitely be material you haven't seen in notebook 1.2 
 | | [notes video 4 (27:27)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Ee3CZ5XfG_NPsh_fCN4U-P0Bnfg0RPd63sa-N5tfzYSQsg) |
 | [Notebook 2: Linear Regression](https://colab.research.google.com/drive/1wrgZfRJaWC-Hh_zgrDd-ubgdIAq0Qd_q?usp=sharing) | N/A |
 | N/A | [Week 2 QA (19:40)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EUD1dJvk0hZGhF1Ect2x9TYBd3ELuLXQLCgW1l0paMmZ5g) |
-<!--
+
 #### Week 3: Linear Classification
 
 | Notes/Notebook | Video (if available) |
@@ -148,7 +148,7 @@ In any case, there will definitely be material you haven't seen in notebook 1.2 
 | | [notes video 3 (22:41)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaFZZAf4Bg5FofmwNDjWRUoBhpMXIBYRuthKn_EsU99FpA) |
 | [Notebook 3: Linear Classification](https://colab.research.google.com/drive/1XuazbDaJA88AJbdsm9mcw_foBfyQR2bH?usp=sharing) | N/A |
 | N/A | [Week 3 QA (10:51)](https://uob.sharepoint.com/:v:/t/UnitTeams-EMAT31530-2023-24-TB-4-A/EWRi1FtGS2xOsO13s_aeY4sB_LjNVc8jvvW-OuOaObElUw) |
-
+<!--
 #### Week 4: NNs
 
 This week, we introduce NNs!
