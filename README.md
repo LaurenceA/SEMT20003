@@ -93,6 +93,8 @@ Finally, there's alot that Claude can't do.  Despite the hype, it can't by itsel
 
 Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
 
+Finally, very recently released [DeepSeek](https://chat.deepseek.com) (based in China) also seems to be very good, and is completely free.
+
 ## Other resources:
 
 * [The little book of deep learning](https://fleuret.org/francois/lbdl.html)
