@@ -165,7 +165,7 @@ However, understanding how PyTorch implements NNs requires a bit more thought, e
 | [Notebook 4.2: NNs in PyTorch](https://colab.research.google.com/drive/1UyJM01YKfxszLffd-F2EU2yTFxmKb7e9?usp=sharing) | N/A |
 | [Notebook 4.3: NNs with torch.nn](https://colab.research.google.com/drive/1dXEYDmW7Bu31rC2ejkNXfdTHfwVO_vrC?usp=sharing) | N/A |
 | [Notebook 4.4: NN exercises](https://colab.research.google.com/drive/1zjH9hiu7Q85fWRuL5vfvMpfsOTv4q0tn?usp=sharing) | N/A |
-<!--
+
 #### Week 5: Backprop
 
 The key bit of magic in PyTorch is the ability to compute gradients of the loss through arbitrary compute graphs.
@@ -180,11 +180,12 @@ But once you really understand backprop, you'll really know (and be able to reas
 | | [notes video 2 (23:40)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaSlQHNHczhGs5JRfnAHxq4BWaM7OkuqXu5RTM8_tCtLzQ?e=fcNBJO) |
 | | [notes video 3 (9:39)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ERn7EiVTzMlLtDkf0YT5jB0BNd4fIOg-40RWu_VfOtJtSA?e=xWuOpq) |
 | | [notes video 4 (7:00)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdFpkDWzP5FBhQCbdWHIw0oBTp2W9CC24M-zS9rP3egnug?e=eBQbtQ) |
+| | [notes video 5 (13:36)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EY6fxAUMxn9AjzGggKxO62QBqSBDqdjshA_Q28Zk-hEb9Q?e=FgVThQ) |
 | [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
 | [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
 
 #### Week 6: Reading week!
-
+<!--
 #### Week 7: Optimization
 
 Computing the gradients using backprop was the hard part.
