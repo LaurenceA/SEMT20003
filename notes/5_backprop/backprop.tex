@@ -188,7 +188,7 @@ In deep learning, it's far better to use the more formal definition, as it'll he
 In contrast, the total derivative does make sense in this context, as it describes how changes (e.g.\ in $t$) propagate through the full compute graph.
 To compute the total derivative, we use the multivariate chain rule,
 \begin{align}
-  \dt[f]{t} &= \dd[f]{x} \dt[x]{t} + \dd[f]{y} \dt[y]{t}.
+  \dt[f]{t} &= \dd[f]{x} \dd[x]{t} + \dd[f]{y} \dd[y]{t}.
 \end{align}
 This is again the form for the multivariate chain rule you'll find in most textbooks / references.
 %Note that the chain rule uses total derivatives for $\dt[x]{t}$ and $\dt[y]{t}$.
@@ -287,7 +287,7 @@ The implied compute graph is,
   \node (a2) at ({3*\xsep}, 0) {$a_2$};
   \node (h2) at ({4*\xsep}, 0) {$h_2$};
   \node (f)  at ({5*\xsep}, 0) {$f$};
-  \node (L)  at ({6*\xsep}, 0) {$L$};
+  \node (L)  at ({6*\xsep}, 0) {$\L$};
 
   \node (W1) at ({1*\xsep-\de}, {-\ysep}) {$w_1$};
   \node (b1) at ({1*\xsep+\de}, {-\ysep}) {$b_1$};
@@ -298,7 +298,7 @@ The implied compute graph is,
   \node (W3) at ({5*\xsep-\de}, {-\ysep}) {$W_3$};
   \node (b3) at ({5*\xsep+\de}, {-\ysep}) {$b_3$};
 
-  \node (y)  at ({6*\xsep}, {-\ysep}) {$\y$};
+  \node (y)  at ({6*\xsep}, {-\ysep}) {$y$};
 
   \draw[->] (x) edge (a1);
   \draw[->] (W1) edge (a1);
