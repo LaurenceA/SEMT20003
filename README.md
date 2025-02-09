@@ -173,6 +173,7 @@ PyTorch does this using the backprop algoritm, and the backprop algorithm to com
 This might be a bit tougher than other weeks, as it involves going back-and-forth between the math and the code.
 But once you really understand backprop, you'll really know (and be able to reason about) what goes on in modern AI.
 
+Note that Notebook 5.2 is "formally" non-examinable, but should be super-useful in reinforcing the examinable material in the notes!
 
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
