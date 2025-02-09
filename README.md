@@ -177,7 +177,7 @@ But once you really understand backprop, you'll really know (and be able to reas
 | Notes/Notebook | Video (if available) |
 | ---- | ---- |
 | [notes](notes/5_backprop/backprop.pdf) | [notes video 1 (16:55)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EU6TPdQ0WoBEqn3TeUAn-e0B0xPLT5Ypz-XHSTAA2A2Jlw?e=ahw3VY) |
-| | [notes video 2 (15:48)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ESL-W0p5tYJPriVWJrZdzzkBwHxvFDyGkiQKhHyPrAJIOQ) |
+| | [notes video 2 (23:40)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EaSlQHNHczhGs5JRfnAHxq4BWaM7OkuqXu5RTM8_tCtLzQ?e=fcNBJO) |
 | | [notes video 3 (15:04)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EUow4gEqGHNNi7kRqL4oussB1Se_WQpl2qExDJx1F0Uv7w) |
 | | [notes video 4 (20:59)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EZH1PMMjpXhKtu9rzWHtQSYBkQyrUV1qs_-48zrNNx7VBA) |
 | [Notebook 5.1: Compute Graph](https://colab.research.google.com/drive/17aja1jqP-nrCZcQSTvMUVm1FkYrf_7ZM?usp=sharing) | N/A |
