@@ -55,7 +55,7 @@ Other points:
 
 ## Exam
 * These exams are in the standard TB2 assessment period.
-* The exam will be a 2 hour, 20 question, multiple choice, in-person exam.
+* The exam will be a 3 hour, 20 question, multiple choice, in-person exam.
 * The exam is primarily based on the material in the pdf notes.
 * But the material in the CoLab notebooks is examinable.  I may ask in-detail about the material in the first week's CoLab notebooks (as you can see from Q1 and Q2 of the sample exam).  For instance, you should know what `t.ones(2,3,4)` or `A.mean(2)` does (along with the material in the GPU and intro to Python notebooks).  You aren't expected to know the material in the rest of the CoLab notebooks in that level of detail.  Specifically, the material in the rest of the CoLab notebooks may be examined in a couple of ways:
   - The CoLab exams can illustrate examinable concepts (e.g. Q7 and Q10 in the sample exam).
