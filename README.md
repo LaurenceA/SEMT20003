@@ -66,13 +66,14 @@ Other points:
 * The formula sheet in the sample exam is the same as that in the paper.
 * I'm going to try hard to avoid needing memorisating equations in questions (see practice exams for details).
 
-<!--
 ## Practice exam!
-[practice exam](exams/sample.pdf)
+[sample exam](exams/sample.pdf)
 
-[practice exam answers](exams/sample_answers.pdf)
--->
+[sample exam answers](exams/sample_answers.pdf)
 
+[23/24 exam](exams/2324.pdf)
+
+[23/24 exam answers](exams/2324_answers.pdf)
 
 ## Understanding the capabilities of modern AI by it questions about the course
 
