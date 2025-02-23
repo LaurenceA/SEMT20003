@@ -188,7 +188,7 @@ Note that Notebook 5.2 is "formally" non-examinable, but should be super-useful 
 | [Notebook 5.2: Backprop](https://colab.research.google.com/drive/1A4Ne83U5Yp45Yivjo9baDC3LO7XyIhEs?usp=sharing) | N/A |
 
 #### Week 6: Reading week!
-<!--
+
 #### Week 7: Optimization
 
 Computing the gradients using backprop was the hard part.
@@ -205,9 +205,7 @@ That's what this week is all about.
 | [Notebook 7.1 torch.optim](https://colab.research.google.com/drive/1S3bcYEUpeaXEMae0gRILxhIYN7EQcMHN?usp=sharing) | N/A |
 | [Notebook 7.2 NNs for MNIST](https://colab.research.google.com/drive/1UA9-DSlbjoLp_vTYAi_bR7-6X6uvKMgi?usp=sharing) | N/A |
 
-Major Updates post initial release:
-* Proof of equivalence between the different formulations of SGD is now non-examinable.
-
+<!--
 #### Week 8: Overfitting
 
 This week is a bit unusual, because I'd advise looking at the CoLab notebook first.  That notebook introduces overfitting and cross-validation in linear models.
