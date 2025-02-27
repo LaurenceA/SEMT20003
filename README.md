@@ -33,10 +33,11 @@ Course materials for each week will be posted here on Monday.  Course materials 
   - To reiterate, the exam is based on the notes/notebooks, _not_ the videos.
 
 ## Synchronous sessions.
-* TA-led labs/problem classes 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c.  These start in week 1 (16th January).  In this time you should:
+* Labs/problem classes 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c.  These start in week 1 (16th January).  In this time you should:
   - Work on the exercises in the pdf notes + CoLab notebooks for that week.
   - Ask TAs about these exercises (or anything else in the course).
   - (Note that more "organised" material in this course is not really possible, as the course is taken so widely that some students have clashes with these sessions).
+  - TAs will be at all of these sessions.  I will be at most of the sessions.
 <!-- * Online, lecturer-led QA sessions, Thursday 4-5pm in TB1.  Held as a Teams meeting from the course Team.
   - Again, this is for feedback on all parts of the course, including lectures, notes, questions, iPython notebooks, past exams and the group coursework.
   - A couple of you will have clashes.  Apologies.  Timetabling have worked hard to minimize clashes, but it isn't actually possible to eliminate clashes, given the wide range of cohorts on the course.  The sessions will be recorded, and you can e.g. ask some else to submit your question.
