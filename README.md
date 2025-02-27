@@ -12,7 +12,7 @@ Linear algebra, basic statistics, basic Python.
 
 ## Course Structure
 
-The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  There is a weekly 2-hour TA-led problem class.  In that session, you can work on the question sheets and/or iPython notebooks, and ask TAs any questions on that material, or on any other part of the course. <!--, and the 1-hour weekly lecturer-led QA session (see Feedback below).-->
+The course is taught in a "flipped classroom model".  So there are no in-person lectures (we wouldn't be able to schedule them anyway given the wide range of cohorts on the course).  Instead, there are extensive pdf notes, iPython notebooks and videos.  There is a weekly 2-hour lab/problem class.  In that session, you can work on the question sheets and/or iPython notebooks, and ask TAs/me any questions on that material, or on any other part of the course. <!--, and the 1-hour weekly lecturer-led QA session (see Feedback below).-->
 
 
 ## Course Materials
