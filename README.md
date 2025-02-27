@@ -88,7 +88,9 @@ The solution is: try asking modern AI systems!  Specifically, for this kind of t
 * [Claude](https://claude.ai)
 * [Grok](https://grok.com)
 * [DeepSeek](https://chat.deepseek.com)
-are all really good (note, not ChatGPT atm).  There is a feeling that Claude is the best for programming, buts its pretty close.  I have been using Claude to help me to e.g. understand recent research in deep learning, so these models are definitely at the point where they can help you learn!  Note that:
+* [ChatGPT](https://chatgpt.com) (But only o1, o3 etc, _not_ GPT-4o).
+
+There is a feeling that Claude is the best for programming, buts its pretty close.  I have been using Claude to help me to e.g. understand recent research in deep learning, so these models are definitely at the point where they can help you learn!  Note that:
 * The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).
 * If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
 * These mdoels are pretty good in 99% of cases.  But like me/a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
