@@ -113,6 +113,12 @@ Overall, these AI systems are some of the most powerful tools humanity has, and 
 * [Harvard Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/)
 * Usually searching Google for a given topic will give a bunch of blog posts on the subject (often in places like [Towards Data Science](https://towardsdatascience.com))
 
+## Extra exercises
+
+The exercises in the pdf notes and Colab notebooks are supposed to be complete.  But I have had a query about extra exercises.
+
+If you find yourself in this position, the best exercise is to go through my Colab notebooks, looking mainly at my text (i.e. not the code).  Then close my notebook, and reproduce the code yourself.  If you can do that, you'll understand everything in the course really deeply.  And if you can reproduce the code in the non-examinable backprop notebook, let me know and I can chat to you about PhDs :-).
+
 ## Downloading the notes
 
 To download the notes, use the download button highlighted with the red circle:
