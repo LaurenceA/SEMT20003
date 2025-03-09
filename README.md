@@ -236,7 +236,7 @@ The pdf notes then go on to talk about overfitting in neural networks.
 | [Notebook 8 Overfitting](https://colab.research.google.com/drive/1_adhLa3YMOnnmIS0sKkYvjToisFuWr3Z?usp=sharing) | [notebook video (16:47)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/Eehq1IzytbFDpyT7l0N4z1kBzMOn7iQ3xCTPmzMI1JY6mw?e=IV8Op9) |
 | [notes](notes/8_overfitting/overfitting.pdf) | [notes video 1 (17:01)](https://uob.sharepoint.com/:v:/t/grp-LA/Ee4MriT4lbtHs9c_x3bhaBwBGO2FLz-_Q5Xz85MDSwsSUw) |
 |  | [notes video 2 (21:59)](https://uob.sharepoint.com/:v:/t/grp-LA/EQI-cw16ysBCovXNC0f2-IoBiMKDwYoXTdVWql4NkhJKqA) |
-<!--
+
 #### Week 9: CNNs
 
 This week we'll look at architectures for neural networks for images.
@@ -250,7 +250,7 @@ This week we'll look at architectures for neural networks for images.
 | | [notebook video 3 (18:24)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EQ1Kg8lHCqNFg055rGfnCCABQORuJkKhxcTchU31H9k5mA?e=uRUsme) |
 | [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
 | [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
-
+<!--
 #### Week 10: Large language models (LLMs)
 
 This week we'll take a very high-level look at modern large language models.
