@@ -367,8 +367,8 @@ The first key insight is that when we apply the chain rule to compute these deri
   \dL{b_3} &= \cola{\dd[\L]{f}} \dd[f]{b_3}\\
   \dL{w_2} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \dd[a_2]{w_2}\\
   \dL{b_2} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \dd[a_2]{b_2}\\
-  \dL{w_1} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \colc{\dd[a_2]{h_1} \dd[h_1]{a_1}} \dd[a_1]{w_2}\\
-  \dL{b_1} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \colc{\dd[a_2]{h_1} \dd[h_1]{a_1}} \dd[a_1]{b_2}
+  \dL{w_1} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \colc{\dd[a_2]{h_1} \dd[h_1]{a_1}} \dd[a_1]{w_1}\\
+  \dL{b_1} &= \cola{\dd[\L]{f}} \colb{\dd[f]{h_2} \dd[h_2]{a_2}} \colc{\dd[a_2]{h_1} \dd[h_1]{a_1}} \dd[a_1]{b_1}
 \end{align}
 \end{subequations}
 The second key insight is that these shared terms actually mean something: they're the gradients of the loss wrt the activations:
