@@ -74,6 +74,8 @@ Other points:
 * I'm going to try hard to avoid needing memorisating equations in questions (see practice exams for details).
 
 ## Practice exam!
+Note that these previous exams are shorter (2 hour , 15 questions), whereas the exam this year is longer (3 hours , 20 questions).  The questions this year are exactly the same type and difficulty as the questions in previous years: the exam is just a bit longer.
+
 [sample exam](exams/sample.pdf)
 
 [sample exam answers](exams/sample_answers.pdf)
