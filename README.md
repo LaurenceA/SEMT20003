@@ -268,15 +268,7 @@ This week we'll take a very high-level look at modern large language models.
 | [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
-#### Week 11: Revision
-[practice exam](exams/sample.pdf)
+#### Week 11/12: Revision
 
-[practice exam answers](exams/sample_answers.pdf)
-
-The lecturer led QA on  7th December and lab session on  8th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
-
-
-#### Week 12: Revision
-
-The lecturer led QA on 14th December and lab session on 15th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
+There will be 2 hour revision sessions on 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c as usual.
 -->
