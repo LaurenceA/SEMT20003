@@ -105,11 +105,11 @@ Are all pretty good.  There is a feeling that Claude is the best for programming
   - These models can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
 * Be careful about which model you're asking.  Most of the providers have some good, expensive models and some less good, but cheaper models.  These platforms will often give free users some access to the good model, but quickly force you onto the less good model as you continue using it.
 
-These models is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, they can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use these mdoels to help you learn more quicker, and think harder and deeper.  Don't switch off brain and have them do stuff for you!
+These models can supercharge your learning if you ask it about things you're confused about as you're learning.  As I am sure you are aware, they can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  And of course, in the exam, you won't have access to these models!  So be careful.  My advice is: use these models to help you learn more quicker, and think harder and deeper.  Definitely don't switch off brain and have them do stuff for you!
 
 Finally, there's alot that these models can't do.  Despite the hype, it can't by itself build large programs/systems, nor can it write (interesting) research papers, and it definitely can't to any mechanical/civil engineering.  But they can dramtically accelerate experts as they do those things.  And they can definitely help you learn those things.  
 
-Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
+Overall, these AI systems are some of the most powerful tools humanity has developed, and so learning to use them effectively is a critical skill!
 
 ## Other resources:
 
