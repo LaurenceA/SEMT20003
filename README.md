@@ -98,9 +98,9 @@ The solution is: try asking modern AI systems!  Specifically, for this kind of t
 * [ChatGPT](https://chatgpt.com) (But only o1, o3 etc, _not_ GPT-4o).
 
 Are all pretty good.  There is a feeling that Claude is the best for programming, buts its pretty close.  I have been using Claude to help me to e.g. understand recent research in deep learning, so these models are definitely at the point where they can help you learn!  Note that:
-* The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).  Other providers tend to have more/better free models available though.
+* The university doesn't have a subscription to Claude.  So you can consider getting a personal subscription (I have one).  Other providers tend to have more/better free models available though.
 * If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
-* These mdoels are pretty good in 99% of cases.  But like me/a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
+* These models are pretty good in 99% of cases.  But like me/a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
   - These models do not by default not have access to the internet (sometimes they do, but atm, you have to turn that on using a "search" or similar button).  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching some material (e.g. a paper on the topic) to your message to Claude!
   - These models can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
 * Be careful about which model you're asking.  Most of the providers have some good, expensive models and some less good, but cheaper models.  These platforms will often give free users some access to the good model, but quickly force you onto the less good model as you continue using it.
