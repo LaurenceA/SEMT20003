@@ -263,7 +263,7 @@ This week we'll take a very high-level look at modern large language models.
 | ---- | ---- |
 | [notes](notes/10_llms/llm.pdf) | [notebook video 1 (8:30)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EUpV3cefSAFHmt72QTKa8VgBa4tmOA06c5goOgR5EOgRZA?e=gmusoy) |
 | | [notebook video 2 (12:04)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVfJV1I7gMhMkiwhiId0rcQBHDuOZCH6buF1XKQID3d0lA?e=lQMfup) |
-| | [notebook video 3 (20:58)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdbMDBxkAhNAs_b5Dlgm8HoBsaS0UAeus0V_uEbouxk8mg?e=hSA77f) |
+| | [notebook video 3 (23:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYk_H6-j8Q5DkTWFb2LOi3kBzw5bkt_14ViZVaUscrndVg?e=uENEu8) |
 | [Notebook 10.1 Strings](https://colab.research.google.com/drive/11fXTOUD_XJw3aRFQd2SQHxMFsLAqfuoq?usp=sharing) | N/A |
 | [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
