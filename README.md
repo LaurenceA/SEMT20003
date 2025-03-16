@@ -252,7 +252,7 @@ This week we'll look at architectures for neural networks for images.
 | | [notebook video 3 (18:24)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EQ1Kg8lHCqNFg055rGfnCCABQORuJkKhxcTchU31H9k5mA?e=uRUsme) |
 | [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
 | [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
-<!--
+
 #### Week 10: Large language models (LLMs)
 
 This week we'll take a very high-level look at modern large language models.
@@ -264,10 +264,12 @@ This week we'll take a very high-level look at modern large language models.
 | [notes](notes/10_llms/llm.pdf) | [notebook video 1 (8:30)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EUpV3cefSAFHmt72QTKa8VgBa4tmOA06c5goOgR5EOgRZA?e=gmusoy) |
 | | [notebook video 2 (12:04)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVfJV1I7gMhMkiwhiId0rcQBHDuOZCH6buF1XKQID3d0lA?e=lQMfup) |
 | | [notebook video 3 (23:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYk_H6-j8Q5DkTWFb2LOi3kBzw5bkt_14ViZVaUscrndVg?e=uENEu8) |
+| | [notebook video 4 (21:02)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ERqEcCBXSvRAt_U33IfMvaQBcxaoeg1NakEq8M3AjQ4ewQ?e=DjeTvM) |
 | [Notebook 10.1 Strings](https://colab.research.google.com/drive/11fXTOUD_XJw3aRFQd2SQHxMFsLAqfuoq?usp=sharing) | N/A |
 | [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
+<!--
 #### Week 11/12: Revision
 
 There will be 2 hour revision sessions on 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c as usual.
