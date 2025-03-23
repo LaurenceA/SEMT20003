@@ -98,18 +98,18 @@ The solution is: try asking modern AI systems!  Specifically, for this kind of t
 * [ChatGPT](https://chatgpt.com) (But only o1, o3 etc, _not_ GPT-4o).
 
 Are all pretty good.  There is a feeling that Claude is the best for programming, buts its pretty close.  I have been using Claude to help me to e.g. understand recent research in deep learning, so these models are definitely at the point where they can help you learn!  Note that:
-* The university doesn't have a subscription to Claude.  So you may need to get a personal subscription (I have one).  Other providers tend to have more/better free models available though.
+* The university doesn't have a subscription to Claude.  So you can consider getting a personal subscription (I have one).  Other providers tend to have more/better free models available though.
 * If you want to ask about something specific that turns up e.g. in the lecture notes, you can attach the lecture notes to your message to Claude!
-* These mdoels are pretty good in 99% of cases.  But like me/a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
+* These models are pretty good in 99% of cases.  But like me/a TA, Claude can be wrong.  When these models are wrong, it is called a "hallucination" in deep learning research.  Some thoughts on that:
   - These models do not by default not have access to the internet (sometimes they do, but atm, you have to turn that on using a "search" or similar button).  So if you're asking about something super specific (e.g. something that only turns up in a few research papers), it may "misremember".  Try attaching some material (e.g. a paper on the topic) to your message to Claude!
   - These models can hallucinate if you ask leading questions.  For instance, if its impossible to do \<task\> in \<Python library\>, but you ask it  "How do I do \<task\> in \<Python library\>" anyway, it will often try anyway and give you a wrong solution.  Try to ask open-ended, non-leading questions.
 * Be careful about which model you're asking.  Most of the providers have some good, expensive models and some less good, but cheaper models.  These platforms will often give free users some access to the good model, but quickly force you onto the less good model as you continue using it.
 
-These models is definitely going to supercharge your learning if you ask it all your questions as you're learning.  However, they can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  So be careful.  My advice is: use these mdoels to help you learn more quicker, and think harder and deeper.  Don't switch off brain and have them do stuff for you!
+These models can supercharge your learning if you ask it about things you're confused about as you're learning.  As I am sure you are aware, they can also write code, solve exercises etc. for you.  I don't think we have any research on this, but that is likely to be detrimental to your learning.  And of course, in the exam, you won't have access to these models!  So be careful.  My advice is: use these models to help you learn more quicker, and think harder and deeper.  Definitely don't switch off brain and have them do stuff for you!
 
 Finally, there's alot that these models can't do.  Despite the hype, it can't by itself build large programs/systems, nor can it write (interesting) research papers, and it definitely can't to any mechanical/civil engineering.  But they can dramtically accelerate experts as they do those things.  And they can definitely help you learn those things.  
 
-Overall, these AI systems are some of the most powerful tools humanity has, and so learning to use them effectively is a critical skill!
+Overall, these AI systems are some of the most powerful tools humanity has developed, and so learning to use them effectively is a critical skill!
 
 ## Other resources:
 
@@ -252,7 +252,7 @@ This week we'll look at architectures for neural networks for images.
 | | [notebook video 3 (18:24)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EQ1Kg8lHCqNFg055rGfnCCABQORuJkKhxcTchU31H9k5mA?e=uRUsme) |
 | [Notebook 9.1 Convolutions](https://colab.research.google.com/drive/1A7nPFBzJLneS7e1FAMPbi8s2aCQ_SfG_?usp=sharing) | N/A |
 | [Notebook 9.2 CNNs](https://colab.research.google.com/drive/1Myg8Ge9ubyRariUV1G0CGGbgiAheftuw?usp=sharing) | N/A |
-<!--
+
 #### Week 10: Large language models (LLMs)
 
 This week we'll take a very high-level look at modern large language models.
@@ -263,20 +263,14 @@ This week we'll take a very high-level look at modern large language models.
 | ---- | ---- |
 | [notes](notes/10_llms/llm.pdf) | [notebook video 1 (8:30)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EUpV3cefSAFHmt72QTKa8VgBa4tmOA06c5goOgR5EOgRZA?e=gmusoy) |
 | | [notebook video 2 (12:04)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EVfJV1I7gMhMkiwhiId0rcQBHDuOZCH6buF1XKQID3d0lA?e=lQMfup) |
-| | [notebook video 3 (20:58)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EdbMDBxkAhNAs_b5Dlgm8HoBsaS0UAeus0V_uEbouxk8mg?e=hSA77f) |
+| | [notebook video 3 (23:17)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/EYk_H6-j8Q5DkTWFb2LOi3kBzw5bkt_14ViZVaUscrndVg?e=uENEu8) |
+| | [notebook video 4 (21:02)](https://uob.sharepoint.com/:v:/t/grp-LAlectures/ERqEcCBXSvRAt_U33IfMvaQBcxaoeg1NakEq8M3AjQ4ewQ?e=DjeTvM) |
 | [Notebook 10.1 Strings](https://colab.research.google.com/drive/11fXTOUD_XJw3aRFQd2SQHxMFsLAqfuoq?usp=sharing) | N/A |
 | [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
-#### Week 11: Revision
-[practice exam](exams/sample.pdf)
+<!--
+#### Week 11/12: Revision
 
-[practice exam answers](exams/sample_answers.pdf)
-
-The lecturer led QA on  7th December and lab session on  8th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
-
-
-#### Week 12: Revision
-
-The lecturer led QA on 14th December and lab session on 15th December are running.  You may use the lab to go through the practice exam, and you may ask the TA/lecturer about the practice exam, or about anything else that comes up as part of your revision.
+There will be 2 hour revision sessions on 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c as usual.
 -->
