@@ -269,8 +269,9 @@ This week we'll take a very high-level look at modern large language models.
 | [Notebook 10.2 Tokenization](https://colab.research.google.com/drive/1y-9Ezr6Kfn74QDtD-rqyF_JRH3zAEZNW?usp=sharing) | N/A |
 | [Notebook 10.3 Attention](https://colab.research.google.com/drive/1wLaBNwbHT10UkvSuHfO6wgtrAqmqVkpg?usp=sharing) | N/A |
 
-<!--
+
 #### Week 11/12: Revision
 
 There will be 2 hour revision sessions on 11am-1pm on Thursdays in QUEENS BLDG F.101a/b/c as usual.
--->
+
+<!--     -->
