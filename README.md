@@ -74,7 +74,14 @@ Other points:
 * The formula sheet in the sample exam is the same as that in the paper.
 * I'm going to try hard to avoid needing memorisating equations in questions (see practice exams for details).
 
-## Practice exam!
+### Calculators in the exam
+
+* The Methods of Artificial Intelligence Exam summer examination permits the use of a non-programmable calculator. We recommend the Casio FX-85 GT CW (solar-powered) or Casio FX-83GT CW (battery-powered).
+* Please be advised that the use of a programmable calculator will be treated as an examination offence (and is likely to incur a penalty under the University Assessment Regulations). Your calculator will be visually checked by an invigilator during each exam.
+* For students who do not own or are unable to obtain a non-programmable calculator prior to their exam, please contact the SEMT school office for further advice: semt-student-enquiries@bristol.ac.uk (e-mail enquiries) or Ada Lovelace Building room G1 (in-person enquiries; 9am-4pm Monday-Friday).
+* If you are unsure whether your calculator is programmable or not, our recommendation is to use Google to search for your calculator model, and whether it is programmable or non-programmable. This usually provides a clear answer. Additionally, calculator brand websites often list this information under the product description for each model. If you are concerned and want someone to double check, the SEMT school office can offer support - see the contact details above.
+
+### Practice exam!
 Note that these previous exams are shorter (2 hour , 15 questions), whereas the exam this year is longer (3 hours , 20 questions).  The questions this year are exactly the same type and difficulty as the questions in previous years: the exam is just a bit longer.
 
 [sample exam](exams/sample.pdf)
