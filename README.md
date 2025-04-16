@@ -2,6 +2,7 @@
 The course will introduce AI, with a focus on neural networks in PyTorch.
 
 ## Changelog
+* Edited notebook 1.2 to be clearer, and added exercises at the end of notebooks 1.1 and 1.2.
 * Changes to the last part (Sec. 6 and onwards) of the LLM notes. 
 * Clarified that the _code_ in the notebook in week 8 is non-examinable.  The statement at the top of that notebook now reads: "The code in this notebook is non-examinable!! We're doing some slightly weird stuff to get the nice visualisations!! Its the concepts illustrated in the notebook that are examinable!! i.e. only the stuff covered in the associated video is examinable."
 * Added a note on extra exercises to this README.
